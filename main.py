@@ -1,10 +1,10 @@
-
+# from __future__ import annotations
 from dtu.server import Parameters, dataclass
 
 @dataclass
 class Defaults(Parameters):
     name: str = "local"
-    n: int = 1
+    instances: int = 1
     GPU: bool = False
     time: int = 3600
 
@@ -12,8 +12,8 @@ class Defaults(Parameters):
     a: int = 1
     d: str = "fd"
 
-    def run(cls, b: float, d: str, a: int) -> None:
-        print(b,d, a)
+    def run(self, b: float, d: str) -> None:
+        print(b,d, self.time)
 
 
 Defaults.start()
