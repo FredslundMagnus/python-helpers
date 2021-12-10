@@ -1,106 +1,55 @@
 from __future__ import annotations
-from inspect import signature, Signature
-from dataclasses import dataclass
-import inspect
-annotations: dict[str, type] = {}
+from dataclasses import dataclass, Field
+from inspect import signature
+
+dataclass
+
+def check(params, features):
+    for key, value in params.items():
+        if key not in features:
+            raise Exception(f'The feature "{key}" does not exist.')
+        if value.__class__ != features[key]:
+            if value.__class__ == int and features[key] == float:
+                params[key] = float(value)
+            else:
+                if value.__class__.__name__ != features[key].__name__:
+                    raise Exception(f'The feature "{key}" should be of type {features[key].__name__}.')
+                else:
+                    params[key] = value.__name__
 
 
-def generate():
-    print(2)
+def createFolders(name, folders, file):
+    for folder in folders:
+        file.write(f"mkdir ../outputs/{name}/{folder}\n")
 
 
-def createSignature(f):
-    print(signature(f))
-    # dataclass(f).__init__
-
-    def generate(b: float = 3.0, a: int = 1, c: bool = True, d: str = "3") -> None:
-        print(f"{b = }")
-        print(f"{a = }")
-        print(f"{c = }")
-        print(f"{d = }")
-
-    a = """def generate(b: float = 2.0, a: int = 1) -> None:
-        print(3)\nb["f"] = generate"""
-    # eval(a)
-    b = {}
-    exec(a)
-    # print(signature(b["f"]))
-
-    # b["f"].__signature__ = signature(b["f"])
-
-    # if locals is None:
-    #     locals = {}
-    # if 'BUILTINS' not in locals:
-    #     locals['BUILTINS'] = builtins
-    # return_annotation = ''
-    # if return_type is not MISSING:
-    #     locals['_return_type'] = return_type
-    #     return_annotation = '->_return_type'
-    # args = ','.join(args)
-    # body = '\n'.join(f'  {b}' for b in body)
-
-    # # Compute the text of the entire function.
-    # txt = f' def {name}({args}){return_annotation}:\n{body}'
-
-    # local_vars = ', '.join(locals.keys())
-    # txt = f"def __create_fn__({local_vars}):\n{txt}\n return {name}"
-
-    # ns = {}
-    # exec(txt, globals, ns)
-
-    print(signature(generate))
-    return generate
+# def genExperiments(name, n=1, cpu=False, **params):
+#     createFolders(name)
+#     check(params)
+#     for i in range(n):
+#         params['num'] = i
+#         file.write(f'bsub -o "../outputs/{name}/Markdown/{name}_{i}.md" -J "{name}_{i}" -env MYARGS="-name {name}-{i} {" ".join(f"-{name} {value}" for name, value in params.items())}" < submit_{"cpu" if cpu else "gpu"}.sh\n')
 
 
-class Parameters(type):
-    def __new__(cls, name, bases, dct):
-        print("meta: creating %s %s" % (name, bases))
-        return type.__new__(cls, name, bases, dct)
+class Parameters():
+    def __post_init__(self):
+        file = open('experiments.sh', 'w')
+        file.write('#!/bin/sh\n')
+        features, folders = dict(self.__annotations__), ['', 'Markdown']
+        print(features)
+        print("dsfsdfsdfsdfs",[f for f in dir(self) if f[0] !="_"])
 
-    @createSignature
-    def generate(self: Parameters):
-        pass
-
-
-def parameters(defaults: Parameters):
-    global annotations
-    print(defaults)
-    print(dir(defaults))
-    annotations = defaults.__annotations__
-    print(annotations)
-    a = """def generate(b: float = 2.0, a: int = 1) -> None:
-        print(3)
-b["f"] = generate"""
-    # eval(a)
-    b = {}
-    exec(a, None, {"b": b})
-    print(signature(b["f"]))
-
-    # def generate(b: float = 3.0, a: int = 1, c: bool = True, d: str = "3") -> None:
-    #     pass
-
-    # defaults.generate = b["f"]
-    # def generate(b: float = 2.0, a: int = 1) -> None:
-    #     pass
-    # defaults.generate = generate
-
-    return defaults
+    @classmethod
+    def start(cls) -> None:
+        values = {name: value for name, value in cls.__dict__.items() if name[0] !="_" and name != "run"}
+        values['cls'] = cls
+        args = [values[name] for name in signature(cls.run).parameters]
+        annotations = [(v.name, v.annotation) for v in signature(cls.run).parameters.values() if v.name != "cls"]
+        print(annotations)
+        print(cls.__annotations__)
+        for name, annotation in annotations:
+            if cls.__annotations__[name] != annotation:
+                raise TypeError(f"The type of '{name}' should be '{cls.__annotations__[name].__name__}' in run!")
+        cls.run(*args)
 
 
-@dataclass
-class test:
-    b: int = 2
-
-
-# test()
-
-
-# def create_signature(f):
-#     print("her", annotations)
-#     print(type(signature(f)))
-#     return f
-
-
-# @create_signature
-# def generate():
-#     pass
