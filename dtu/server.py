@@ -1,5 +1,5 @@
 from __future__ import annotations
-from dataclasses import dataclass, Field
+from dataclasses import dataclass
 from inspect import signature
 
 dataclass
@@ -23,12 +23,12 @@ def createFolders(name, folders, file):
         file.write(f"mkdir ../outputs/{name}/{folder}\n")
 
 
-# def genExperiments(name, n=1, cpu=False, **params):
-#     createFolders(name)
-#     check(params)
-#     for i in range(n):
-#         params['num'] = i
-#         file.write(f'bsub -o "../outputs/{name}/Markdown/{name}_{i}.md" -J "{name}_{i}" -env MYARGS="-name {name}-{i} {" ".join(f"-{name} {value}" for name, value in params.items())}" < submit_{"cpu" if cpu else "gpu"}.sh\n')
+def genExperiments(features, folders, file, name, n=1, cpu=False, **params):
+    createFolders(name, folders, file)
+    check(params, features)
+    for i in range(n):
+        params['num'] = i
+        file.write(f'bsub -o "../outputs/{name}/Markdown/{name}_{i}.md" -J "{name}_{i}" -env MYARGS="-name {name}-{i} {" ".join(f"-{name} {value}" for name, value in params.items())}" < submit_{"cpu" if cpu else "gpu"}.sh\n')
 
 
 class Parameters():
@@ -38,6 +38,8 @@ class Parameters():
         features, folders = dict(self.__annotations__), ['', 'Markdown']
         print(features)
         print("dsfsdfsdfsdfs",[f for f in dir(self) if f[0] !="_"])
+        genExperiments(features, folders, file, self.name, self.n, not self.GPU)
+        file.close()
 
     @classmethod
     def start(cls) -> None:
