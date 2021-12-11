@@ -10,8 +10,8 @@ C:/path/to/python.exe -m pip install --upgrade --force-reinstall git+https://git
 # Server
 Example of main.py
 ```python
-from src.helpers.server import Parameters, dtu
-from src.helpers.database import Database
+from helpers.server import Parameters, dtu
+from helpers.database import Database
 
 @dtu
 class Defaults(Parameters):
@@ -37,7 +37,7 @@ Defaults.start()
 without database
 
 ```python
-from src.helpers.server import Parameters, dtu
+from helpers.server import Parameters, dtu
 
 @dtu
 class Defaults(Parameters):
