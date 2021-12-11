@@ -10,13 +10,14 @@ def check(params, features):
         if key not in features:
             raise Exception(f'The feature "{key}" does not exist.')
         if value.__class__ != features[key]:
-            if value.__class__ == int and features[key] == float:
+            if value.__class__ == int and (features[key] == float or features[key] == 'float'):
                 params[key] = float(value)
             else:
-                if value.__class__.__name__ != features[key].__name__:
-                    raise Exception(f'The feature "{key}" should be of type {features[key].__name__}.')
-                else:
-                    params[key] = value.__name__
+                _class_ = features[key].__name__ if hasattr(features[key], "__name__") else features[key]
+                if value.__class__.__name__ != _class_:
+                    raise Exception(f'The feature "{key}" should be of type {_class_}.')
+                # else:
+                #     params[key] = value.__name__
 
 
 def createFolders(name, folders, file):
@@ -34,16 +35,17 @@ def genExperiments(features, folders, file, name, n, cpu, **params):
 
 class Parameters():
     ID: int = 0
-    # folders: list[str] = []
+    folders: list[str] = []
     def __post_init__(self):
         file = open('experiments.sh', 'w')
         file.write('#!/bin/sh\n')
         file.write(f'#{"".join([str(randint(0, 9)) for _ in range(10)])}\n')
-        features, folders = dict(self.__annotations__), ['', 'Markdown']
+        self.folders = list(self.folders)
+        features, folders = dict(self.__annotations__), ['', 'Markdown'] + self.folders
         # print(features)
         # print("dsfsdfsdfsdfs",[f for f in dir(self) if f[0] !="_"])
         # print()
-        genExperiments(features, folders, file, self.name, self.instances, not self.GPU, **{k:v for k, v in self.__dict__.items() if k not in {"name", "instances"}})
+        genExperiments(features, folders, file, self.name, self.instances, not self.GPU, **{k:v for k, v in self.__dict__.items() if k not in {"name", "instances", "folders"}})
         file.close()
 
     @classmethod
