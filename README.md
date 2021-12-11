@@ -4,7 +4,9 @@
 
 # Database
 ## Create a Firebase Project
-text
+Give the project a name
+Enable firebase analytics
+Choose default firebase project
 ## Generate Private Key
 Go to Project Settings -> Service Accounts -> Generate new private key
 ## Save the Key
@@ -27,7 +29,7 @@ Click Enable
 ```python
 from helpers.database import Database
 
-database = Database(project_id, collection="Test2") # Collection is optional but will be default.
+database = Database("project_id", collection="collection_name") # Collection is optional but will be default.
 ```
 or
 ```python
@@ -38,7 +40,7 @@ from helpers.database import Database
 class Defaults(Parameters):
     name: str = "local"
     ...
-    database: Database = Database(project_id) # Collection will automatically be name.
+    database: Database = Database("project_id") # Collection will automatically be name.
     ...
 
     def run(self, database: Database):
