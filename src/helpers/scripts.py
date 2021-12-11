@@ -1,9 +1,8 @@
 from sys import argv
+args = argv[1:]
 
 def run():
-    print(argv)
-    print("I just ran!")
+    print(f"I just ran, with {args = }!")
 
 def save():
-    print(argv)
-    print("You just hot saved!")
+    print(f"You just hot saved, with {args = }!")
