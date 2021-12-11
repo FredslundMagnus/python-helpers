@@ -12,7 +12,7 @@ class Defaults(Parameters):
     a: int = 1
     d: str = "fd"
 
-    def run(self, b: float, d: str) -> None:
+    def run(self, b: float, d: str, a: int) -> None:
         print(b,d, self.time)
 
 

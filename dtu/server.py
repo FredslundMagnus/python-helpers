@@ -36,6 +36,10 @@ def genExperiments(features, folders, file, name, n, cpu, **params):
 class Parameters():
     ID: int = 0
     folders: list[str] = []
+    instances: int = 1
+    GPU: bool = False
+    time: int = 3600
+
     def __post_init__(self):
         file = open('experiments.sh', 'w')
         file.write('#!/bin/sh\n')
@@ -61,7 +65,8 @@ class Parameters():
         if isRunning:
             for name, annotation in annotations:
                 if cls.__annotations__[name] != annotation:
-                    raise TypeError(f"The type of '{name}' should be '{cls.__annotations__[name].__name__}' in run!")
+                    _class_ = cls.__annotations__[name].__name__ if hasattr(cls.__annotations__[name], "__name__") else cls.__annotations__[name]
+                    raise TypeError(f"The type of '{name}' should be '{_class_}' in run!")
             cls.run(*args)
 
 
