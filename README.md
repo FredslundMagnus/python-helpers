@@ -8,6 +8,36 @@ C:/path/to/python.exe -m pip install --upgrade --force-reinstall git+https://git
 ```
 
 # Server
+Example of main.py
+```python
+@dtu
+class Defaults(Parameters):
+    name: str = "local"
+    instances: int = 1
+    GPU: bool = False
+    time: int = 3600
+    database: Database = Database("dtu-server-test")
+
+    b: float = 2.0
+    a: int = 1
+    d: str = "fd"
+
+    def run(self, b: float, d: str, a: int, database: Database) -> None:
+        database.set("doc1", {"a": a, "b": b})
+        print(database.get("doc1"))
+        print(b,d, self.time)
+
+
+Defaults.start()
+```
+
+example of generate.py
+```python
+from main import Defaults
+
+Defaults("Test1", b=4, d="dsf")
+```
+It will check types
 
 # Database
 ## Create a Firebase Project
