@@ -40,7 +40,7 @@ from helpers.database import Database
 class Defaults(Parameters):
     name: str = "local"
     ...
-    database: Database = Database("project_id") # Collection will automatically be name.
+    database: Database = Database("project_id") # Collection will automatically be name ("local" or overwritten by server).
     ...
 
     def run(self, database: Database):
