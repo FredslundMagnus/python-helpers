@@ -39,6 +39,7 @@ class Parameters():
     instances: int = 1
     GPU: bool = False
     time: int = 3600
+    isServer: bool = False
 
     def __post_init__(self):
         file = open('experiments.sh', 'w')
@@ -46,9 +47,6 @@ class Parameters():
         file.write(f'#{"".join([str(randint(0, 9)) for _ in range(10)])}\n')
         self.folders = list(self.folders)
         features, folders = dict(self.__annotations__), ['', 'Markdown'] + self.folders
-        # print(features)
-        # print("dsfsdfsdfsdfs",[f for f in dir(self) if f[0] !="_"])
-        # print()
         genExperiments(features, folders, file, self.name, self.instances, not self.GPU, **{k:v for k, v in self.__dict__.items() if k not in {"name", "instances", "folders"}})
         file.close()
 
@@ -59,8 +57,7 @@ class Parameters():
         values['self'] = cls
         args = [values[name] for name in signature(cls.run).parameters]
         annotations = [(v.name, v.annotation) for v in signature(cls.run).parameters.values() if v.name not in {"cls", "self"}]
-        # print(annotations)
-        # print(cls.__annotations__)
+
         isRunning: bool = cls.__module__ == "__main__"
         if isRunning:
             for name, annotation in annotations:
