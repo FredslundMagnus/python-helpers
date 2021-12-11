@@ -15,10 +15,10 @@ Choose default firebase project
 Go to Project Settings -> Service Accounts -> Generate new private key
 ## Save the Key
 Create a new folder somewhere on your computer
-fx: C:\private_keys
+fx: C:\Users\magnu\Documents\private_keys
 Then place the json-file you just downloaded in this folder.
-fx: C:\private_keys\project_id-firebase.json
-Then add the folder to your path environment variables.
+fx: C:\Users\magnu\Documents\private_keys\project_id-firebase.json
+Then add the folder to your path "System"-environment variables (Cannot be user). 
 Close VS Code and any running python instances
 Optionally restart computer
 
@@ -33,7 +33,7 @@ Click Enable
 ```python
 from helpers.database import Database
 
-database = Database("project_id", collection="collection_name") # Collection is optional but will be default.
+database = Database("project_id", collection="collection_name") # Collection is required and will be default.
 ```
 or
 ```python
