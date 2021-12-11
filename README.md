@@ -74,17 +74,26 @@ Choose default firebase project
 Go to Project Settings -> Service Accounts -> Generate new private key
 ## Save the Key
 Create a new folder somewhere on your computer
+
 fx: C:\Users\magnu\Documents\private_keys
+
 Then place the json-file you just downloaded in this folder.
+
 fx: C:\Users\magnu\Documents\private_keys\project_id-firebase.json
+
 Then add the folder to your path "System"-environment variables (Cannot be user). 
+
 Close VS Code and any running python instances
+
 Optionally restart computer
 
 # Create Firestore Database
 Click Create database
+
 Start in production mode
+
 Choose eur3 (europe-west)
+
 Click Enable
 
 
@@ -115,6 +124,10 @@ class Defaults(Parameters):
 
 ## Use Database
 ```python
+from helpers.database import Database
+
+database = Database("project_id", "collection")
+
 database.set("doc1", {"name": "value", "booleans": False, "strings": "sf", "floats": 4.3, "integers": 4})
 print(database.get("doc1"))
 
