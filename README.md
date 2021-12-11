@@ -1,4 +1,8 @@
 # Welcome
+```bash
+pip install git+https://github.com/FredslundMagnus/dtu-server.git
+```
+
 
 # Server
 
