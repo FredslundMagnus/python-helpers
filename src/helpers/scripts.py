@@ -9,4 +9,4 @@ def save():
     print(f"You just hot saved, with {args = }!")
 
 def upgrade():
-    os.system('cmd /c "C:/Users/magnu/AppData/Local/Microsoft/WindowsApps/python.exe -m pip install --upgrade --force-reinstall git+https://github.com/FredslundMagnus/python-helpers.git"')
+    print("C:/Users/magnu/AppData/Local/Microsoft/WindowsApps/python.exe -m pip install --upgrade --force-reinstall git+https://github.com/FredslundMagnus/python-helpers.git")
