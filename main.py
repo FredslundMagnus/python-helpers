@@ -1,6 +1,7 @@
 from __future__ import annotations
 from src.helpers.server import Parameters, dtu
 from src.helpers.database import Database
+from src.helpers.printer import print, Colors
 
 @dtu
 class Defaults(Parameters):
@@ -17,7 +18,7 @@ class Defaults(Parameters):
     def run(self, b: float, d: str, a: int, database: Database) -> None:
         database.set("doc1", {"a": a, "b": b})
         print(database.get("doc1"))
-        print(b,d, self.time)
+        print(b,d, self.time, color=Colors.green)
 
 
 Defaults.start()

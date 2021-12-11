@@ -1,5 +1,4 @@
 from __future__ import annotations
-from typing import Any
 import firebase_admin as Firebase
 from firebase_admin import firestore, App
 # from google.cloud.firestore_v1.collection import CollectionReference
@@ -44,7 +43,7 @@ class Database:
 	def set(self, document: str, data: dict, collection: str | None = None) -> None:
 		self.collection(collection).document(document).set(data)
 
-	def get(self,  document: str, collection: str | None = None) -> dict[str, Any] | None:
+	def get(self,  document: str, collection: str | None = None) -> dict[str, object] | None:
 		return self.collection(collection).document(document).get().to_dict()
 
 	def getAll(self, collection: str | None = None):
