@@ -56,11 +56,9 @@ class Parameters():
         values = {name: value for name, value in cls.__dict__.items() if name[0] !="_" and name != "run"}
         values['cls'] = cls
         values['self'] = cls
-        print(values)
         if 'database' in values:
             values['database'].__create__(values['name'])
         args = [values[name] for name in signature(cls.run).parameters]
-        print(values)
         if 'database' in args:
             args['database'].__create__(args['name'])
         annotations = [(v.name, v.annotation) for v in signature(cls.run).parameters.values() if v.name not in {"cls", "self"}]
