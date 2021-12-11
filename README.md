@@ -134,3 +134,6 @@ print(database.get("doc1"))
 for v in database.getAll():
     print(v)
 ```
+
+## Create own package
+https://packaging.python.org/en/latest/tutorials/packaging-projects/
