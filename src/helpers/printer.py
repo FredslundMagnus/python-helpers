@@ -16,3 +16,9 @@ def print(*values: object, sep: str | None = ' ', end: str | None = '\n', color:
         text = sep.join(str(v) for v in values)
         builtins.print(colored(text, color), end=end)
 
+def warning(*values: object, sep: str | None = ' ', end: str | None = '\n'):
+    print(*values, sep=sep, end=end, color=Colors.red)
+
+def info(*values: object, sep: str | None = ' ', end: str | None = '\n'):
+    print(*values, sep=sep, end=end, color=Colors.yellow)
+
