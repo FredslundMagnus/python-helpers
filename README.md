@@ -55,6 +55,6 @@ class Defaults(Parameters):
 database.set("doc1", {"name": "value", "booleans": False, "strings": "sf", "floats": 4.3, "integers": 4})
 print(database.get("doc1"))
 
-for v in database.getAll("Test"):
+for v in database.getAll():
     print(v)
 ```
