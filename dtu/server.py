@@ -1,9 +1,9 @@
 from __future__ import annotations
-from dataclasses import dataclass
+from dataclasses import dataclass as dtu
 from inspect import signature
 from random import randint
 
-dataclass
+dtu
 
 def check(params, features):
     for key, value in params.items():

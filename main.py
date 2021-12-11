@@ -1,7 +1,7 @@
 from __future__ import annotations
-from dtu.server import Parameters, dataclass
+from dtu.server import Parameters, dtu
 
-@dataclass
+@dtu
 class Defaults(Parameters):
     name: str = "local"
     instances: int = 1
