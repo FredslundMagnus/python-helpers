@@ -10,7 +10,6 @@ import json
 def json_files() -> list[str]:
 	temp = []
 	for folder in os.environ["Path"].split(';'):
-		print(folder)
 		try:
 			temp.extend([os.path.join(folder, f) for f in os.listdir(folder) if f.endswith(".json") and f.count("firebase")])
 		except Exception:
@@ -18,9 +17,7 @@ def json_files() -> list[str]:
 	return temp
 
 def get_credentials_path(project_id: str) -> str:
-	print(project_id)
 	for file in json_files():
-		print(file)
 		with open(file, 'r') as f:
 			if json.load(f).get('project_id', None) == project_id:
 				return file 
