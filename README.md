@@ -1,10 +1,10 @@
 # Welcome
 ```bash
-pip install git+https://github.com/FredslundMagnus/dtu-server.git
+pip install git+https://github.com/FredslundMagnus/python-helpers.git
 ```
 or 
 ```bash
-C:/path/to/python.exe -m pip install --upgrade --force-reinstall git+https://github.com/FredslundMagnus/dtu-server.git
+C:/path/to/python.exe -m pip install --upgrade --force-reinstall git+https://github.com/FredslundMagnus/python-helpers.git
 ```
 
 # Server
