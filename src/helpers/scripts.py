@@ -6,8 +6,8 @@ import pip
 from pip._internal import main as pipmain
 
 def install(package):
-    pipmain(["install", "--upgrade", "--force-reinstall", package])
-    # subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", "--force-reinstall", package])
+    # pipmain(["install", "--upgrade", "--force-reinstall", package])
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", "--force-reinstall", package], shell=True)
 
 args = argv[1:]
 
