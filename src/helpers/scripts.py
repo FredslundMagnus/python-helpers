@@ -1,5 +1,11 @@
 from sys import argv
 import os
+import subprocess
+import sys
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", "--force-reinstall", package])
+
 args = argv[1:]
 
 def run():
@@ -9,4 +15,5 @@ def save():
     print(f"You just hot saved, with {args = }!")
 
 def upgrade():
-    print("C:/Users/magnu/AppData/Local/Microsoft/WindowsApps/python.exe -m pip install --upgrade --force-reinstall git+https://github.com/FredslundMagnus/python-helpers.git")
+    install("git+https://github.com/FredslundMagnus/python-helpers.git")
+    # print("C:/Users/magnu/AppData/Local/Microsoft/WindowsApps/python.exe -m pip install --upgrade --force-reinstall git+https://github.com/FredslundMagnus/python-helpers.git")
