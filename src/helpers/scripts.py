@@ -7,7 +7,10 @@ from pip._internal import main as pipmain
 
 def install(package):
     # pipmain(["install", "--upgrade", "--force-reinstall", package])
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", "--force-reinstall", package], shell=True)
+    try:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", "--force-reinstall", package], shell=True)
+    except Exception as e:
+        print(e)
 
 args = argv[1:]
 
