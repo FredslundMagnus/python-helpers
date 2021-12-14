@@ -26,24 +26,24 @@ class Background:
         self.folder = folder
         self.color_name = str(color.color)[1: -1].replace(', ', '_')
         self.box_color_name = str(box_color.color)[1: -1].replace(', ', '_')
-        self.boxes_shape = [(tuple(list(b) + [box_color]) if len(b) == 4 else b) for b in boxes]
+        self.boxes: list[tuple[float, float, float, float, Color]] = [(tuple(list(b) + [box_color]) if len(b) == 4 else b) for b in boxes]
         self.scene = Scene(
             Camera('location', [0, 0, -6], 'look_at',  [0, 0, 0]),
             [
                 LightSource([2, 4, -3], 'color', [1.5, 1.5, 1.5], 'area_light <5, 0, 0>, <0, 5, 0>, 5, 5', 'adaptive 2 area_illumination on', 'jitter'),
                 BackGroundBox(color=color, distance=2),
                 # Box([16/3, 9/3, 1.9], [-16/3, -9/3, 1.8], colorize(Colors.gray.c800))
-                *self.boxes
+                *self.boxes_shape
             ]
         )
 
     @property
-    def boxes(self) -> list[Box]:
-        return [Box([self.fix(b[2]), self.fix(-b[3], x=False), 1.9], [self.fix(b[0]), self.fix(-b[1], x=False), 1.8], colorize(b[4])) for b in self.boxes_shape]
+    def boxes_shape(self) -> list[Box]:
+        return [Box([self.fix(b[2]), self.fix(-b[3], x=False), 1.9], [self.fix(b[0]), self.fix(-b[1], x=False), 1.8], colorize(b[4])) for b in self.boxes]
 
     @property
     def boxes_name(self) -> list[Box]:
-        return "_".join([f"{self.fix(b[0])}-{self.fix(b[1])}-{self.fix(b[2])}-{self.fix(b[3])}-" + str(b[4].color)[1: -1].replace(', ', '_') for b in self.boxes_shape])
+        return "_".join([f"{self.fix(b[0])}-{self.fix(b[1])}-{self.fix(b[2])}-{self.fix(b[3])}-" + str(b[4].color)[1: -1].replace(', ', '_') for b in self.boxes])
 
     def fix(self, pos: float, x: bool = True) -> float:
         b = -6.94 if x else 3.9
@@ -64,6 +64,8 @@ class Background:
             self.render()
         return IMG.open(name)
 
-    @classmethod
-    def transition(background1: Background, background2: Background, frames: int, curve: Curve):
-        pass
+    @staticmethod
+    def transition(background1: Background, background2: Background, frames: int, curve: Curve) -> list[Background]:
+        steps = (curve(i/(frames-1)) for i in range(frames))
+        zip(background1.boxes, background2.boxes)
+        [step for step in steps]
