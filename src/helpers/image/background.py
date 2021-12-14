@@ -38,10 +38,12 @@ class Background:
 
     @property
     def boxes(self) -> list[Box]:
-        return [Box([self.fix(b[2]), self.fix(-b[3]), 1.9], [self.fix(b[0]), -self.fix(b[1]), 1.8], colorize(self.box_color)) for b in self.boxes_shape]
+        return [Box([self.fix(b[2]), self.fix(-b[3], x=False), 1.9], [self.fix(b[0]), self.fix(-b[1], x=False), 1.8], colorize(self.box_color)) for b in self.boxes_shape]
 
-    def fix(self, pos: float) -> float:
-        return pos - 3
+    def fix(self, pos: float, x: bool = True) -> float:
+        b = 6 if x else 3.5
+        a = 1 if x else 1
+        return a*pos - b
 
     def render(self, antialiasing: float = 0.001, quality: int = 11, size: tuple[int, int] = (1920, 1080)) -> None:
         width, height = size
