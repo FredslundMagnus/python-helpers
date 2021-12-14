@@ -41,6 +41,7 @@ class Background:
 
     def render(self, antialiasing: float = 0.001, quality: int = 11, size: tuple[int, int] = (1920, 1080)) -> None:
         width, height = size
+        self.file_name = join("backgrounds", f"background-{self.color_name}-{width}-{height}.png")
         self.scene.render(outfile=self.file_name, width=width, height=height, quality=quality, antialiasing=antialiasing)
 
     def load(self, size: tuple[int, int] = (1920, 1080)):
