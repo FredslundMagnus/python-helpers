@@ -4,6 +4,8 @@ from helpers.colors import Color, Colors
 from PIL import Image as IMG
 from os.path import join, exists
 
+from helpers.curves import Curve
+
 
 def colorize(color: Color) -> Texture:
     return Texture(Pigment('color', [v/255 for v in color.color]))
@@ -61,3 +63,7 @@ class Background:
         if not exists(name):
             self.render()
         return IMG.open(name)
+
+    @classmethod
+    def transition(background1: Background, background2: Background, frames: int, curve: Curve):
+        pass

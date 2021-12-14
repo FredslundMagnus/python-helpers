@@ -1,9 +1,15 @@
 from enum import Enum
 
 
-def linear(x: float) -> float:
-    return x
+class Curve:
+    def __call__(self, x: float) -> float:
+        return x
 
 
-class Curves(Enum):
-    linear = linear
+class Linear(Curve):
+    def __call__(self, x: float) -> float:
+        return x
+
+
+class Curves:
+    linear = Linear()
