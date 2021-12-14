@@ -20,7 +20,7 @@ class BackGroundBox(Item):
 
 
 class Background:
-    def __init__(self, color: Color, boxes: list[tuple[float, float, float, float]], box_color: Color = Colors.gray.c800) -> None:
+    def __init__(self, color: Color, boxes: list[tuple[float, float, float, float]] = [], box_color: Color = Colors.gray.c800) -> None:
         self.color_name = str(color.color)[1: -1].replace(', ', '_')
         self.box_color_name = str(box_color.color)[1: -1].replace(', ', '_')
         self.box_color = box_color
