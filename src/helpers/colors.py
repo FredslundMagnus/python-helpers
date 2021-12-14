@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+
 class Transparent:
     def __init__(self, r: int, g: int, b: int, alpha: int) -> None:
         self.color: tuple[int, int, int, int] = (r, g, b, alpha)
@@ -12,6 +13,11 @@ class Color:
     def transparrent(self, alpha=255):
         r, g, b = self.color
         return Transparent(r, g, b, alpha)
+
+    @staticmethod
+    def interpolate(color1: Color, color2: Color, x: float) -> Color:
+        # Should convert RGB to HSV
+        return Color(*(int((v2 - v1)*x+v1) for v1, v2 in zip(color1.color, color2.color)))
 
 
 class MaterialColor(Color):
@@ -59,3 +65,7 @@ class Colors:
     blueGray: MaterialColor = MaterialColor(Color(236, 239, 241), Color(207, 216, 220), Color(176, 190, 197), Color(144, 164, 174), Color(120, 144, 156), Color(96, 125, 139), Color(84, 110, 122), Color(69, 90, 100), Color(55, 71, 79), Color(38, 50, 56))
     black: Color = Color(0, 0, 0)
     white: Color = Color(255, 255, 255)
+
+    @staticmethod
+    def interpolate(color1: Color, color2: Color, x: float) -> Color:
+        return Color.interpolate(color1, color2, x)

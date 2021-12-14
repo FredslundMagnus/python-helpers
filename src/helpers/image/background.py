@@ -20,12 +20,11 @@ class BackGroundBox(Item):
 
 
 class Background:
-    def __init__(self, color: Color, boxes: list[tuple[float, float, float, float]] = [], box_color: Color = Colors.gray.c800, folder: str = "backgrounds") -> None:
+    def __init__(self, color: Color, boxes: list[tuple[float, float, float, float] | tuple[float, float, float, float, Color]] = [], box_color: Color = Colors.gray.c800, folder: str = "backgrounds") -> None:
         self.folder = folder
         self.color_name = str(color.color)[1: -1].replace(', ', '_')
         self.box_color_name = str(box_color.color)[1: -1].replace(', ', '_')
-        self.box_color = box_color
-        self.boxes_shape = boxes
+        self.boxes_shape = [(tuple(list(b) + [box_color]) if len(b) == 4 else b) for b in boxes]
         self.scene = Scene(
             Camera('location', [0, 0, -6], 'look_at',  [0, 0, 0]),
             [
@@ -38,21 +37,27 @@ class Background:
 
     @property
     def boxes(self) -> list[Box]:
-        return [Box([self.fix(b[2]), self.fix(-b[3], x=False), 1.9], [self.fix(b[0]), self.fix(-b[1], x=False), 1.8], colorize(self.box_color)) for b in self.boxes_shape]
+        return [Box([self.fix(b[2]), self.fix(-b[3], x=False), 1.9], [self.fix(b[0]), self.fix(-b[1], x=False), 1.8], colorize(b[4])) for b in self.boxes_shape]
+
+    @property
+    def boxes_name(self) -> list[Box]:
+        return "_".join([f"{self.fix(b[0])}-{self.fix(b[1])}-{self.fix(b[2])}-{self.fix(b[3])}-" + str(b[4].color)[1: -1].replace(', ', '_') for b in self.boxes_shape])
 
     def fix(self, pos: float, x: bool = True) -> float:
-        b = 6.3 if x else -3.7
-        a = 0.5 if x else 0.5
-        return a*pos - b
+        b = -6.94 if x else 3.9
+        a = 0.867
+        return int((a*pos + b) * 10000) / 10000
+
+    def name(self, size: tuple[int, int] = (1920, 1080)) -> str:
+        width, height = size
+        return join(self.folder, f"background-{self.color_name}-{width}-{height}-{self.boxes_name}.png")
 
     def render(self, antialiasing: float = 0.001, quality: int = 11, size: tuple[int, int] = (1920, 1080)) -> None:
         width, height = size
-        self.file_name = join(self.folder, f"background-{self.color_name}-{width}-{height}.png")
-        self.scene.render(outfile=self.file_name, width=width, height=height, quality=quality, antialiasing=antialiasing)
+        self.scene.render(outfile=self.name(size), width=width, height=height, quality=quality, antialiasing=antialiasing)
 
     def load(self, size: tuple[int, int] = (1920, 1080)):
-        width, height = size
-        self.file_name = join(self.folder, f"background-{self.color_name}-{width}-{height}.png")
-        if not exists(self.file_name):
+        name = self.name(size)
+        if not exists(name):
             self.render()
-        return IMG.open(self.file_name)
+        return IMG.open(name)
