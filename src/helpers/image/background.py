@@ -24,14 +24,14 @@ class BackGroundBox(Item):
 class Background:
     def __init__(self, color: Color, boxes: list[tuple[float, float, float, float] | tuple[float, float, float, float, Color]] = [], box_color: Color = Colors.gray.c800, folder: str = "backgrounds") -> None:
         self.folder = folder
-        self.color_name = str(color.color)[1: -1].replace(', ', '_')
-        self.box_color_name = str(box_color.color)[1: -1].replace(', ', '_')
+        self.color = color
+        self.color_name = str(self.color.color)[1: -1].replace(', ', '_')
         self.boxes: list[tuple[float, float, float, float, Color]] = [(tuple(list(b) + [box_color]) if len(b) == 4 else b) for b in boxes]
         self.scene = Scene(
             Camera('location', [0, 0, -6], 'look_at',  [0, 0, 0]),
             [
                 LightSource([2, 4, -3], 'color', [1.5, 1.5, 1.5], 'area_light <5, 0, 0>, <0, 5, 0>, 5, 5', 'adaptive 2 area_illumination on', 'jitter'),
-                BackGroundBox(color=color, distance=2),
+                BackGroundBox(color=self.color, distance=2),
                 # Box([16/3, 9/3, 1.9], [-16/3, -9/3, 1.8], colorize(Colors.gray.c800))
                 *self.boxes_shape
             ]
@@ -61,11 +61,19 @@ class Background:
     def load(self, size: tuple[int, int] = (1920, 1080)):
         name = self.name(size)
         if not exists(name):
-            self.render()
+            self.render(size=size)
         return IMG.open(name)
 
     @staticmethod
     def transition(background1: Background, background2: Background, frames: int, curve: Curve) -> list[Background]:
-        steps = (curve(i/(frames-1)) for i in range(frames))
-        zip(background1.boxes, background2.boxes)
-        [step for step in steps]
+        backgrounds: list[Background] = []
+        for step in (curve(i/(frames-1)) for i in range(frames)):
+            boxes: list[tuple[float, float, float, float, Color]] = []
+            for box1, box2, in zip(background1.boxes, background2.boxes):
+                *vs1, c1 = box1
+                *vs2, c2 = box2
+                box = tuple([(v2-v1)*step + v1 for v1, v2 in zip(vs1, vs2)] + [Colors.interpolate(c1, c2, step)])
+                boxes.append(box)
+            color = Colors.interpolate(background1.color, background2.color, step)
+            backgrounds.append(Background(color=color, boxes=boxes))
+        return backgrounds
