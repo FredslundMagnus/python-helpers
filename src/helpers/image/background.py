@@ -20,7 +20,8 @@ class BackGroundBox(Item):
 
 
 class Background:
-    def __init__(self, color: Color, boxes: list[tuple[float, float, float, float]] = [], box_color: Color = Colors.gray.c800) -> None:
+    def __init__(self, color: Color, boxes: list[tuple[float, float, float, float]] = [], box_color: Color = Colors.gray.c800, folder: str = "backgrounds") -> None:
+        self.folder = folder
         self.color_name = str(color.color)[1: -1].replace(', ', '_')
         self.box_color_name = str(box_color.color)[1: -1].replace(', ', '_')
         self.box_color = box_color
@@ -44,12 +45,12 @@ class Background:
 
     def render(self, antialiasing: float = 0.001, quality: int = 11, size: tuple[int, int] = (1920, 1080)) -> None:
         width, height = size
-        self.file_name = join("backgrounds", f"background-{self.color_name}-{width}-{height}.png")
+        self.file_name = join(self.folder, f"background-{self.color_name}-{width}-{height}.png")
         self.scene.render(outfile=self.file_name, width=width, height=height, quality=quality, antialiasing=antialiasing)
 
     def load(self, size: tuple[int, int] = (1920, 1080)):
         width, height = size
-        self.file_name = join("backgrounds", f"background-{self.color_name}-{width}-{height}.png")
+        self.file_name = join(self.folder, f"background-{self.color_name}-{width}-{height}.png")
         if not exists(self.file_name):
             self.render()
         return IMG.open(self.file_name)
