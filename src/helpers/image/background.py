@@ -38,7 +38,7 @@ class Background:
 
     @property
     def boxes(self) -> list[Box]:
-        return [Box([b[2], b[3], 1.9], [b[0], b[1], 1.8], colorize(self.box_color)) for b in self.boxes_shape]
+        return [Box([b[2], b[1], 1.9], [b[0], b[3], 1.8], colorize(self.box_color)) for b in self.boxes_shape]
 
     def transform(pos: float) -> float:
         return pos
