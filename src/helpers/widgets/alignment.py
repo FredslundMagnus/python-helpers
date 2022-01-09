@@ -8,46 +8,37 @@ class Alignment:
     y: float = 0.0
 
     @property
-    @classmethod
-    def topLeft(cls) -> Alignment:
+    def topLeft(self) -> Alignment:
         return Alignment(-1.0, -1.0)
 
     @property
-    @classmethod
-    def topCenter(cls) -> Alignment:
+    def topCenter(self) -> Alignment:
         return Alignment(0.0, -1.0)
 
     @property
-    @classmethod
-    def topRight(cls) -> Alignment:
+    def topRight(self) -> Alignment:
         return Alignment(1.0, -1.0)
 
     @property
-    @classmethod
-    def centerLeft(cls) -> Alignment:
+    def centerLeft(self) -> Alignment:
         return Alignment(-1.0, 0.0)
 
     @property
-    @classmethod
-    def center(cls) -> Alignment:
+    def center(self) -> Alignment:
         return Alignment(0.0, 0.0)
 
     @property
-    @classmethod
-    def centerRight(cls) -> Alignment:
+    def centerRight(self) -> Alignment:
         return Alignment(1.0, 0.0)
 
     @property
-    @classmethod
-    def bottomLeft(cls) -> Alignment:
+    def bottomLeft(self) -> Alignment:
         return Alignment(-1.0, 1.0)
 
     @property
-    @classmethod
-    def bottomCenter(cls) -> Alignment:
+    def bottomCenter(self) -> Alignment:
         return Alignment(0.0, 1.0)
 
     @property
-    @classmethod
-    def bottomRight(cls) -> Alignment:
+    def bottomRight(self) -> Alignment:
         return Alignment(1.0, 1.0)
