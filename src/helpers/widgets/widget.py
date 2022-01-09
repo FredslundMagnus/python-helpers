@@ -9,4 +9,9 @@ class Widget:
     flex: float | None = None
 
     def draw(self, canvas: ImageDraw, offset: Offset, max_size: Size, ratio: float) -> None:
-        pass
+        built = self.build(max_size)
+        if built is not None:
+            built.draw(canvas, offset, max_size, ratio)
+
+    def build(self, size: Size) -> Widget | None:
+        return None

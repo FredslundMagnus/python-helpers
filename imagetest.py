@@ -1,5 +1,6 @@
 from __future__ import annotations
 import cv2
+from helpers.widgets.fileEditor import FileEditor
 from src.helpers.curves import Curves
 from src.helpers.colors import Colors
 from src.helpers.image.background import Background
@@ -50,13 +51,8 @@ def make(name: str, files: list[Background], fps: int = 60, size: tuple[int, int
 # )
 
 test0 = [Background(color=Colors.blue, boxes=[(1, 1, 5, 8), (6, 1, 10, 8), (11, 1, 15, 8)], children=[
-    Container(
-        color=Colors.red,
-        child=Container(
-            color=Colors.green,
-            size=Size(100, 100),
-            radius=10,
-        ),
+    FileEditor(
+        filename="Test",
     ),
     Container(
         color=Colors.yellow,
@@ -76,24 +72,53 @@ test0 = [Background(color=Colors.blue, boxes=[(1, 1, 5, 8), (6, 1, 10, 8), (11, 
     ),
     Container(
         color=Colors.yellow,
-        child=Row(
+        child=Column(
             children=[
-                Container(
-                    color=Colors.purple,
-                    size=Size(100, 200),
-                    radius=30,
-                ),
-                Container(
-                    color=Colors.purple,
-                    size=Size(50, 100),
-                    radius=30,
+                Expanded(
+                    child=Row(
+                        children=[
+                            Container(
+                                color=Colors.purple,
+                                size=Size(100, 200),
+                                radius=30,
+                            ),
+                            Container(
+                                color=Colors.purple,
+                                size=Size(50, 100),
+                                radius=30,
+                            ),
+                            Expanded(
+                                child=Container(
+                                    color=Colors.purple,
+                                    radius=30,
+                                ),
+                            )
+                        ],
+                    ),
                 ),
                 Expanded(
-                    child=Container(
-                        color=Colors.purple,
-                        radius=30,
+                    child=Row(
+                        children=[
+                            Container(
+                                color=Colors.purple,
+                                size=Size(100, 200),
+                                radius=30,
+                            ),
+                            Spacer(),
+                            Container(
+                                color=Colors.purple,
+                                size=Size(50, 100),
+                                radius=30,
+                            ),
+                            Expanded(
+                                child=Container(
+                                    color=Colors.purple,
+                                    radius=30,
+                                ),
+                            )
+                        ],
                     ),
-                )
+                ),
             ],
         ),
     ),
@@ -126,7 +151,7 @@ test4 = [Background(color=Colors.blue, boxes=[(16/9, 1, 16-16/9, 8)]) for _ in r
 
 
 # make("eksempelHD2", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920, 1080))
-make("testContainer", test0, size=(1920, 1080))
+make("testContainer", test0, size=(1920*2, 1080*2))
 # [tran.load() for tran in trans]
 # [tran.load() for tran in trans2]
 
