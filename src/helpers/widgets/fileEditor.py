@@ -24,12 +24,14 @@ class FileEditor(Widget):
                     child=Padding(
                         padding=Edges.all(12),
                         child=Row(
-                            Container(size=Size(8, 8), color=Colors.red, radius=4),
-                            SizedBox(size=Size(8, 8)),
-                            Container(size=Size(8, 8), color=Colors.yellow, radius=4),
-                            SizedBox(size=Size(8, 8)),
-                            Container(size=Size(8, 8), color=Colors.green, radius=4),
-                            SizedBox(size=Size(24, 8)),
+                            children=[
+                                Container(size=Size(8, 8), color=Colors.red, radius=4),
+                                SizedBox(size=Size(8, 8)),
+                                Container(size=Size(8, 8), color=Colors.yellow, radius=4),
+                                SizedBox(size=Size(8, 8)),
+                                Container(size=Size(8, 8), color=Colors.green, radius=4),
+                                SizedBox(size=Size(24, 8)),
+                            ],
                         ),
                     ),
                 ),
