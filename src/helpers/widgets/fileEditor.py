@@ -18,8 +18,7 @@ class FileEditor(Widget):
     def build(self, size: Size) -> Widget | None:
         return Column(
             children=[
-                Container(
-                    color=Colors.blue,
+                SizedBox(
                     size=Size(size.width, 32),
                     child=Padding(
                         padding=Edges.all(10),
@@ -37,14 +36,11 @@ class FileEditor(Widget):
                     ),
                 ),
                 Expanded(
-                    child=Container(
-                        color=Colors.green,
-                        child=Padding(
-                            padding=Edges.all(10),
-                            child=Container(
-                                color=Colors.blue,
-                            )
-                        )
+                    child=Padding(
+                        padding=Edges.all(10),
+                        child=Container(
+                            color=Colors.blue,
+                        ),
                     ),
                 ),
             ],
