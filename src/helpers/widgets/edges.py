@@ -9,6 +9,9 @@ class Edges:
     bottom: float = 0.0
     left: float = 0.0
 
+    def __call__(self) -> Edges:
+        return self
+
     @staticmethod
     def symmetric(vertical: float = 0.0, horizontal: float = 0.0) -> Edges:
         return Edges(top=vertical, bottom=vertical, right=horizontal, left=horizontal)

@@ -65,6 +65,7 @@ test0 = [Background(color=Colors.blue, boxes=[(1, 1, 5, 8), (6, 1, 10, 8), (11, 
             child=Container(
                 color=Colors.blue,
                 child=Align(
+                    alignment=Alignment.centerRight,
                     child=Container(
                         color=Colors.green,
                         size=Size(200, 100),

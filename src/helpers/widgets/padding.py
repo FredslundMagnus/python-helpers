@@ -3,8 +3,8 @@ from helpers.widgets.widget import *
 
 
 class Padding(Widget):
-    def __init__(self, padding: Edges = Edges.zero(), child: Widget = None) -> None:
-        self.padding = padding
+    def __init__(self, padding: Edges = Edges.zero, child: Widget = None) -> None:
+        self.padding = padding.__call__()
         self.child = child
         super().__init__()
 

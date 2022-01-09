@@ -7,6 +7,9 @@ class Alignment:
     x: float = 0.0
     y: float = 0.0
 
+    def __call__(self) -> Alignment:
+        return self
+
     @staticmethod
     def topLeft() -> Alignment:
         return Alignment(-1.0, -1.0)

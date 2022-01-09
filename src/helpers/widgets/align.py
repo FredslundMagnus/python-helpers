@@ -3,8 +3,8 @@ from helpers.widgets.widget import *
 
 
 class Align(Widget):
-    def __init__(self, alignment: Alignment = Alignment.center(), child: Widget = None) -> None:
-        self.alignment = alignment
+    def __init__(self, alignment: Alignment = Alignment.center, child: Widget = None) -> None:
+        self.alignment = alignment.__call__()
         self.child = child
         super().__init__()
 
