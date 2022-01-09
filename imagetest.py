@@ -52,7 +52,7 @@ def make(name: str, files: list[Background], fps: int = 60, size: tuple[int, int
 test0 = [Background(color=Colors.blue, boxes=[(1, 1, 5, 8), (6, 1, 10, 8), (11, 1, 15, 8)], children=[
     Container(
         color=Colors.red,
-        radius=50,
+        radius=5,
         child=Container(
             color=Colors.green,
             size=Size(100, 100),
@@ -60,15 +60,21 @@ test0 = [Background(color=Colors.blue, boxes=[(1, 1, 5, 8), (6, 1, 10, 8), (11, 
         ),
     ),
     Container(
-        radius=50,
+        radius=5,
         color=Colors.yellow,
-        child=Container(
-            color=Colors.blue,
-            size=Size(200, 100),
+        child=Padding(
+            padding=Edges.all(10.0),
+            child=Container(
+                color=Colors.blue,
+                child=Container(
+                    color=Colors.green,
+                    size=Size(200, 100),
+                ),
+            ),
         ),
     ),
     Container(
-        radius=50,
+        radius=5,
         color=Colors.yellow,
         child=Container(
             color=Colors.purple,
