@@ -14,4 +14,4 @@ class Text(Widget):
 
     def draw(self, canvas: ImageDraw, offset: Offset, max_size: Size, ratio: float) -> None:
         self.font = font(self.fontType, int(self.fontSize * ratio))
-        canvas.text((offset.dx*ratio, offset.dy*ratio), self.text, self.color.color)
+        canvas.text((offset.dx*ratio, offset.dy*ratio), self.text, self.color.color, self.font)
