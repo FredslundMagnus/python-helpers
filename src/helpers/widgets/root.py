@@ -11,15 +11,18 @@ class Root(Widget):
         self.y_0 = y_0
         self.x_1 = x_1
         self.y_1 = y_1
-        self.size = Size((x_1-x_0) * 100, (y_1-y_0) * 100)
-        self.offset = Offset(x_0 * 100, y_0 * 100)
+        self.size = Size((x_1-x_0) * 120, (y_1-y_0) * 120)
+        self.offset = Offset(x_0 * 120, y_0 * 120)
         self.child = child
         super().__init__()
 
     def draw(self, size: tuple[int, int] = (1920, 1080)):
-        img = Image.new('RGBA', size, (255, 0, 0, 0))
+        img = Image.new('RGBA', size, (0, 0, 0, 0))
 
         draw = ImageDraw.Draw(img)
-        draw.ellipse((25, 25, 75, 75), fill=(255, 0, 0))
+        ratio = (size[1] / 1080)
+        dx = self.offset.dx * ratio
+        dy = self.offset.dy * ratio
+        draw.rectangle((dx, dy + 100, dx + 50, dy + 175), fill=(255, 0, 0))
 
         img.save('test.png', 'PNG')
