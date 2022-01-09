@@ -14,11 +14,10 @@ class Container(Widget):
         dx = offset.dx * ratio
         dy = offset.dy * ratio
         if self.size is None:
-            width = max_size.width * ratio
-            height = max_size.height * ratio
-        else:
-            width = self.size.width * ratio
-            height = self.size.height * ratio
+            self.size = max_size
+
+        width = self.size.width * ratio
+        height = self.size.height * ratio
         if self.color is not None:
             canvas.rounded_rectangle((dx, dy, dx + width, dy + height), radius=self.radius, fill=self.color.color)
         if self.child is not None:
