@@ -11,7 +11,8 @@ import numpy as np
 def create_video(name: str, files: list[Background], fps: int = 60, size: tuple[int, int] = (1920, 1080)):
     video = cv2.VideoWriter(f'Videos/{name}.mov', 4, fps, size)
 
-    for image in files:
+    for i, image in enumerate(files):
+        print(f"{i} out of {len(files)}")
         image.load(size=size)
         background = Image.open(image.name(size=size))
         for img in (root.draw(size=size) for root in image.children):
