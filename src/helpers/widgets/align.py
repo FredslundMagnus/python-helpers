@@ -12,7 +12,6 @@ class Align(Widget):
         if self.child is not None:
             if self.child.size is None:
                 raise ValueError("Child needs a size")
-            print(self.alignment)
             _offset = Offset(
                 offset.dx + (max_size.width - self.child.size.width) * ((self.alignment.x + 1) / 2),
                 offset.dy + (max_size.height - self.child.size.height) * ((self.alignment.y + 1) / 2),
