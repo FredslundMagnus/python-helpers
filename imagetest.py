@@ -11,6 +11,9 @@ def make(name: str, files: list[Background], fps: int = 60, size: tuple[int, int
 
     for image in files:
         image.load(size=size)
+        for root in image.children:
+            root.draw(size=size)
+
         video.write(cv2.imread(image.name(size=size)))
 
     cv2.destroyAllWindows()
