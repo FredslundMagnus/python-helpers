@@ -19,9 +19,9 @@ class FileEditor(Widget):
         return Column(
             children=[
                 SizedBox(
-                    size=Size(size.width, 40),
+                    size=Size(size.width, 46),
                     child=Padding(
-                        padding=Edges.all(13),
+                        padding=Edges.all(16),
                         child=Row(
                             children=[
                                 Container(size=Size(14, 14), color=Colors.red, radius=7),
