@@ -4,6 +4,7 @@ from helpers.colors import Color, Colors
 from PIL import Image as IMG
 from os.path import join, exists
 from helpers.widgets.widget import Widget
+from helpers.widgets.root import Root
 
 from helpers.curves import Curve
 
@@ -37,7 +38,7 @@ class Background:
                 *self.boxes_shape
             ]
         )
-        self.children = children
+        self.children = [Root(*box[:4], child) for child, box in zip(children, boxes)]
 
     @property
     def boxes_shape(self) -> list[Box]:
