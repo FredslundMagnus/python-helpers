@@ -16,4 +16,5 @@ class Container(Widget):
         width = self.size.width * ratio
         height = self.size.height * ratio
         if self.color is not None:
-            canvas.rounded_rectangle((dx, dy, dx + width, dy + height), radius=self.radius, fill=self.color.color)
+            canvas.rectangle((dx, dy, dx + width, dy + height), fill=self.color.color)
+            # canvas.rounded_rectangle((dx, dy, dx + width, dy + height), radius=self.radius, fill=self.color.color)
