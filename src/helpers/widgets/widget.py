@@ -6,6 +6,7 @@ from PIL.ImageDraw import ImageDraw
 
 class Widget:
     size: Size | None = None
+    flex: float | None = None
 
     def draw(self, canvas: ImageDraw, offset: Offset, max_size: Size, ratio: float) -> None:
         pass

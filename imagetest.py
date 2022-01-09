@@ -76,10 +76,19 @@ test0 = [Background(color=Colors.blue, boxes=[(1, 1, 5, 8), (6, 1, 10, 8), (11, 
     ),
     Container(
         color=Colors.yellow,
-        child=Container(
-            color=Colors.purple,
-            size=Size(100, 200),
-            radius=30,
+        child=Row(
+            children=[
+                Container(
+                    color=Colors.purple,
+                    size=Size(100, 200),
+                    radius=30,
+                ),
+                Container(
+                    color=Colors.purple,
+                    size=Size(100, 200),
+                    radius=30,
+                ),
+            ],
         ),
     ),
 ]) for _ in range(40)]
