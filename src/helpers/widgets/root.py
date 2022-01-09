@@ -20,7 +20,7 @@ class Root:
     def draw(self, size: tuple[int, int] = (1920, 1080)) -> Image:
         img = IMG.new('RGBA', size, (0, 0, 0, 0))
         canvas = ImageDraw.Draw(img)
-        ratio = ((self.x_1 - self.x_0) * 120 / 1080)
+        ratio = ((self.y_1 - self.y_0) * 120 / 1080)
         self.child.draw(canvas, self.offset, self.size, ratio)
 
         return img
