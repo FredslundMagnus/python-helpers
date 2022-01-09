@@ -16,4 +16,4 @@ class Font:
 
 
 class Fonts:
-    CascadiaCode: Font = Font(join("..", "Fonts", "Cascadia", "CascadiaCode.ttf"))
+    CascadiaCode: Font = Font(join("src", "helpers", "Fonts", "Cascadia", "CascadiaCode.ttf"))
