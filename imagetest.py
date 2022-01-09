@@ -8,7 +8,7 @@ from PIL import Image
 import numpy as np
 
 
-def make(name: str, files: list[Background], fps: int = 60, size: tuple[int, int] = (1920, 1080)):
+def create_video(name: str, files: list[Background], fps: int = 60, size: tuple[int, int] = (1920, 1080)):
     video = cv2.VideoWriter(f'Videos/{name}.mov', 4, fps, size)
 
     for image in files:
@@ -57,8 +57,8 @@ def create_image(name: str, file: Background, size: tuple[int, int] = (1920, 108
 # )
 children = [
     FileEditor(filename="example_of_filename.py"),
-    FileEditor(filename="Test2"),
-    FileEditor(filename="Test3"),
+    FileEditor(filename="another_great_but_long_name.py"),
+    FileEditor(filename="short_name.py"),
 ]
 
 test0 = [Background(color=Colors.blue, boxes=[(1, 1, 5, 8), (6, 1, 10, 8), (11, 1, 15, 8)], children=children) for _ in range(40)]
@@ -91,7 +91,7 @@ test4 = [Background(color=Colors.blue, boxes=[(16/9, 1, 16-16/9, 8)], children=c
 # )
 
 
-# make("eksempelHD2", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920, 1080))
+create_video("test", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920, 1080))
 create_image("test0Container", test0[0], size=(1920*2, 1080*2))
 create_image("test1Container", test2[0], size=(1920*2, 1080*2))
 create_image("test2Container", test4[0], size=(1920*2, 1080*2))
