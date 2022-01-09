@@ -16,4 +16,4 @@ class Font:
 
 
 class Fonts:
-    CascadiaCode: Font = Font(join(dirname(__file__), "Fonts", "Cascadia", "CascadiaCode.ttf6"))
+    CascadiaCode: Font = Font(join("..", "Fonts", "Cascadia", "CascadiaCode.ttf"))
