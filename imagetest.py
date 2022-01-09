@@ -3,6 +3,7 @@ import cv2
 from src.helpers.curves import Curves
 from src.helpers.colors import Colors
 from src.helpers.image.background import Background
+from src.helpers.widgets.widgets import *
 
 
 def make(name: str, files: list[Background], fps: int = 60, size: tuple[int, int] = (1920, 1080)):
@@ -40,7 +41,12 @@ def make(name: str, files: list[Background], fps: int = 60, size: tuple[int, int
 #     curve=Curves.linear,
 # )
 
-test0 = [Background(color=Colors.blue, boxes=[(1, 1, 5, 8), (6, 1, 10, 8), (11, 1, 15, 8)]) for _ in range(40)]
+test0 = [Background(color=Colors.blue, boxes=[(1, 1, 5, 8), (6, 1, 10, 8), (11, 1, 15, 8)], children=[
+    Container(
+        color=Colors.green,
+        size=Size(100, 100),
+    ),
+]) for _ in range(40)]
 
 test1 = Background.transition(
     Background(color=Colors.blue, boxes=[(1, 1, 5, 8), (6, 1, 10, 8), (11, 1, 15, 8)]),
