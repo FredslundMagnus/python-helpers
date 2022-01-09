@@ -11,10 +11,12 @@ def make(name: str, files: list[Background], fps: int = 60, size: tuple[int, int
 
     for image in files:
         image.load(size=size)
-        for root in image.children:
-            root.draw(size=size)
+        main = cv2.imread(image.name(size=size))
+        for img in (root.draw(size=size) for root in image.children):
+            main = cv2.addWeighted(main, 0.4, img, 0.1, 0)
+            # main
 
-        video.write(cv2.imread(image.name(size=size)))
+        video.write(main)
 
     cv2.destroyAllWindows()
     video.release()
@@ -48,6 +50,14 @@ test0 = [Background(color=Colors.blue, boxes=[(1, 1, 5, 8), (6, 1, 10, 8), (11, 
     Container(
         color=Colors.green,
         size=Size(100, 100),
+    ),
+    Container(
+        color=Colors.blue,
+        size=Size(200, 100),
+    ),
+    Container(
+        color=Colors.purple,
+        size=Size(100, 200),
     ),
 ]) for _ in range(40)]
 

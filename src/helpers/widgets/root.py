@@ -2,7 +2,8 @@ from __future__ import annotations
 from helpers.widgets.widget import Widget
 from helpers.widgets.size import Size
 from helpers.widgets.offset import Offset
-from PIL import Image, ImageDraw
+from PIL import Image as IMG, ImageDraw
+from PIL.Image import Image
 
 
 class Root(Widget):
@@ -16,13 +17,15 @@ class Root(Widget):
         self.child = child
         super().__init__()
 
-    def draw(self, size: tuple[int, int] = (1920, 1080)):
-        img = Image.new('RGBA', size, (0, 0, 0, 0))
+    def draw(self, size: tuple[int, int] = (1920, 1080)) -> Image:
+        img = IMG.new('RGBA', size, (0, 0, 0, 0))
 
         draw = ImageDraw.Draw(img)
         ratio = (size[1] / 1080)
         dx = self.offset.dx * ratio
         dy = self.offset.dy * ratio
-        draw.rectangle((dx, dy, dx + self.size.width * ratio, dy + self.size.height * ratio), fill=(255, 0, 0))
+        width = self.size.width * ratio
+        height = self.size.height * ratio
+        draw.rectangle((dx, dy, dx + width, dy + height), fill=(255, 0, 0))
 
-        img.save('test.png', 'PNG')
+        return img
