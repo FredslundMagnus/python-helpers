@@ -26,9 +26,9 @@ class FileEditor(Widget):
                         child=Row(
                             children=[
                                 Container(size=Size(12, 12), color=Colors.red, radius=6),
-                                SizedBox(size=Size(12, 12)),
+                                SizedBox(size=Size(8, 12)),
                                 Container(size=Size(12, 12), color=Colors.yellow, radius=6),
-                                SizedBox(size=Size(12, 12)),
+                                SizedBox(size=Size(8, 12)),
                                 Container(size=Size(12, 12), color=Colors.green, radius=6),
                                 SizedBox(size=Size(24, 12)),
                                 # self.filename if self.filename is not None else None,
