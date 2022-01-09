@@ -12,7 +12,7 @@ class Root:
         self.y_0 = y_0
         self.x_1 = x_1
         self.y_1 = y_1
-        self.size = Size((x_1-x_0) * 119, (y_1-y_0) * 120)
+        self.size = Size((x_1-x_0) * 119.5, (y_1-y_0) * 120)
         self.offset = Offset(x_0 * 120, y_0 * 120)
         self.child = child
         super().__init__()
