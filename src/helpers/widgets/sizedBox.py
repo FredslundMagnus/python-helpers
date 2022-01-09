@@ -8,6 +8,7 @@ class SizedBox(Widget):
         super().__init__()
 
     def draw(self, canvas: ImageDraw, offset: Offset, max_size: Size, ratio: float) -> None:
+        print(canvas.textsize("Hej med dig"))
         if self.size is None:
             self.size = max_size
 
