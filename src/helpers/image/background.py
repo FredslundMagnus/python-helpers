@@ -3,6 +3,7 @@ from vapory.vapory import *
 from helpers.colors import Color, Colors
 from PIL import Image as IMG
 from os.path import join, exists
+from helpers.widgets.widget import Widget
 
 from helpers.curves import Curve
 
@@ -22,7 +23,7 @@ class BackGroundBox(Item):
 
 
 class Background:
-    def __init__(self, color: Color, boxes: list[tuple[float, float, float, float] | tuple[float, float, float, float, Color]] = [], box_color: Color = Colors.gray.c800, folder: str = "backgrounds") -> None:
+    def __init__(self, color: Color, boxes: list[tuple[float, float, float, float] | tuple[float, float, float, float, Color]] = [], box_color: Color = Colors.gray.c800, folder: str = "backgrounds", children: list[Widget] = []) -> None:
         self.folder = folder
         self.color = color
         self.color_name = str(self.color.color)[1: -1].replace(', ', '_')
@@ -36,6 +37,7 @@ class Background:
                 *self.boxes_shape
             ]
         )
+        self.children = children
 
     @property
     def boxes_shape(self) -> list[Box]:
