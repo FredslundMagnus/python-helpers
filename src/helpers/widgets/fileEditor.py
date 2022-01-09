@@ -8,6 +8,7 @@ from helpers.widgets.container import Container
 from helpers.widgets.expanded import Expanded
 from helpers.widgets.edges import Edges
 from helpers.widgets.row import Row
+from helpers.widgets.text import Text
 
 
 class FileEditor(Widget):
@@ -30,7 +31,7 @@ class FileEditor(Widget):
                                 SizedBox(size=Size(8, 14)),
                                 Container(size=Size(14, 14), color=Colors.green, radius=7),
                                 SizedBox(size=Size(24, 14)),
-                                # self.filename if self.filename is not None else None,
+                                Text(self.filename) if self.filename is not None else None,
                             ],
                         ),
                     ),

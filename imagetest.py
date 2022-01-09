@@ -1,6 +1,5 @@
 from __future__ import annotations
 import cv2
-from helpers.widgets.fileEditor import FileEditor
 from src.helpers.curves import Curves
 from src.helpers.colors import Colors
 from src.helpers.image.background import Background
