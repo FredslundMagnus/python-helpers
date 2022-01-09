@@ -1,5 +1,7 @@
-from os.path import join
+from os.path import join, curdir
 from PIL.ImageFont import truetype, FreeTypeFont
+
+print(curdir)
 
 
 class Font:
@@ -11,4 +13,4 @@ class Font:
 
 
 class Fonts:
-    CascadiaCode: Font = Font(join("Fonts", "Cascadia", "CascadiaCode.ttf"))
+    CascadiaCode: Font = Font(join(curdir, "Fonts", "Cascadia", "CascadiaCode.ttf"))
