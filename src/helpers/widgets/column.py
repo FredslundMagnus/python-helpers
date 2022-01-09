@@ -4,7 +4,7 @@ from helpers.widgets.widget import *
 
 class Column(Widget):
     def __init__(self, children: list[Widget] = []) -> None:
-        self.children = children
+        self.children = [child for child in children if child is not None]
         super().__init__()
 
     def drawMin(self, canvas: ImageDraw, offset: Offset, max_size: Size, ratio: float) -> None:

@@ -31,6 +31,7 @@ class FileEditor(Widget):
                                 SizedBox(size=Size(12, 12)),
                                 Container(size=Size(12, 12), color=Colors.green, radius=6),
                                 SizedBox(size=Size(24, 12)),
+                                # self.filename if self.filename is not None else None,
                             ],
                         ),
                     ),
