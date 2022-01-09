@@ -7,38 +7,38 @@ class Alignment:
     x: float = 0.0
     y: float = 0.0
 
-    @property
-    def topLeft(self) -> Alignment:
+    @staticmethod
+    def topLeft() -> Alignment:
         return Alignment(-1.0, -1.0)
 
-    @property
-    def topCenter(self) -> Alignment:
+    @staticmethod
+    def topCenter() -> Alignment:
         return Alignment(0.0, -1.0)
 
-    @property
-    def topRight(self) -> Alignment:
+    @staticmethod
+    def topRight() -> Alignment:
         return Alignment(1.0, -1.0)
 
-    @property
-    def centerLeft(self) -> Alignment:
+    @staticmethod
+    def centerLeft() -> Alignment:
         return Alignment(-1.0, 0.0)
 
-    @property
-    def center(self) -> Alignment:
+    @staticmethod
+    def center() -> Alignment:
         return Alignment(0.0, 0.0)
 
-    @property
-    def centerRight(self) -> Alignment:
+    @staticmethod
+    def centerRight() -> Alignment:
         return Alignment(1.0, 0.0)
 
-    @property
-    def bottomLeft(self) -> Alignment:
+    @staticmethod
+    def bottomLeft() -> Alignment:
         return Alignment(-1.0, 1.0)
 
-    @property
-    def bottomCenter(self) -> Alignment:
+    @staticmethod
+    def bottomCenter() -> Alignment:
         return Alignment(0.0, 1.0)
 
-    @property
-    def bottomRight(self) -> Alignment:
+    @staticmethod
+    def bottomRight() -> Alignment:
         return Alignment(1.0, 1.0)

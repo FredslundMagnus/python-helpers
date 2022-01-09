@@ -3,7 +3,7 @@ from helpers.widgets.widget import *
 
 
 class Padding(Widget):
-    def __init__(self, padding: Edges = Edges.zero, child: Widget = None) -> None:
+    def __init__(self, padding: Edges = Edges.zero(), child: Widget = None) -> None:
         self.padding = padding
         self.child = child
         super().__init__()

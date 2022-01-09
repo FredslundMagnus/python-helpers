@@ -21,7 +21,6 @@ class Edges:
     def only(top: float = 0.0, bottom: float = 0.0, right: float = 0.0, left: float = 0.0) -> Edges:
         return Edges(top=top, bottom=bottom, right=right, left=left)
 
-    @property
-    @classmethod
-    def zero(cls) -> Edges:
+    @staticmethod
+    def zero() -> Edges:
         return Edges()

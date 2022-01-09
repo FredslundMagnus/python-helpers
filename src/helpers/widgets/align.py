@@ -3,7 +3,7 @@ from helpers.widgets.widget import *
 
 
 class Align(Widget):
-    def __init__(self, alignment: Alignment = Alignment.center, child: Widget = None) -> None:
+    def __init__(self, alignment: Alignment = Alignment.center(), child: Widget = None) -> None:
         self.alignment = alignment
         self.child = child
         super().__init__()
