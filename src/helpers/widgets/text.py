@@ -1,14 +1,15 @@
 from helpers.widgets.widget import *
 from helpers.colors import Color, Colors
 from PIL.ImageFont import truetype as font
+from helpers.fonts import Font, Fonts
 
 
 class Text(Widget):
-    def __init__(self, text: str, fontSize: float = 16.0, color: Color = Colors.white, fontType: str = "arial.ttf") -> None:
+    def __init__(self, text: str, fontSize: float = 16.0, color: Color = Colors.white, font: Font = Fonts.CascadiaCode) -> None:
         self.text = text
         self.fontSize = fontSize
         self.color = color
-        self.fontType = fontType
+        self.fontType = font.file
         self.size = Size(*font(self.fontType, int(self.fontSize)).getsize(self.text))
         print(self.size)
         super().__init__()
