@@ -9,5 +9,7 @@ from helpers.widgets.alignment import Alignment
 from helpers.widgets.center import Center
 from helpers.widgets.row import Row
 from helpers.widgets.column import Column
+from helpers.widgets.expanded import Expanded
+from helpers.widgets.spacer import Spacer
 
-widgets = [Size, Widget, Offset, Container, Padding, Edges, Align, Alignment, Center, Row, Column]
+widgets = [Size, Widget, Offset, Container, Padding, Edges, Align, Alignment, Center, Row, Column, Expanded, Spacer]

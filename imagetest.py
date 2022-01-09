@@ -85,9 +85,15 @@ test0 = [Background(color=Colors.blue, boxes=[(1, 1, 5, 8), (6, 1, 10, 8), (11, 
                 ),
                 Container(
                     color=Colors.purple,
-                    size=Size(100, 200),
+                    size=Size(50, 100),
                     radius=30,
                 ),
+                Expanded(
+                    child=Container(
+                        color=Colors.purple,
+                        radius=30,
+                    ),
+                )
             ],
         ),
     ),
