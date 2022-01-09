@@ -19,14 +19,13 @@ class Root:
 
     def draw(self, size: tuple[int, int] = (1920, 1080)) -> Image:
         img = IMG.new('RGBA', size, (0, 0, 0, 0))
-
         canvas = ImageDraw.Draw(img)
         ratio = (size[1] / 1080)
-        dx = self.offset.dx * ratio
-        dy = self.offset.dy * ratio
-        width = self.size.width * ratio
-        height = self.size.height * ratio
-        canvas.rectangle((dx, dy, dx + width, dy + height), fill=(255, 0, 0))
-        self.child.draw(canvas, self.offset, ratio)
+        # dx = self.offset.dx * ratio
+        # dy = self.offset.dy * ratio
+        # width = self.size.width * ratio
+        # height = self.size.height * ratio
+        # # canvas.rectangle((dx, dy, dx + width, dy + height), fill=(255, 0, 0))
+        self.child.draw(canvas, self.offset, self.size, ratio)
 
         return img

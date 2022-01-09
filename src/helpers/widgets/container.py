@@ -1,21 +1,26 @@
+from numpy.core.fromnumeric import size
 from helpers.colors import Color
-from helpers.widgets.size import Size
 from helpers.widgets.widget import *
 
 
 class Container(Widget):
-    def __init__(self, color: Color = None, size: Size = None, radius: float = 0.0) -> None:
+    def __init__(self, color: Color = None, size: Size = None, radius: float = 0.0, child: Widget = None) -> None:
         self.color = color
         self.size = size
         self.radius = radius
+        self.child = child
         super().__init__()
 
-    def draw(self, canvas: ImageDraw, offset: Offset, ratio: float) -> None:
+    def draw(self, canvas: ImageDraw, offset: Offset, max_size: Size, ratio: float) -> None:
         dx = offset.dx * ratio
         dy = offset.dy * ratio
-        width = self.size.width * ratio
-        height = self.size.height * ratio
+        if self.size is None:
+            width = max_size.width * ratio
+            height = max_size.height * ratio
+        else:
+            width = self.size.width * ratio
+            height = self.size.height * ratio
         if self.color is not None:
-            # canvas.rectangle((dx, dy, dx + width, dy + height), fill=self.color.color)
-            # canvas.r
             canvas.rounded_rectangle((dx, dy, dx + width, dy + height), radius=self.radius, fill=self.color.color)
+        if self.child is not None:
+            self.child.draw(canvas, offset, ratio, self.size)
