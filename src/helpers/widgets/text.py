@@ -9,8 +9,8 @@ class Text(Widget):
         self.text = text
         self.fontSize = fontSize
         self.color = color
-        self.fontType = font.file
-        self.size = Size(*create_font(self.fontType, int(self.fontSize)).getsize(self.text))
+        self.fontType = font.pil(self.fontSize)
+        self.size = Size(*font.pil(self.fontSize).getsize(self.text))
         print(self.size)
         super().__init__()
 
