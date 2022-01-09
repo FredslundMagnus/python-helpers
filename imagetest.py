@@ -4,6 +4,8 @@ from src.helpers.curves import Curves
 from src.helpers.colors import Colors
 from src.helpers.image.background import Background
 from src.helpers.widgets.widgets import *
+from PIL import Image
+import numpy as np
 
 
 def make(name: str, files: list[Background], fps: int = 60, size: tuple[int, int] = (1920, 1080)):
@@ -11,12 +13,13 @@ def make(name: str, files: list[Background], fps: int = 60, size: tuple[int, int
 
     for image in files:
         image.load(size=size)
-        main = cv2.imread(image.name(size=size))
+        background = Image.open(image.name(size=size))
         for img in (root.draw(size=size) for root in image.children):
-            main = cv2.addWeighted(main, 0.4, img, 0.1, 0)
-            # main
+            background.paste(img, (0, 0), img)
 
-        video.write(main)
+        pil_image = np.array(background.convert('RGB'))
+        open_cv_image = pil_image[:, :, ::-1].copy()
+        video.write(open_cv_image)
 
     cv2.destroyAllWindows()
     video.release()
