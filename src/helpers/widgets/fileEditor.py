@@ -19,18 +19,18 @@ class FileEditor(Widget):
         return Column(
             children=[
                 Container(
-                    color=Colors.red,
+                    color=Colors.blue,
                     size=Size(size.width, 32),
                     child=Padding(
-                        padding=Edges.all(12),
+                        padding=Edges.all(10),
                         child=Row(
                             children=[
-                                Container(size=Size(8, 8), color=Colors.red, radius=4),
-                                SizedBox(size=Size(8, 8)),
-                                Container(size=Size(8, 8), color=Colors.yellow, radius=4),
-                                SizedBox(size=Size(8, 8)),
-                                Container(size=Size(8, 8), color=Colors.green, radius=4),
-                                SizedBox(size=Size(24, 8)),
+                                Container(size=Size(12, 12), color=Colors.red, radius=6),
+                                SizedBox(size=Size(12, 12)),
+                                Container(size=Size(12, 12), color=Colors.yellow, radius=6),
+                                SizedBox(size=Size(12, 12)),
+                                Container(size=Size(12, 12), color=Colors.green, radius=6),
+                                SizedBox(size=Size(24, 12)),
                             ],
                         ),
                     ),
