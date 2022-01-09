@@ -50,97 +50,33 @@ def make(name: str, files: list[Background], fps: int = 60, size: tuple[int, int
 #     curve=Curves.linear,
 # )
 
-test0 = [Background(color=Colors.blue, boxes=[(1, 1, 5, 8), (6, 1, 10, 8), (11, 1, 15, 8)], children=[
-    FileEditor(
-        filename="Test",
-    ),
-    Container(
-        color=Colors.yellow,
-        child=Padding(
-            padding=Edges.all(10.0),
-            child=Container(
-                color=Colors.blue,
-                child=Align(
-                    alignment=Alignment.centerRight,
-                    child=Container(
-                        color=Colors.green,
-                        size=Size(200, 100),
-                    ),
-                ),
-            ),
-        ),
-    ),
-    Container(
-        color=Colors.yellow,
-        child=Column(
-            children=[
-                Expanded(
-                    child=Row(
-                        children=[
-                            Container(
-                                color=Colors.purple,
-                                size=Size(100, 200),
-                                radius=30,
-                            ),
-                            Container(
-                                color=Colors.purple,
-                                size=Size(50, 100),
-                                radius=30,
-                            ),
-                            Expanded(
-                                child=Container(
-                                    color=Colors.purple,
-                                    radius=30,
-                                ),
-                            )
-                        ],
-                    ),
-                ),
-                Expanded(
-                    child=Row(
-                        children=[
-                            Container(
-                                color=Colors.purple,
-                                size=Size(100, 200),
-                                radius=30,
-                            ),
-                            Spacer(),
-                            Container(
-                                color=Colors.purple,
-                                size=Size(50, 100),
-                                radius=30,
-                            ),
-                            Expanded(
-                                child=Container(
-                                    color=Colors.purple,
-                                    radius=30,
-                                ),
-                            )
-                        ],
-                    ),
-                ),
-            ],
-        ),
-    ),
-]) for _ in range(40)]
+children = [
+    FileEditor(filename="Test1"),
+    FileEditor(filename="Test2"),
+    FileEditor(filename="Test3"),
+]
+
+test0 = [Background(color=Colors.blue, boxes=[(1, 1, 5, 8), (6, 1, 10, 8), (11, 1, 15, 8)], children=children) for _ in range(40)]
 
 test1 = Background.transition(
     Background(color=Colors.blue, boxes=[(1, 1, 5, 8), (6, 1, 10, 8), (11, 1, 15, 8)]),
     Background(color=Colors.blue, boxes=[(1, 1, 7.5, 8), (8.5, 1, 15, 8), (17, 1, 30, 8)]),
     frames=40,
     curve=Curves.easeInOut,
+    children=children,
 )
 
-test2 = [Background(color=Colors.blue, boxes=[(1, 1, 7.5, 8), (8.5, 1, 15, 8)]) for _ in range(40)]
+test2 = [Background(color=Colors.blue, boxes=[(1, 1, 7.5, 8), (8.5, 1, 15, 8)], children=children) for _ in range(40)]
 
 test3 = Background.transition(
     Background(color=Colors.blue, boxes=[(1, 1, 7.5, 8), (8.5, 1, 15, 8)]),
     Background(color=Colors.blue, boxes=[(16/9, 1, 16-16/9, 8), (17, 1, 30, 8)]),
     frames=40,
     curve=Curves.easeInOut,
+    children=children,
 )
 
-test4 = [Background(color=Colors.blue, boxes=[(16/9, 1, 16-16/9, 8)]) for _ in range(40)]
+test4 = [Background(color=Colors.blue, boxes=[(16/9, 1, 16-16/9, 8)], children=children) for _ in range(40)]
 
 # test5 = Background.transition(
 #     Background(color=Colors.blue, boxes=[(16/9, 1, 16-16/9, 8), (17, 1, 30, 8)]),
@@ -150,8 +86,10 @@ test4 = [Background(color=Colors.blue, boxes=[(16/9, 1, 16-16/9, 8)]) for _ in r
 # )
 
 
-# make("eksempelHD2", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920, 1080))
-make("testContainer", test0, size=(1920*2, 1080*2))
+make("eksempelHD2", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920, 1080))
+# make("test0Container", test0, size=(1920*2, 1080*2))
+# make("test1Container", test2, size=(1920*2, 1080*2))
+# make("test2Container", test4, size=(1920*2, 1080*2))
 # [tran.load() for tran in trans]
 # [tran.load() for tran in trans2]
 

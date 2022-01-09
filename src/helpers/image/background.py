@@ -68,7 +68,7 @@ class Background:
         return IMG.open(name)
 
     @staticmethod
-    def transition(background1: Background, background2: Background, frames: int, curve: Curve) -> list[Background]:
+    def transition(background1: Background, background2: Background, frames: int, curve: Curve, children: list[Widget] = []) -> list[Background]:
         backgrounds: list[Background] = []
         for step in (curve(i/(frames-1)) for i in range(frames)):
             boxes: list[tuple[float, float, float, float, Color]] = []
@@ -78,5 +78,5 @@ class Background:
                 box = tuple([(v2-v1)*step + v1 for v1, v2 in zip(vs1, vs2)] + [Colors.interpolate(c1, c2, step)])
                 boxes.append(box)
             color = Colors.interpolate(background1.color, background2.color, step)
-            backgrounds.append(Background(color=color, boxes=boxes))
+            backgrounds.append(Background(color=color, boxes=boxes, children=children))
         return backgrounds
