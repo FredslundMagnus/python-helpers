@@ -6,7 +6,7 @@ from PIL import Image as IMG, ImageDraw
 from PIL.Image import Image
 
 
-class Root(Widget):
+class Root:
     def __init__(self, x_0: float, y_0: float, x_1: float, y_1: float, child: Widget) -> None:
         self.x_0 = x_0
         self.y_0 = y_0
@@ -20,12 +20,13 @@ class Root(Widget):
     def draw(self, size: tuple[int, int] = (1920, 1080)) -> Image:
         img = IMG.new('RGBA', size, (0, 0, 0, 0))
 
-        draw = ImageDraw.Draw(img)
+        canvas = ImageDraw.Draw(img)
         ratio = (size[1] / 1080)
         dx = self.offset.dx * ratio
         dy = self.offset.dy * ratio
         width = self.size.width * ratio
         height = self.size.height * ratio
-        draw.rectangle((dx, dy, dx + width, dy + height), fill=(255, 0, 0))
+        canvas.rectangle((dx, dy, dx + width, dy + height), fill=(255, 0, 0))
+        self.child.draw(canvas, self.offset, ratio)
 
         return img
