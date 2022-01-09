@@ -23,6 +23,6 @@ class Root(Widget):
         ratio = (size[1] / 1080)
         dx = self.offset.dx * ratio
         dy = self.offset.dy * ratio
-        draw.rectangle((dx, dy + 100, dx + 50, dy + 175), fill=(255, 0, 0))
+        draw.rectangle((dx, dy, dx + self.size.width * ratio, dy + self.size.height * ratio), fill=(255, 0, 0))
 
         img.save('test.png', 'PNG')
