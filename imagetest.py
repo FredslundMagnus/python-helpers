@@ -56,7 +56,7 @@ def create_image(name: str, file: Background, size: tuple[int, int] = (1920, 108
 #     curve=Curves.linear,
 # )
 children = [
-    FileEditor(filename="Test1"),
+    FileEditor(filename="example_of_filename.py"),
     FileEditor(filename="Test2"),
     FileEditor(filename="Test3"),
 ]
