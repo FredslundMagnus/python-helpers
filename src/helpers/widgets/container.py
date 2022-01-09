@@ -11,6 +11,7 @@ class Container(Widget):
         super().__init__()
 
     def draw(self, canvas: ImageDraw, offset: Offset, max_size: Size, ratio: float) -> None:
+        print(canvas.textsize("Hej med dig"))
         dx = offset.dx * ratio
         dy = offset.dy * ratio
         if self.size is None:
