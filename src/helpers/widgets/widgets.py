@@ -1,6 +1,6 @@
-from size import Size
-from widget import Widget
-from offset import Offset
-from container import Container
+from helpers.widgets.size import Size
+from helpers.widgets.widget import Widget
+from helpers.widgets.offset import Offset
+from helpers.widgets.container import Container
 
 widgets = [Size, Widget, Offset, Container]
