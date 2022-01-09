@@ -25,6 +25,14 @@ def make(name: str, files: list[Background], fps: int = 60, size: tuple[int, int
     video.release()
 
 
+def create_image(name: str, file: Background, size: tuple[int, int] = (1920, 1080)):
+    file.load(size=size)
+    background = Image.open(file.name(size=size))
+    for img in (root.draw(size=size) for root in file.children):
+        background.paste(img, (0, 0), img)
+    background.save(f"Images/{name}.png")
+
+
 # Background(color=Colors.brown, boxes=[(0, 0, 16, 9)]).load(size=(1920, 1080))
 
 # Background(color=Colors.brown, boxes=[(16/9, 1, 16-16/9, 8)]).load(size=(1920, 1080))
@@ -41,14 +49,12 @@ def make(name: str, files: list[Background], fps: int = 60, size: tuple[int, int
 #     frames=10,
 #     curve=Curves.linear,
 # )
-
 # trans2 = Background.transition(
 #     Background(color=Colors.brown, boxes=[(1, 1, 5, 8, Colors.blue), (6, 1, 10, 8), (11, 1, 15, 8, Colors.green)]),
 #     Background(color=Colors.yellow, boxes=[(1, 1, 7.5, 8, Colors.green), (8.5, 1, 15, 8, Colors.red), (17, 1, 30, 8)]),
 #     frames=40,
 #     curve=Curves.linear,
 # )
-
 children = [
     FileEditor(filename="Test1"),
     FileEditor(filename="Test2"),
@@ -86,9 +92,9 @@ test4 = [Background(color=Colors.blue, boxes=[(16/9, 1, 16-16/9, 8)], children=c
 
 
 # make("eksempelHD2", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920, 1080))
-make("test0Container", test0, size=(1920*2, 1080*2))
-make("test1Container", test2, size=(1920*2, 1080*2))
-make("test2Container", test4, size=(1920*2, 1080*2))
+create_image("test0Container", test0, size=(1920*2, 1080*2))
+create_image("test1Container", test2, size=(1920*2, 1080*2))
+create_image("test2Container", test4, size=(1920*2, 1080*2))
 # [tran.load() for tran in trans]
 # [tran.load() for tran in trans2]
 
