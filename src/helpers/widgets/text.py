@@ -10,6 +10,7 @@ class Text(Widget):
         self.color = color
         self.fontType = fontType
         self.size = Size(*font(self.fontType, int(self.fontSize)).getsize(self.text))
+        print(self.size)
         super().__init__()
 
     def draw(self, canvas: ImageDraw, offset: Offset, max_size: Size, ratio: float) -> None:
