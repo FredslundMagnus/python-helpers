@@ -22,7 +22,8 @@ class Row(Widget):
                 if child.flex is None or child.flex <= 0:
                     raise ValueError("Child needs a positive flex")
                 flex_sum += child.flex
-            size_sum += child.size.width
+            else:
+                size_sum += child.size.width
         if flex_sum == 0:
             self.drawMin(canvas, offset, max_size, ratio)
             return
