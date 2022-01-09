@@ -2,6 +2,7 @@ from os.path import join
 from PIL.ImageFont import truetype, FreeTypeFont
 from os import getcwd
 print(getcwd())
+print(__file__)
 
 
 class Font:
