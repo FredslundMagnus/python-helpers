@@ -19,17 +19,17 @@ class FileEditor(Widget):
         return Column(
             children=[
                 SizedBox(
-                    size=Size(size.width, 36),
+                    size=Size(size.width, 34),
                     child=Padding(
                         padding=Edges.all(10),
                         child=Row(
                             children=[
-                                Container(size=Size(16, 16), color=Colors.red, radius=6),
-                                SizedBox(size=Size(8, 16)),
-                                Container(size=Size(16, 16), color=Colors.yellow, radius=6),
-                                SizedBox(size=Size(8, 16)),
-                                Container(size=Size(16, 16), color=Colors.green, radius=6),
-                                SizedBox(size=Size(24, 16)),
+                                Container(size=Size(14, 14), color=Colors.red, radius=7),
+                                SizedBox(size=Size(8, 14)),
+                                Container(size=Size(14, 14), color=Colors.yellow, radius=7),
+                                SizedBox(size=Size(8, 14)),
+                                Container(size=Size(14, 14), color=Colors.green, radius=7),
+                                SizedBox(size=Size(24, 14)),
                                 # self.filename if self.filename is not None else None,
                             ],
                         ),
