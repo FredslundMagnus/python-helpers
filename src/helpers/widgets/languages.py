@@ -2,6 +2,9 @@ from __future__ import annotations
 
 from helpers.colors import Color
 
+import pygments as pm
+import pygments.lexers as lexers
+
 
 class Language:
     extention: str
@@ -23,6 +26,9 @@ class Python(Language):
     extention: str = "py"
 
     def colorize(self, code: str) -> list[list[Color]]:
+        lexer = lexers.get_lexer_by_name('python')
+        for a in pm.lex(code, lexer):
+            print(a)
         return [[Python.color_systemWords for char in line] for line in code.splitlines()]
 
 
