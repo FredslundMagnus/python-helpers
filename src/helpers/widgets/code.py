@@ -11,7 +11,13 @@ class Code(Widget):
         self.fontSize = fontSize
         self.font: Font = Fonts.CascadiaCode
         self.language = language
-        self.size = Size(self.font.pil(self.fontSize).getsize(self.code)[0], fontSize*len(self.code.splitlines()))
+        self.lines = self.code.splitlines()
+        self.charWidth = self.font.pil(self.fontSize).getsize("m")[0]
+        print(self.font.pil(self.fontSize).getsize("m")[0])
+        print(self.font.pil(self.fontSize).getsize(".")[0])
+        print(self.font.pil(self.fontSize).getsize("i")[0])
+        print(self.font.pil(self.fontSize).getsize("_")[0])
+        self.size = Size(self.font.pil(self.fontSize).getsize(self.code)[0], fontSize*len())
         print(self.size)
         super().__init__()
 
