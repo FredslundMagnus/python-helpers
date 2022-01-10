@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import struct
-from numpy import abs, Tester
+from numpy import arange, Tester
 
 outputVideo = cv2.VideoWriter()
 outputVideo.open("foo.avi", -1, 25, (640, 480), True)
