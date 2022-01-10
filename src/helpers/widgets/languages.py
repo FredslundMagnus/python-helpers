@@ -13,12 +13,13 @@ class Language:
     lexer: Lexer
     strings: set = Tokens.Literal.String.subtypes
     comments: set = Tokens.Comment.subtypes
+    numbers: set = Tokens.Literal.Number.subtypes
     color_booleans: Color = Color(86, 156, 214)
     color_systemWords: Color = Color(197, 134, 192)
     color_classes: Color = Color(78, 201, 176)
     color_symbols: Color = Color(255, 255, 255)
     color_functions: Color = Color(220, 220, 170)
-    color_numerics: Color = Color(181, 206, 168)
+    color_numbers: Color = Color(181, 206, 168)
     color_default: Color = Color(156, 220, 254)
     color_comments: Color = Color(106, 153, 85)
     color_strings: Color = Color(206, 145, 120)
@@ -51,6 +52,8 @@ class Language:
             return self.color_strings                 #
         if token in self.comments:                    #
             return self.color_comments                #
+        if token in self.numbers:                    #
+            return self.color_numbers                #
         if token == Tokens.Name:
             return self.color_default
         if token == Tokens.Keyword.Constant:          #
@@ -65,8 +68,6 @@ class Language:
             return Colors.red
         if token == Tokens.Punctuation:
             return self.color_symbols
-        if token == Tokens.Literal.Number.Integer:
-            return self.color_numerics
         if token == Tokens.Literal.String.Interpol:
             return Colors.orange
         if token == Tokens.Text:
