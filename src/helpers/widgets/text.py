@@ -4,7 +4,7 @@ from helpers.fonts import Font, Fonts
 
 
 class Text(Widget):
-    def __init__(self, text: str, fontSize: float = 16.0, color: Color = Colors.gray.c300, font: Font = Fonts.CascadiaCode, lineHeight: float = 1.0) -> None:
+    def __init__(self, text: str, fontSize: float = 16.0, color: Color = Colors.gray.c300, font: Font = Fonts.CascadiaCode, lineHeight: float = 1.5) -> None:
         self.text = text
         self.fontSize = fontSize
         self.lineHeight = lineHeight
