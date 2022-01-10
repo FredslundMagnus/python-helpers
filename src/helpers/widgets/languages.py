@@ -48,11 +48,11 @@ class Language:
         if token == Tokens.Keyword.Constant:
             return self.color_booleans
         if token == Tokens.Keyword:
-            return self.color_strings
+            return self.color_comments
         if token == Tokens.Keyword.Namespace:
-            return self.color_strings
+            return self.color_comments
         if token == Tokens.Name.Namespace:
-            return self.color_strings
+            return self.color_comments
         if token == Tokens.Name.Builtin:
             return self.color_strings
         if token == Tokens.Punctuation:
