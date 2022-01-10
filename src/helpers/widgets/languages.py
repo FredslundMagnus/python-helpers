@@ -23,7 +23,7 @@ class Python(Language):
     extention: str = "py"
 
     def colorize(self, code: str) -> list[list[Color]]:
-        return [[Python.color_symbols for char in line] for line in code.splitlines()]
+        return [[Python.color_systemWords for char in line] for line in code.splitlines()]
 
 
 class Dart(Language):
