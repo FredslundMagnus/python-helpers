@@ -7,6 +7,8 @@ from src.helpers.widgets.widgets import *
 from PIL import Image
 import numpy as np
 
+test: bool = True
+
 
 def create_video(name: str, files: list[Background], fps: int = 60, size: tuple[int, int] = (1920, 1080), test: bool = False):
     video = cv2.VideoWriter(f'Videos/{name}.mov', 4, fps, size)
@@ -92,12 +94,13 @@ test4 = [Background(color=Colors.blue, boxes=[(16/9, 1, 16-16/9, 8)], children=c
 #     curve=Curves.easeInOut,
 # )
 
-create_video("testHD", test0[:20], size=(1920*2, 1080*2), test=True)
-
-# create_video("testHD", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920*2, 1080*2))
-# create_image("test0Container", test0[0], size=(1920*2, 1080*2))
-# create_image("test1Container", test2[0], size=(1920*2, 1080*2))
-# create_image("test2Container", test4[0], size=(1920*2, 1080*2))
+if test:
+    create_video("testHD", test0[:20], size=(1920*2, 1080*2), test=test)
+else:
+    create_video("testHD", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920*2, 1080*2))
+    create_image("test0Container", test0[0], size=(1920*2, 1080*2))
+    create_image("test1Container", test2[0], size=(1920*2, 1080*2))
+    create_image("test2Container", test4[0], size=(1920*2, 1080*2))
 # create_image("test0ContainerSmall", test0[0], size=(1920, 1080))
 # create_image("test1ContainerSmall", test2[0], size=(1920, 1080))
 # create_image("test2ContainerSmall", test4[0], size=(1920, 1080))
