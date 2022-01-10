@@ -54,17 +54,17 @@ class Language:
         if token == Tokens.Name.Namespace:
             return self.color_systemWords
         if token == Tokens.Name.Builtin:
-            return self.color_strings
+            return self.color_numerics
         if token == Tokens.Punctuation:
-            return self.color_strings
+            return self.color_numerics
         if token == Tokens.Literal.Number.Integer:
-            return self.color_strings
+            return self.color_numerics
         if token == Tokens.Literal.String.Interpol:
-            return self.color_strings
+            return self.color_numerics
         if token == Tokens.Text:
-            return self.color_strings
+            return self.color_numerics
         if token == Tokens.Operator:
-            return self.color_strings
+            return self.color_numerics
 
 
 class Python(Language):
