@@ -53,7 +53,7 @@ class Language:
         if token == Tokens.Keyword.Constant:
             return self.color_booleans
         if token == Tokens.Keyword:
-            return self.color_comments
+            return self.color_classes
         if token == Tokens.Keyword.Namespace:
             return self.color_functions
         if token == Tokens.Name.Namespace:
@@ -70,6 +70,8 @@ class Language:
             return self.color_numerics
         if token == Tokens.Operator:
             return self.color_numerics
+        if token == Tokens.Comment.Single:
+            return self.color_comments
 
 
 class Python(Language):
