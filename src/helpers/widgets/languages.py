@@ -7,11 +7,6 @@ import pygments.lexers as lexers
 from pygments.token import Token
 
 
-print(Token.subtypes)
-print(Token.Text)
-print(Token.Name)
-
-
 class Language:
     extention: str
     color_booleans: Color = Color(86, 156, 214)
@@ -33,15 +28,21 @@ class Python(Language):
 
     def colorize(self, code: str) -> list[list[Color]]:
         lexer = lexers.get_lexer_by_name('python')
-        output = []
+        output: list[list[Color]] = []
         line = []
         for token, chars in pm.lex(code, lexer):
             if chars == "\n":
                 output.append(line)
                 line = []
                 continue
-            print(token, chars)
-        return [[Python.color_systemWords for char in line] for line in code.splitlines()]
+            for char in chars:
+                if token == Token.String:
+                    line.append(Python.color_strings)
+                else:
+                    line.append(Python.color_functions)
+        output.append(line)
+        return output
+        # return [[Python.color_systemWords for char in line] for line in code.splitlines()]
 
 
 class Dart(Language):
