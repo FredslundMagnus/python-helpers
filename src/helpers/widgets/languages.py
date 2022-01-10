@@ -37,9 +37,12 @@ class Language:
 
     def colorize(self, code: str) -> list[list[Color]]:
         tokens: list[list[Token]] = self.tokenize(code)
+        print(tokens)
         return [[self.color(token) for token in line] for line in tokens]
 
     def color(self, token: Token) -> Color:
+        if token in self.strings:
+            return self.color_strings
         if token in self.strings:
             return self.color_strings
         return self.color_functions
@@ -52,12 +55,12 @@ class Python(Language):
 
 class Dart(Language):
     extention: str = "dart"
-    lexer: Lexer = get_lexer_by_name('python')
+    lexer: Lexer = get_lexer_by_name('dart')
 
 
 class Rust(Language):
     extention: str = "rs"
-    lexer: Lexer = get_lexer_by_name('python')
+    lexer: Lexer = get_lexer_by_name('rust')
 
 
 class Languages:
