@@ -9,8 +9,13 @@ class Text(Widget):
         self.fontSize = fontSize
         self.color = color
         self.font = font
-        self.size = Size(*self.font.pil(self.fontSize).getsize(self.text))
+        self.lines = self.text.splitlines()
+        _size = self.font.pil(10000).getsize("m")
+        self.charWidth = fontSize/_size[1]*_size[0]
+        self.size = Size(self.charWidth*max(len(line) for line in self.lines), fontSize*len(self.lines))
         super().__init__()
 
     def draw(self, canvas: ImageDraw, offset: Offset, max_size: Size, ratio: float) -> None:
-        canvas.text((offset.dx*ratio, offset.dy*ratio), self.text, self.color.color, self.font.pil(self.fontSize * ratio))
+        for y, line in enumerate(self.lines):
+            for x, char in enumerate(line):
+                canvas.text(((offset.dx + x*self.charWidth)*ratio, (offset.dy + y*self.fontSize)*ratio), char, self.color.color, self.font.pil(self.fontSize * ratio))
