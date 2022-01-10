@@ -65,7 +65,7 @@ def create_image(name: str, file: Background, size: tuple[int, int] = (1920, 108
 #     curve=Curves.linear,
 # )
 children = [
-    FileEditor(filename="example_of_filename.py"),
+    FileEditor(filename="example_of_filename.py", child=Code.fromFile("test.py")),
     FileEditor(filename="another_great_but_long_name.py", child=Code.fromFile("test.py")),
     FileEditor(filename="short_name.py"),
 ]
@@ -133,12 +133,14 @@ test7 = Background.transition(
 
 test: bool = False
 idea = list(reversed(test6)) + test7 + list(reversed(test7)) + test6
+
 if test:
     # create_video("testHD", test0[:20], size=(1920*2, 1080*2), test=test)
     # create_image("test0Container", test0[0], size=(1920*2, 1080*2), test=test)
     create_video("test6HD", idea, size=(1920*2, 1080*2), test=test)
 else:
-    create_video("test6HD4", idea, size=(1920, 1080), test=test, fps=30)
+    create_image(test4[0], idea, size=(1920*2, 1080*2), test=test)
+    # create_video("test6HD4", idea, size=(1920, 1080), test=test, fps=30)
     # create_video("test4k", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920*2, 1080*2))
     # create_image("test0Container", test0[0], size=(1920*2, 1080*2))
     # create_image("test1Container", test2[0], size=(1920*2, 1080*2))
