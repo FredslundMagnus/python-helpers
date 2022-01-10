@@ -49,7 +49,7 @@ class Language:
     def color(self, token: Token) -> Color:
         if token in self.strings:                     #
             return self.color_strings                 #
-        if token == self.comments:                    #
+        if token in self.comments:                    #
             return self.color_comments                #
         if token == Tokens.Name:
             return self.color_default
