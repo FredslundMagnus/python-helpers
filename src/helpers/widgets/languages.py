@@ -15,28 +15,28 @@ class Language:
     color_comments: Color = Color(0, 255, 0)
     color_strings: Color = Color(255, 0, 0)
 
-    def colorize(code: str) -> list[list[Color]]:
+    def colorize(self, code: str) -> list[list[Color]]:
         pass
 
 
 class Python(Language):
     extention: str = "py"
 
-    def colorize(code: str) -> list[list[Color]]:
+    def colorize(self, code: str) -> list[list[Color]]:
         return [[Python.color_symbols for char in line] for line in code.splitlines()]
 
 
 class Dart(Language):
     extention: str = "dart"
 
-    def colorize(code: str) -> list[list[Color]]:
+    def colorize(self, code: str) -> list[list[Color]]:
         pass
 
 
 class Rust(Language):
     extention: str = "rs"
 
-    def colorize(code: str) -> list[list[Color]]:
+    def colorize(self, code: str) -> list[list[Color]]:
         pass
 
 
