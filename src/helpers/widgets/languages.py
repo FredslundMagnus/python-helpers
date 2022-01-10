@@ -12,6 +12,7 @@ class Language:
     extention: str
     lexer: Lexer
     strings: set = Tokens.Literal.String.subtypes
+    comments: set = Tokens.Comment.subtypes
     color_booleans: Color = Color(86, 156, 214)
     color_systemWords: Color = Color(197, 134, 192)
     color_classes: Color = Color(78, 201, 176)
@@ -48,6 +49,8 @@ class Language:
     def color(self, token: Token) -> Color:
         if token in self.strings:                     #
             return self.color_strings                 #
+        if token == self.comments:                    #
+            return self.color_comments                #
         if token == Tokens.Name:
             return self.color_default
         if token == Tokens.Keyword.Constant:          #
@@ -59,19 +62,17 @@ class Language:
         if token == Tokens.Name.Namespace:
             return self.color_classes
         if token == Tokens.Name.Builtin:
-            return self.color_numerics
-        if token == Tokens.Punctuation:
             return Colors.red
+        if token == Tokens.Punctuation:
+            return self.color_symbols
         if token == Tokens.Literal.Number.Integer:
             return self.color_numerics
         if token == Tokens.Literal.String.Interpol:
-            return self.color_numerics
+            return Colors.orange
         if token == Tokens.Text:
-            return self.color_numerics
+            return Colors.pink
         if token == Tokens.Operator:
-            return self.color_numerics
-        if token == Tokens.Comment.Single:
-            return self.color_comments
+            return Colors.brown
 
 
 class Python(Language):
@@ -87,7 +88,7 @@ class Python(Language):
                 line = []
                 continue
             for _ in word:
-                if token in Tokens.Comment.subtypes:
+                if token in self.comments:
                     line.append(token)
                 elif token in self.strings:
                     line.append(token)
