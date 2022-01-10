@@ -21,6 +21,11 @@ class Language:
     color_default: Color = Color(156, 220, 254)
     color_comments: Color = Color(106, 153, 85)
     color_strings: Color = Color(206, 145, 120)
+    # SYMBOLS = {' ', ':', ',' , '=', '(', ')', '-', '>', '<', '*', '+', '.'}
+    FUNCTIONS = {'print'}
+    CLASSES = {'int', 'bool'}
+    BOOLEANS = {'True', 'False', 'not', 'and', 'or', 'in', 'None', 'is', 'lambda', 'class', 'def'}
+    SYSTEMWORDS = {'while', 'if', 'return', 'for', 'else', 'raise', 'pass', 'break', 'try', 'except', 'yield', 'continue', 'assert'}
 
     def tokenize(self, code: str) -> list[list[Token]]:
         output: list[list[Color]] = []
