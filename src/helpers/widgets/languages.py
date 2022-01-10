@@ -44,7 +44,7 @@ class Language:
         if token in self.strings:
             return self.color_strings
         if token == Tokens.Name:
-            return self.color_strings
+            return self.color_booleans
         if token == Tokens.Keyword.Constant:
             return self.color_strings
         if token == Tokens.Keyword:
