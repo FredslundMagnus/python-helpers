@@ -15,6 +15,7 @@ class Language:
     comments: set = Tokens.Comment.subtypes
     numbers: set = Tokens.Literal.Number.subtypes
     symbols: set = {Tokens.Punctuation, Tokens.Operator, Tokens.Text}
+    systemwords: set = {Tokens.Keyword, Tokens.Keyword.Namespace}
     color_booleans: Color = Color(86, 156, 214)
     color_systemWords: Color = Color(197, 134, 192)
     color_classes: Color = Color(78, 201, 176)
@@ -47,6 +48,8 @@ class Language:
             return self.color_numbers                 #
         if token in self.symbols:                     #
             return self.color_symbols                 #
+        if token in self.systemwords:                 #
+            return self.color_systemWords             #
 
         if token == Tokens.Keyword.Constant:
             return self.color_booleans
@@ -55,15 +58,11 @@ class Language:
         if token == Tokens.Operator.Word:
             return self.color_booleans
 
-        if token == Tokens.Name:
-            return self.color_default
-
-        if token == Tokens.Keyword:
-            return self.color_systemWords
-        if token == Tokens.Keyword.Namespace:
-            return self.color_systemWords
         if token == Tokens.Name.Namespace:
             return self.color_symbols
+
+        if token == Tokens.Name:
+            return self.color_default
         if token == Tokens.Name.Builtin:
             return self.color_classes
 
@@ -87,8 +86,8 @@ class Python(Language):
                     line.append(token)
                 elif token in self.strings:
                     line.append(token)
-                # elif word in {'import', 'from'}:
-                #     line.append(Tokens.Keyword)
+                elif word in {'import', 'from'}:
+                    line.append(Tokens.Keyword)
                 else:
                     line.append(token)
         output.append(line)
