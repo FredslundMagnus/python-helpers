@@ -7,6 +7,8 @@ from pygments.lexer import Lexer
 from pygments.lexers import get_lexer_by_name
 from pygments.token import Token as Tokens, _TokenType as Token
 
+print(Tokens.Literal.String.subtypes)
+
 
 class Language:
     extention: str
@@ -73,7 +75,7 @@ class Language:
             return Colors.orange
         if token == Tokens.Text:
             return Colors.pink
-        
+
         print(token)
 
 

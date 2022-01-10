@@ -21,3 +21,6 @@ while, if, return, for, else, raise, pass, break, try, except, yield, continue, 
 """while, if, return, for, else, raise, pass, break, try, except, yield, continue, assert, import, as"""
 2.1
 3, 1
+
+if 1 in {2,1}:
+    pass
