@@ -47,22 +47,25 @@ class Language:
             return self.color_numbers                 #
         if token in self.symbols:                     #
             return self.color_symbols                 #
-        if token == Tokens.Name:
-            return self.color_default
-        if token == Tokens.Keyword.Constant:          #
-            return self.color_booleans                #
-        if token == Tokens.Keyword:
-            return self.color_systemWords
-        if token == Tokens.Keyword.Namespace:
-            return self.color_functions
-        if token == Tokens.Name.Namespace:
-            return self.color_classes
-        if token == Tokens.Name.Builtin:
-            return Colors.red
+
+        if token == Tokens.Keyword.Constant:
+            return self.color_booleans
         if token == Tokens.Literal.String.Interpol:
             return self.color_booleans
         if token == Tokens.Operator.Word:
             return self.color_booleans
+
+        if token == Tokens.Name:
+            return self.color_default
+
+        if token == Tokens.Keyword:
+            return self.color_systemWords
+        if token == Tokens.Keyword.Namespace:
+            return self.color_systemWords
+        if token == Tokens.Name.Namespace:
+            return self.color_symbols
+        if token == Tokens.Name.Builtin:
+            return self.color_classes
 
         print(token)
 
@@ -84,8 +87,8 @@ class Python(Language):
                     line.append(token)
                 elif token in self.strings:
                     line.append(token)
-                elif word in {'import', 'from'}:
-                    line.append(Tokens.Keyword)
+                # elif word in {'import', 'from'}:
+                #     line.append(Tokens.Keyword)
                 else:
                     line.append(token)
         output.append(line)
