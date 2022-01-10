@@ -7,6 +7,8 @@ from pygments.lexer import Lexer
 from pygments.lexers import get_lexer_by_name
 from pygments.token import Token as Tokens, _TokenType as Token
 
+print(Tokens.Keyword.subtypes)
+
 
 class Language:
     extention: str
