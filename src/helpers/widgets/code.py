@@ -6,7 +6,7 @@ from helpers.widgets.widget import *
 
 
 class Code(Widget):
-    def __init__(self, code: str, language: Language = Languages.python, fontSize: float = 16.0, lineHeight: float = 1.0) -> None:
+    def __init__(self, code: str, language: Language = Languages.python, fontSize: float = 16.0, lineHeight: float = 1.5) -> None:
         self.code = code
         self.fontSize = fontSize
         self.font: Font = Fonts.CascadiaCode
@@ -19,10 +19,10 @@ class Code(Widget):
         super().__init__()
 
     @staticmethod
-    def fromFile(filename: str, fontSize: float = 16.0) -> Code:
+    def fromFile(filename: str, fontSize: float = 16.0, lineHeight: float = 1.5) -> Code:
         with open(filename) as f:
             code = f.read()
-        return Code(code, language=Languages.fromExtension(filename.split('.')[-1]), fontSize=fontSize)
+        return Code(code, language=Languages.fromExtension(filename.split('.')[-1]), fontSize=fontSize, lineHeight=lineHeight)
 
     def draw(self, canvas: ImageDraw, offset: Offset, max_size: Size, ratio: float) -> None:
         for y, line in enumerate(self.lines):
