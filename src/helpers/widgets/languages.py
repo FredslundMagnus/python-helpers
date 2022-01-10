@@ -74,7 +74,7 @@ class Language:
         if token == Tokens.Text:
             return Colors.pink
         if token == Tokens.Operator.Word:
-            return Colors.orange
+            return self.color_booleans
 
         print(token)
 
