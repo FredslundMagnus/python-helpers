@@ -23,7 +23,7 @@ class Root:
         canvas = ImageDraw.Draw(img)
         ratio = (size[1] / 1080)
         if test:
-            canvas.rectangle(self.offset.dx*ratio, self.offset.dy*ratio, (self.offset.dx + self.size.width)*ratio, (self.offset.dy + self.size.height)*ratio, Colors.gray.c800)
+            canvas.rectangle((self.offset.dx*ratio, self.offset.dy*ratio, (self.offset.dx + self.size.width)*ratio, (self.offset.dy + self.size.height)*ratio), Colors.gray.c800.color)
         self.child.draw(canvas, self.offset, self.size, ratio)
 
         return img
