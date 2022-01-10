@@ -29,6 +29,7 @@ class Python(Language):
         lexer = lexers.get_lexer_by_name('python')
         for a in pm.lex(code, lexer):
             print(a)
+        print(len("\n"))
         return [[Python.color_systemWords for char in line] for line in code.splitlines()]
 
 
