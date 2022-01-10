@@ -4,6 +4,10 @@ from helpers.colors import Color
 
 import pygments as pm
 import pygments.lexers as lexers
+import pygments.token as tokennn
+
+
+print(tokennn.Token.subtypes)
 
 
 class Language:
