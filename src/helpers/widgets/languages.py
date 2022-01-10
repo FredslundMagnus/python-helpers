@@ -7,13 +7,11 @@ from pygments.lexer import Lexer
 from pygments.lexers import get_lexer_by_name
 from pygments.token import Token as Tokens, _TokenType as Token
 
-print(Tokens.Literal.String.subtypes)
-
 
 class Language:
     extention: str
     lexer: Lexer
-    strings: set = Tokens.Literal.String.subtypes
+    strings: set = {Tokens.Literal.String.Symbol, Tokens.Literal.String.Escape, Tokens.Literal.String.Double, Tokens.Literal.String.Backtick, Tokens.Literal.String.Char, Tokens.Literal.String.Doc, Tokens.Literal.String.Affix, Tokens.Literal.String.Single, Tokens.Literal.String.Heredoc, Tokens.Literal.String.Other, Tokens.Literal.String.Delimiter, Tokens.Literal.String.Regex}
     comments: set = Tokens.Comment.subtypes
     numbers: set = Tokens.Literal.Number.subtypes
     symbols: set = {Tokens.Punctuation, Tokens.Operator}
@@ -72,7 +70,7 @@ class Language:
         if token == Tokens.Name.Builtin:
             return Colors.red
         if token == Tokens.Literal.String.Interpol:
-            return Colors.orange
+            return self.color_booleans
         if token == Tokens.Text:
             return Colors.pink
 
