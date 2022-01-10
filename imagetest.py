@@ -15,7 +15,7 @@ def create_video(name: str, files: list[Background], fps: int = 60, size: tuple[
         print(f"{i} out of {len(files)}")
         if not test:
             image.load(size=size)
-        background = Image.new(mode="RGBA", size=size, color=(*image.color.color, 0)) if test else Image.open(image.name(size=size))
+        background = Image.new(mode="RGBA", size=size, color=(*image.color.color, 255)) if test else Image.open(image.name(size=size))
         for img in (root.draw(size=size, test=test) for root in image.children):
             background.paste(img, (0, 0), img)
 
@@ -30,7 +30,7 @@ def create_video(name: str, files: list[Background], fps: int = 60, size: tuple[
 def create_image(name: str, file: Background, size: tuple[int, int] = (1920, 1080), test: bool = False):
     if not test:
         file.load(size=size)
-    background = Image.new(mode="RGBA", size=size, color=(*file.color.color, 0)) if test else Image.open(file.name(size=size))
+    background = Image.new(mode="RGBA", size=size, color=(*file.color.color, 255)) if test else Image.open(file.name(size=size))
     for img in (root.draw(size=size, test=test) for root in file.children):
         background.paste(img, (0, 0), img)
     background.save(f"Images/{name}.png")
