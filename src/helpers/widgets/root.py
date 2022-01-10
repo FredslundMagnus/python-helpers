@@ -17,10 +17,12 @@ class Root:
         self.child = child
         super().__init__()
 
-    def draw(self, size: tuple[int, int] = (1920, 1080)) -> Image:
+    def draw(self, size: tuple[int, int] = (1920, 1080), test: bool = False) -> Image:
         img = IMG.new('RGBA', size, (0, 0, 0, 0))
         canvas = ImageDraw.Draw(img)
         ratio = (size[1] / 1080)
+        if test:
+            canvas.rectangle(self.offset.dx*ratio, self.offset.dy*ratio, (self.offset.dx + self.size.width)*ratio, (self.offset.dy + self.size.height)*ratio)
         self.child.draw(canvas, self.offset, self.size, ratio)
 
         return img
