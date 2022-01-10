@@ -7,8 +7,6 @@ from pygments.lexer import Lexer
 from pygments.lexers import get_lexer_by_name
 from pygments.token import Token as Tokens, _TokenType as Token
 
-print(Tokens.Keyword.subtypes)
-
 
 class Language:
     extention: str
@@ -18,6 +16,7 @@ class Language:
     numbers: set = Tokens.Literal.Number.subtypes
     symbols: set = {Tokens.Punctuation, Tokens.Operator, Tokens.Text}
     systemwords: set = {Tokens.Keyword, Tokens.Keyword.Namespace}
+    booleans: set = {Tokens.Keyword.Constant, Tokens.Literal.String.Interpol, Tokens.Operator.Word}
     color_booleans: Color = Color(86, 156, 214)
     color_systemWords: Color = Color(197, 134, 192)
     color_classes: Color = Color(78, 201, 176)
@@ -52,13 +51,8 @@ class Language:
             return self.color_symbols                 #
         if token in self.systemwords:                 #
             return self.color_systemWords             #
-
-        if token == Tokens.Keyword.Constant:
-            return self.color_booleans
-        if token == Tokens.Literal.String.Interpol:
-            return self.color_booleans
-        if token == Tokens.Operator.Word:
-            return self.color_booleans
+        if token in self.booleans:                    #
+            return self.color_booleans                #
 
         if token == Tokens.Name.Namespace:
             return self.color_symbols
