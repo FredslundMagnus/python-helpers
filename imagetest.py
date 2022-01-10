@@ -9,7 +9,8 @@ import numpy as np
 
 
 def create_video(name: str, files: list[Background], fps: int = 60, size: tuple[int, int] = (1920, 1080), test: bool = False):
-    video = cv2.VideoWriter(f'Videos/{name}.mov', 4, fps, size)
+    fourcc = cv2.VideoWriter_fourcc(*'HEVC')
+    video = cv2.VideoWriter(f'Videos/{name}.hevc', fourcc, fps, size)
 
     for i, image in enumerate(files, start=1):
         print(f"{i} out of {len(files)}")
