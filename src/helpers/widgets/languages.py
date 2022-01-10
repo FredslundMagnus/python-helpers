@@ -43,9 +43,28 @@ class Language:
     def color(self, token: Token) -> Color:
         if token in self.strings:
             return self.color_strings
-        if token in self.strings:
+        if token == Tokens.Name:
             return self.color_strings
-        return self.color_functions
+        if token == Tokens.Keyword.Constant:
+            return self.color_strings
+        if token == Tokens.Keyword:
+            return self.color_strings
+        if token == Tokens.Keyword.Namespace:
+            return self.color_strings
+        if token == Tokens.Name.Namespace:
+            return self.color_strings
+        if token == Tokens.Name.Builtin:
+            return self.color_strings
+        if token == Tokens.Punctuation:
+            return self.color_strings
+        if token == Tokens.Literal.Number.Integer:
+            return self.color_strings
+        if token == Tokens.Literal.String.Interpol:
+            return self.color_strings
+        if token == Tokens.Text:
+            return self.color_strings
+        if token == Tokens.Operator:
+            return self.color_strings
 
 
 class Python(Language):
