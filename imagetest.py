@@ -139,7 +139,7 @@ if test:
     # create_image("test0Container", test0[0], size=(1920*2, 1080*2), test=test)
     create_video("test6HD", idea, size=(1920*2, 1080*2), test=test)
 else:
-    create_image(test4[0], idea, size=(1920*2, 1080*2), test=test)
+    create_image("testLang", test4[0], idea, size=(1920*2, 1080*2), test=test)
     # create_video("test6HD4", idea, size=(1920, 1080), test=test, fps=30)
     # create_video("test4k", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920*2, 1080*2))
     # create_image("test0Container", test0[0], size=(1920*2, 1080*2))
