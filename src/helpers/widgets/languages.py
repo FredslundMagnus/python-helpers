@@ -9,6 +9,7 @@ from pygments.token import Token
 
 class Language:
     extention: str
+    strings: set = {Token.Literal.String.Double}
     color_booleans: Color = Color(86, 156, 214)
     color_systemWords: Color = Color(197, 134, 192)
     color_classes: Color = Color(78, 201, 176)
@@ -37,7 +38,7 @@ class Python(Language):
                 continue
             for char in chars:
                 print(chars, token, token == Token.String, token == Token.Literal.String, token == Token.Literal.String.Double, token == Token.Text)
-                if token == Token.String:
+                if token in Python.strings:
                     line.append(Python.color_strings)
                 else:
                     line.append(Python.color_functions)
