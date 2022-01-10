@@ -11,7 +11,7 @@ class Code(Widget):
         self.fontSize = fontSize
         self.font: Font = Fonts.CascadiaCode
         self.language = language
-        self.size = Size(*self.font.pil(self.fontSize).getsize(self.code))
+        self.size = Size(self.font.pil(self.fontSize).getsize(self.code)[0], fontSize*len(self.code.splitlines()))
         print(self.size)
         super().__init__()
 
@@ -22,7 +22,8 @@ class Code(Widget):
         return Code(code, language=Languages.fromExtension(filename.split('.')[-1]), fontSize=fontSize)
 
     def draw(self, canvas: ImageDraw, offset: Offset, max_size: Size, ratio: float) -> None:
-        canvas.text((offset.dx*ratio, offset.dy*ratio), self.code, Colors.green.color, self.font.pil(self.fontSize * ratio))
+        for i, line in enumerate(self.code.splitlines()):
+            canvas.text((offset.dx*ratio, (offset.dy + i*self.fontSize)*ratio), line, Colors.green.color, self.font.pil(self.fontSize * ratio))
 
 
 # class Text(Widget):
