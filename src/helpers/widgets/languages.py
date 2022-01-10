@@ -50,9 +50,9 @@ class Language:
         if token == Tokens.Keyword:
             return self.color_comments
         if token == Tokens.Keyword.Namespace:
-            return self.color_comments
+            return self.color_functions
         if token == Tokens.Name.Namespace:
-            return self.color_comments
+            return self.color_systemWords
         if token == Tokens.Name.Builtin:
             return self.color_strings
         if token == Tokens.Punctuation:
