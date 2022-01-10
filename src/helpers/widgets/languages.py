@@ -14,6 +14,7 @@ class Language:
     strings: set = Tokens.Literal.String.subtypes
     comments: set = Tokens.Comment.subtypes
     numbers: set = Tokens.Literal.Number.subtypes
+    symbols: set = {Tokens.Punctuation, Tokens.Operator}
     color_booleans: Color = Color(86, 156, 214)
     color_systemWords: Color = Color(197, 134, 192)
     color_classes: Color = Color(78, 201, 176)
@@ -52,8 +53,10 @@ class Language:
             return self.color_strings                 #
         if token in self.comments:                    #
             return self.color_comments                #
-        if token in self.numbers:                    #
-            return self.color_numbers                #
+        if token in self.numbers:                     #
+            return self.color_numbers                 #
+        if token in self.symbols:                     #
+            return self.color_symbols                 #
         if token == Tokens.Name:
             return self.color_default
         if token == Tokens.Keyword.Constant:          #
@@ -66,14 +69,11 @@ class Language:
             return self.color_classes
         if token == Tokens.Name.Builtin:
             return Colors.red
-        if token == Tokens.Punctuation:
-            return self.color_symbols
         if token == Tokens.Literal.String.Interpol:
             return Colors.orange
         if token == Tokens.Text:
             return Colors.pink
-        if token == Tokens.Operator:
-            return Colors.brown
+        
         print(token)
 
 
