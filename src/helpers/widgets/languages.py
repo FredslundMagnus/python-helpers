@@ -2,14 +2,16 @@ from __future__ import annotations
 
 from helpers.colors import Color
 
-import pygments as pm
-import pygments.lexers as lexers
-from pygments.token import Token
+from pygments import lex
+from pygments.lexer import Lexer
+from pygments.lexers import get_lexer_by_name
+from pygments.token import Token as Tokens, _TokenType as Token
 
 
 class Language:
     extention: str
-    strings: set = Token.Literal.String.subtypes
+    lexer: Lexer
+    strings: set = Tokens.Literal.String.subtypes
     color_booleans: Color = Color(86, 156, 214)
     color_systemWords: Color = Color(197, 134, 192)
     color_classes: Color = Color(78, 201, 176)
@@ -17,48 +19,45 @@ class Language:
     color_functions: Color = Color(220, 220, 170)
     color_numerics: Color = Color(181, 206, 168)
     color_default: Color = Color(156, 220, 254)
-    color_comments: Color = Color(0, 255, 0)
+    color_comments: Color = Color(106, 153, 85)
     color_strings: Color = Color(206, 145, 120)
 
-    def colorize(self, code: str) -> list[list[Color]]:
-        pass
-
-
-class Python(Language):
-    extention: str = "py"
-
-    def colorize(self, code: str) -> list[list[Color]]:
-        lexer = lexers.get_lexer_by_name('python')
+    def tokenize(self, code: str) -> list[list[Token]]:
         output: list[list[Color]] = []
         line = []
-        for token, chars in pm.lex(code, lexer):
+        for token, chars in lex(code, self.lexer):
             if chars == "\n":
                 output.append(line)
                 line = []
                 continue
-            for char in chars:
-                print(chars, token, token == Token.String, token == Token.Literal.String, token == Token.Literal.String.Double, token == Token.Text)
-                if token in Python.strings:
-                    line.append(Python.color_strings)
-                else:
-                    line.append(Python.color_functions)
+            for _ in chars:
+                line.append(token)
         output.append(line)
         return output
-        # return [[Python.color_systemWords for char in line] for line in code.splitlines()]
+
+    def colorize(self, code: str) -> list[list[Color]]:
+        tokens: list[list[Token]] = self.tokenize(code)
+        return [[self.color(token) for token in line] for line in tokens]
+
+    def color(self, token: Token) -> Color:
+        if token in self.strings:
+            return self.color_strings
+        return self.color_functions
+
+
+class Python(Language):
+    extention: str = "py"
+    lexer: Lexer = get_lexer_by_name('python')
 
 
 class Dart(Language):
     extention: str = "dart"
-
-    def colorize(self, code: str) -> list[list[Color]]:
-        pass
+    lexer: Lexer = get_lexer_by_name('python')
 
 
 class Rust(Language):
     extention: str = "rs"
-
-    def colorize(self, code: str) -> list[list[Color]]:
-        pass
+    lexer: Lexer = get_lexer_by_name('python')
 
 
 class Languages:
