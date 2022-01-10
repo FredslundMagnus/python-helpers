@@ -34,6 +34,8 @@ class Language:
         output: list[list[Color]] = []
         line = []
         for token, chars in lex(code, self.lexer):
+            if token == Tokens.Text:
+                print(chars, "sdfsdfsdf")
             if chars == "\n":
                 output.append(line)
                 line = []
