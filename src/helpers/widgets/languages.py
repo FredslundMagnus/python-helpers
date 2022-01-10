@@ -53,11 +53,11 @@ class Language:
         if token == Tokens.Keyword.Constant:
             return self.color_booleans
         if token == Tokens.Keyword:
-            return self.color_classes
+            return self.color_systemWords
         if token == Tokens.Keyword.Namespace:
             return self.color_functions
         if token == Tokens.Name.Namespace:
-            return self.color_systemWords
+            return self.color_classes
         if token == Tokens.Name.Builtin:
             return self.color_numerics
         if token == Tokens.Punctuation:
