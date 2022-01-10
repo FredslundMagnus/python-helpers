@@ -78,5 +78,9 @@ class Background:
                 box = tuple([(v2-v1)*step + v1 for v1, v2 in zip(vs1, vs2)] + [Colors.interpolate(c1, c2, step)])
                 boxes.append(box)
             color = Colors.interpolate(background1.color, background2.color, step)
-            backgrounds.append(Background(color=color, boxes=boxes, children=children))
+            try:
+                _children = children(step)
+            except Exception:
+                _children = children
+            backgrounds.append(Background(color=color, boxes=boxes, children=_children))
         return backgrounds

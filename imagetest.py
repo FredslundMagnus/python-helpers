@@ -93,11 +93,27 @@ test4 = [Background(color=Colors.blue, boxes=[(16/9, 1, 16-16/9, 8)], children=c
 #     curve=Curves.easeInOut,
 # )
 
+
+def ani6(animation: float) -> list[Widget]:
+    start, end = 1.0, 0.5
+    scale = start + (end-start)*animation
+    return [Scale(scale=scale, child=child) for child in children]
+
+
+test6 = Background.transition(
+    Background(color=Colors.blue, boxes=[(1, 1, 5, 8), (6, 1, 10, 8), (11, 1, 15, 8)]),
+    Background(color=Colors.blue, boxes=[(1, 1, 7.5, 8), (8.5, 1, 15, 8), (17, 1, 30, 8)]),
+    frames=40,
+    curve=Curves.easeInOut,
+    children=ani6,
+)
+
 test: bool = True
 
 if test:
-    create_video("testHD", test0[:20], size=(1920*2, 1080*2), test=test)
-    create_image("test0Container", test0[0], size=(1920*2, 1080*2), test=test)
+    # create_video("testHD", test0[:20], size=(1920*2, 1080*2), test=test)
+    # create_image("test0Container", test0[0], size=(1920*2, 1080*2), test=test)
+    create_video("test6HD", test6, size=(1920*2, 1080*2), test=test)
 else:
     create_video("testHD", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920*2, 1080*2))
     create_image("test0Container", test0[0], size=(1920*2, 1080*2))
