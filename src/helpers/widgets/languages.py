@@ -78,6 +78,22 @@ class Python(Language):
     extention: str = "py"
     lexer: Lexer = get_lexer_by_name('python')
 
+    def tokenize(self, code: str) -> list[list[Token]]:
+        output: list[list[Color]] = []
+        line = []
+        for token, word in lex(code, self.lexer):
+            if word == "\n":
+                output.append(line)
+                line = []
+                continue
+            for _ in word:
+                if word == 'import':
+                    line.append(Tokens.Keyword)
+                else:
+                    line.append(token)
+        output.append(line)
+        return output
+
 
 class Dart(Language):
     extention: str = "dart"
