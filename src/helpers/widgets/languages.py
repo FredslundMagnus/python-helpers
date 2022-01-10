@@ -73,6 +73,7 @@ class Language:
             return Colors.pink
         if token == Tokens.Operator:
             return Colors.brown
+        print(token)
 
 
 class Python(Language):
