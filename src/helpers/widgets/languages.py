@@ -87,7 +87,11 @@ class Python(Language):
                 line = []
                 continue
             for _ in word:
-                if word == 'import':
+                if token in Tokens.Comment.subtypes:
+                    line.append(token)
+                elif token in self.strings:
+                    line.append(token)
+                elif word == 'import':
                     line.append(Tokens.Keyword)
                 else:
                     line.append(token)
