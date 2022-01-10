@@ -14,7 +14,7 @@ class Language:
     strings: set = {Tokens.Literal.String.Symbol, Tokens.Literal.String.Escape, Tokens.Literal.String.Double, Tokens.Literal.String.Backtick, Tokens.Literal.String.Char, Tokens.Literal.String.Doc, Tokens.Literal.String.Affix, Tokens.Literal.String.Single, Tokens.Literal.String.Heredoc, Tokens.Literal.String.Other, Tokens.Literal.String.Delimiter, Tokens.Literal.String.Regex}
     comments: set = Tokens.Comment.subtypes
     numbers: set = Tokens.Literal.Number.subtypes
-    symbols: set = {Tokens.Punctuation, Tokens.Operator}
+    symbols: set = {Tokens.Punctuation, Tokens.Operator, Tokens.Text}
     color_booleans: Color = Color(86, 156, 214)
     color_systemWords: Color = Color(197, 134, 192)
     color_classes: Color = Color(78, 201, 176)
@@ -61,8 +61,6 @@ class Language:
             return Colors.red
         if token == Tokens.Literal.String.Interpol:
             return self.color_booleans
-        if token == Tokens.Text:
-            return Colors.pink
         if token == Tokens.Operator.Word:
             return self.color_booleans
 
@@ -77,8 +75,6 @@ class Python(Language):
         output: list[list[Color]] = []
         line = []
         for token, word in lex(code, self.lexer):
-            if token == Tokens.Text:
-                print(word)
             if word == "\n":
                 output.append(line)
                 line = []
