@@ -66,7 +66,7 @@ def create_image(name: str, file: Background, size: tuple[int, int] = (1920, 108
 # )
 children = [
     FileEditor(filename="example_of_filename.py"),
-    FileEditor(filename="another_great_but_long_name.py", child=Container(color=Colors.green)),
+    FileEditor(filename="another_great_but_long_name.py", child=Code.fromFile("test.py")),
     FileEditor(filename="short_name.py"),
 ]
 

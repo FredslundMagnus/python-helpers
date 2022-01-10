@@ -14,6 +14,8 @@ from helpers.widgets.spacer import Spacer
 from helpers.widgets.sizedBox import SizedBox
 from helpers.widgets.text import Text
 from helpers.widgets.scale import Scale
+from helpers.widgets.languages import Language, Languages
 from helpers.widgets.fileEditor import FileEditor
+from helpers.widgets.code import Code
 
-widgets = [Size, Widget, Offset, Container, Padding, Edges, Align, Alignment, Center, Row, Column, Expanded, Spacer, SizedBox, Text, Scale, FileEditor]
+widgets = [Size, Widget, Offset, Container, Padding, Edges, Align, Alignment, Center, Row, Column, Expanded, Spacer, SizedBox, Text, Scale, Language, Languages, FileEditor, Code]

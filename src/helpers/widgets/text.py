@@ -1,6 +1,5 @@
 from helpers.widgets.widget import *
 from helpers.colors import Color, Colors
-# from PIL.ImageFont import truetype as create_font
 from helpers.fonts import Font, Fonts
 
 
