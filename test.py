@@ -15,3 +15,7 @@ fourcc = int(inputVideo.get(cv2.CAP_PROP_FOURCC))
 print("FOURCC is '%s'" % struct.pack("<I", fourcc), fourcc)
 while, if, return, for, else, raise, pass, break, try, except, yield, continue, assert, import, as
 # sdfg while, if, return, for, else, raise, pass, break, try, except, yield, continue, assert, import, as
+"while, if, return, for, else, raise, pass, break, try, except, yield, continue, assert, import, as"
+'while, if, return, for, else, raise, pass, break, try, except, yield, continue, assert, import, as'
+'''while, if, return, for, else, raise, pass, break, try, except, yield, continue, assert, import, as'''
+"""while, if, return, for, else, raise, pass, break, try, except, yield, continue, assert, import, as"""
