@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from helpers.colors import Color
+from helpers.colors import Color, Colors
 
 from pygments import lex
 from pygments.lexer import Lexer
@@ -46,12 +46,12 @@ class Language:
         return [[self.color(token) for token in line] for line in tokens]
 
     def color(self, token: Token) -> Color:
-        if token in self.strings:
-            return self.color_strings
+        if token in self.strings:                     #
+            return self.color_strings                 #
         if token == Tokens.Name:
             return self.color_default
-        if token == Tokens.Keyword.Constant:
-            return self.color_booleans
+        if token == Tokens.Keyword.Constant:          #
+            return self.color_booleans                #
         if token == Tokens.Keyword:
             return self.color_systemWords
         if token == Tokens.Keyword.Namespace:
@@ -61,7 +61,7 @@ class Language:
         if token == Tokens.Name.Builtin:
             return self.color_numerics
         if token == Tokens.Punctuation:
-            return self.color_numerics
+            return Colors.red
         if token == Tokens.Literal.Number.Integer:
             return self.color_numerics
         if token == Tokens.Literal.String.Interpol:
@@ -91,7 +91,7 @@ class Python(Language):
                     line.append(token)
                 elif token in self.strings:
                     line.append(token)
-                elif word == 'import':
+                elif word in {'import'}:
                     line.append(Tokens.Keyword)
                 else:
                     line.append(token)
