@@ -31,18 +31,7 @@ class Language:
     SYSTEMWORDS = {'while', 'if', 'return', 'for', 'else', 'raise', 'pass', 'break', 'try', 'except', 'yield', 'continue', 'assert'}
 
     def tokenize(self, code: str) -> list[list[Token]]:
-        output: list[list[Color]] = []
-        line = []
-        for token, chars in lex(code, self.lexer):
-            print(token, chars, "sdfsdfsdf")
-            if chars == "\n":
-                output.append(line)
-                line = []
-                continue
-            for _ in chars:
-                line.append(token)
-        output.append(line)
-        return output
+        pass
 
     def colorize(self, code: str) -> list[list[Color]]:
         tokens: list[list[Token]] = self.tokenize(code)
@@ -88,6 +77,8 @@ class Python(Language):
         output: list[list[Color]] = []
         line = []
         for token, word in lex(code, self.lexer):
+            if token == Tokens.Text:
+                print(word)
             if word == "\n":
                 output.append(line)
                 line = []
