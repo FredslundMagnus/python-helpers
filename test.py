@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import struct
+from numpy import abs, Tester
 
 outputVideo = cv2.VideoWriter()
 outputVideo.open("foo.avi", -1, 25, (640, 480), True)
@@ -22,5 +23,5 @@ while, if, return, for, else, raise, pass, break, try, except, yield, continue, 
 2.1
 3, 1
 
-if 1 in {2,1}:
+if 1 in {2, 1}:
     pass
