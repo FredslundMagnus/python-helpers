@@ -82,7 +82,7 @@ class Python(Language):
                     line.append(token)
                 elif token in self.strings:
                     line.append(token)
-                elif word in {'import', 'from'}:
+                elif word in {'import'}:
                     line.append(Tokens.Keyword)
                 else:
                     line.append(token)
