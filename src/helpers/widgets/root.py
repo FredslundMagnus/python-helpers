@@ -1,4 +1,5 @@
 from __future__ import annotations
+from helpers.colors import Colors
 from helpers.widgets.widget import Widget
 from helpers.widgets.size import Size
 from helpers.widgets.offset import Offset
@@ -22,7 +23,7 @@ class Root:
         canvas = ImageDraw.Draw(img)
         ratio = (size[1] / 1080)
         if test:
-            canvas.rectangle(self.offset.dx*ratio, self.offset.dy*ratio, (self.offset.dx + self.size.width)*ratio, (self.offset.dy + self.size.height)*ratio)
+            canvas.rectangle(self.offset.dx*ratio, self.offset.dy*ratio, (self.offset.dx + self.size.width)*ratio, (self.offset.dy + self.size.height)*ratio, Colors.gray.c800)
         self.child.draw(canvas, self.offset, self.size, ratio)
 
         return img
