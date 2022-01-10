@@ -37,7 +37,7 @@ class Language:
 
     def colorize(self, code: str) -> list[list[Color]]:
         tokens: list[list[Token]] = self.tokenize(code)
-        print(tokens)
+        print(set.union(*[set(token) for token in tokens]))
         return [[self.color(token) for token in line] for line in tokens]
 
     def color(self, token: Token) -> Color:
