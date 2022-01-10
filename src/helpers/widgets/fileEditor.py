@@ -13,8 +13,9 @@ from helpers.widgets.center import Center
 
 
 class FileEditor(Widget):
-    def __init__(self, filename: str | None = None) -> None:
+    def __init__(self, filename: str | None = None, child: Widget | None = None) -> None:
         self.filename = filename
+        self.child = child
         super().__init__()
 
     def build(self, size: Size) -> Widget | None:
@@ -40,9 +41,7 @@ class FileEditor(Widget):
                 Expanded(
                     child=Padding(
                         padding=Edges.all(10),
-                        child=Container(
-                            color=Colors.gray.c700,
-                        ),
+                        child=self.child,
                     ),
                 ),
             ],

@@ -6,10 +6,16 @@ from src.helpers.image.background import Background
 from src.helpers.widgets.widgets import *
 from PIL import Image
 import numpy as np
+from enum import Enum
 
 
-def create_video(name: str, files: list[Background], fps: int = 60, size: tuple[int, int] = (1920, 1080), test: bool = False):
-    video = cv2.VideoWriter(f'Videos/{name}.mov', 4, fps, size)
+class VideoFormat(Enum):
+    mov = 4
+    avi = 0
+
+
+def create_video(name: str, files: list[Background], fps: int = 60, size: tuple[int, int] = (1920, 1080), test: bool = False, videoFormat: VideoFormat = VideoFormat.avi):
+    video = cv2.VideoWriter(f'Videos/{name}.{videoFormat.name.split(".")[-1]}', videoFormat.value, fps, size)
 
     for i, image in enumerate(files, start=1):
         print(f"{i} out of {len(files)}")
@@ -60,7 +66,7 @@ def create_image(name: str, file: Background, size: tuple[int, int] = (1920, 108
 # )
 children = [
     FileEditor(filename="example_of_filename.py"),
-    FileEditor(filename="another_great_but_long_name.py"),
+    FileEditor(filename="another_great_but_long_name.py", child=Container(color=Colors.green)),
     FileEditor(filename="short_name.py"),
 ]
 
@@ -132,8 +138,8 @@ if test:
     # create_image("test0Container", test0[0], size=(1920*2, 1080*2), test=test)
     create_video("test6HD", idea, size=(1920*2, 1080*2), test=test)
 else:
-    create_video("test6HD", idea, size=(1920, 1080), test=test)
-    # create_video("testHD", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920*2, 1080*2))
+    create_video("test6HD4", idea, size=(1920, 1080), test=test)
+    # create_video("test4k", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920*2, 1080*2))
     # create_image("test0Container", test0[0], size=(1920*2, 1080*2))
     # create_image("test1Container", test2[0], size=(1920*2, 1080*2))
     # create_image("test2Container", test4[0], size=(1920*2, 1080*2))
