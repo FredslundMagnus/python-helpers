@@ -27,9 +27,14 @@ class Python(Language):
 
     def colorize(self, code: str) -> list[list[Color]]:
         lexer = lexers.get_lexer_by_name('python')
-        for a in pm.lex(code, lexer):
-            print(a)
-        print(len("\n"))
+        output = []
+        line = []
+        for token, chars in pm.lex(code, lexer):
+            if chars == "\n":
+                output.append(line)
+                line = []
+                continue
+            print(token, chars)
         return [[Python.color_systemWords for char in line] for line in code.splitlines()]
 
 
