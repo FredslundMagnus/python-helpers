@@ -36,7 +36,7 @@ class Python(Language):
                 line = []
                 continue
             for char in chars:
-                print(token, token == Token.String, token == Token.Literal.String)
+                print(chars, token, token == Token.String, token == Token.Literal.String, token == Token.Literal.String.Double, token == Token.Text)
                 if token == Token.String:
                     line.append(Python.color_strings)
                 else:
