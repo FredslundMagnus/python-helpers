@@ -12,7 +12,8 @@ class Code(Widget):
         self.font: Font = Fonts.CascadiaCode
         self.language = language
         self.lines = self.code.splitlines()
-        self.charWidth = self.font.pil(self.fontSize).getsize("m")[0]
+        _size = self.font.pil(10000).getsize("m")[0]
+        self.charWidth = fontSize/_size[1]*_size[0]
         self.size = Size(self.charWidth*max(len(line) for line in self.lines), fontSize*len(self.lines))
         super().__init__()
 
