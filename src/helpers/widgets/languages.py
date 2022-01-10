@@ -9,7 +9,7 @@ from pygments.token import Token
 
 class Language:
     extention: str
-    strings: set = {Token.Literal.String.Double}
+    strings: set = Token.Literal.String.subtypes
     color_booleans: Color = Color(86, 156, 214)
     color_systemWords: Color = Color(197, 134, 192)
     color_classes: Color = Color(78, 201, 176)
@@ -18,7 +18,7 @@ class Language:
     color_numerics: Color = Color(181, 206, 168)
     color_default: Color = Color(156, 220, 254)
     color_comments: Color = Color(0, 255, 0)
-    color_strings: Color = Color(255, 0, 0)
+    color_strings: Color = Color(206, 145, 120)
 
     def colorize(self, code: str) -> list[list[Color]]:
         pass
