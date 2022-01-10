@@ -4,10 +4,12 @@ from helpers.colors import Color
 
 import pygments as pm
 import pygments.lexers as lexers
-import pygments.token as tokennn
+from pygments.token import Token
 
 
-print(tokennn.Token.subtypes)
+print(Token.subtypes)
+print(Token.Text)
+print(Token.Name)
 
 
 class Language:
