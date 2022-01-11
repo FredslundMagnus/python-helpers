@@ -37,6 +37,14 @@ class Code(Widget):
                 size = Size(charWidth*max(len(line) for line in self.lines), fontsize*(len(self.lines) + (len(self.lines)-1)*(self.lineHeight-1.0)))
                 if size.width > max_size.width or size.height > max_size.height:
                     break
+            temp = fontsize - 1
+            for adder in range(1002):
+                fontsize = temp + adder/1000
+                _size = self.font.pil(10000).getsize("m")
+                charWidth = fontsize/_size[1]*_size[0]
+                size = Size(charWidth*max(len(line) for line in self.lines), fontsize*(len(self.lines) + (len(self.lines)-1)*(self.lineHeight-1.0)))
+                if size.width > max_size.width or size.height > max_size.height:
+                    break
             self.fontSize = fontsize - 1
             self.charWidth = self.fontSize/_size[1]*_size[0]
         font = self.font.pil(self.fontSize * ratio)
