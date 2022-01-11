@@ -9,7 +9,6 @@ while, if, return, for, else, raise, pass, break, try, except, yield, continue, 
 # sdfg while, if, return, for, else, raise, pass, break, try, except, yield, continue, assert, import, as, from
 """while, if, return, for, else, raise, pass, break, try, except, yield, continue, assert, import, as, from"""
 2.1, 3, 1
-
 if 1 in {2, 1}:
     pass
 [a for a in [1]]
@@ -18,7 +17,6 @@ if 1 is None:
     class Name:
         def test():
             pass
-
 aiter(), anext(), ascii(), breakpoint(), callable(), exec(), help()
 eval(), format(), getattr(), globals(), hasattr(), hash(), hex(), id(), input(), isinstance(), __import__()
 abs(), all(), any(), bin(), chr(), compile(), delattr(), dir(), divmod(), issubclass(), iter(), vars(), sorted()
