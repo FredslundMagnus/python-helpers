@@ -47,7 +47,7 @@ class Language:
         pass
 
     def colorize(self, code: str, functions: set[str], classes: set[str], notModules: set[str]) -> list[list[Color]]:
-        tokens: list[list[Token]] = self.tokenize(code, functions, classes)
+        tokens: list[list[Token]] = self.tokenize(code, functions, classes, notModules)
         print(set.union(*[set(token) for token in tokens]))
         return [[self.color(token) for token in line] for line in tokens]
 
@@ -99,7 +99,8 @@ class Python(Language):
                 elif token in self.strings:
                     line.append(token)
                 elif token == Tokens.Name.Namespace or word in modules:
-                    modules.add(word)
+                    if word not in notModules:
+                        modules.add(word)
                     line.append(Tokens.Name.Namespace)
                 elif word in {'lambda'}:
                     line.append(Tokens.Keyword.Constant)
