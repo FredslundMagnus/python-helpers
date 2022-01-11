@@ -12,12 +12,12 @@ class Language:
     extention: str
     lexer: Lexer
     strings: set = {Tokens.Literal.String.Symbol, Tokens.Literal.String.Escape, Tokens.Literal.String.Double, Tokens.Literal.String.Backtick, Tokens.Literal.String.Char, Tokens.Literal.String.Doc,
-                    Tokens.Literal.String.Affix, Tokens.Literal.String.Single, Tokens.Literal.String.Heredoc, Tokens.Literal.String.Other, Tokens.Literal.String.Delimiter, Tokens.Literal.String.Regex}
+                    Tokens.Literal.String.Single, Tokens.Literal.String.Heredoc, Tokens.Literal.String.Other, Tokens.Literal.String.Delimiter, Tokens.Literal.String.Regex}
     comments: set = Tokens.Comment.subtypes
     numbers: set = Tokens.Literal.Number.subtypes
     symbols: set = {Tokens.Punctuation, Tokens.Operator, Tokens.Text}
     systemwords: set = {Tokens.Keyword, Tokens.Keyword.Namespace}
-    logicals: set = {Tokens.Keyword.Constant, Tokens.Literal.String.Interpol, Tokens.Operator.Word}
+    logicals: set = {Tokens.Keyword.Constant, Tokens.Literal.String.Interpol, Tokens.Operator.Word, Tokens.Literal.String.Affix}
     color_logicals: Color = Color(86, 156, 214)
     color_systemWords: Color = Color(197, 134, 192)
     color_classes: Color = Color(78, 201, 176)
