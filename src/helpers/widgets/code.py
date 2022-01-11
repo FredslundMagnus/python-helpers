@@ -25,7 +25,7 @@ class Code(Widget):
     @staticmethod
     def fromFile(filename: str, fontSize: float = 16.0, lineHeight: float = 1.5, functions: set[str] = {}, classes: set[str] = {}) -> Code:
         with open(filename) as f:
-            code = f.read()
+            code = f.read().strip()
         return Code(code, language=Languages.fromExtension(filename.split('.')[-1]), fontSize=fontSize, lineHeight=lineHeight, functions=functions, classes=classes)
 
     def draw(self, canvas: ImageDraw, offset: Offset, max_size: Size, ratio: float) -> None:
