@@ -12,7 +12,7 @@ while, if, return, for, else, raise, pass, break, try, except, yield, continue, 
 
 if 1 in {2, 1}:
     pass
-
+[a for a in [1]]
 True, False, not True and False or True, None, lambda a: a
 if 1 is None:
     class Name:
