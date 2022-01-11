@@ -1,7 +1,7 @@
 from __future__ import annotations
 import cv2
 from src.helpers.curves import Curves
-from src.helpers.colors import Colors
+from src.helpers.colors import Color, Colors
 from src.helpers.image.background import Background
 from src.helpers.widgets.widgets import *
 from PIL import Image
@@ -163,20 +163,30 @@ test10 = Background.transition(
 small = [Background(color=Colors.green, boxes=[(1, 1, 10, 8), (11, 1, 15, 8, Colors.gray.c900)], children=children) for _ in range(40)]
 big = [Background(color=Colors.green, boxes=[(16/9, 1, 16-16/9, 8), (17, 1, 21, 8, Colors.gray.c900)], children=children) for _ in range(40)]
 
-test: bool = True
+test: bool = False
 idea = list(reversed(test6)) + test7 + list(reversed(test7)) + test6
+
+
+def textConsoleSplit(color: Color) -> Background:
+    return Background(color=color, boxes=[(1, 1, 10, 8), (11, 1, 15, 8, Colors.gray.c900)], children=children)
+
 
 if test:
     # create_video("testHD", test0[:20], size=(1920*2, 1080*2), test=test)
     # create_image("test0Container", test0[0], size=(1920*2, 1080*2), test=test)
-    create_video("test6HD", idea, size=(1920*2, 1080*2), test=test)
+    # create_video("test6HD", idea, size=(1920*2, 1080*2), test=test)
     create_video("textAndConsole4kTest", (big + list(reversed(test10)) + small + test10)*3, size=(1920*2, 1080*2), test=test)
 
 else:
     # create_image("testLang", test4[0], size=(1920*2, 1080*2), test=test)
     # create_image("withConsole1", test8, size=(1920*2, 1080*2), test=test)
     # create_image("withConsole2", test9, size=(1920*2, 1080*2), test=test)
-    create_video("textAndConsole4k", (big + list(reversed(test10)) + small + test10)*3, size=(1920*2, 1080*2), test=test)
+    create_image("redTextConsole", textConsoleSplit(Colors.red), size=(1920*2, 1080*2), test=test)
+    create_image("deepOrangeTextConsole", textConsoleSplit(Colors.deepOrange), size=(1920*2, 1080*2), test=test)
+    create_image("orangeTextConsole", textConsoleSplit(Colors.orange), size=(1920*2, 1080*2), test=test)
+    create_image("deepPurpleTextConsole", textConsoleSplit(Colors.deepPurple), size=(1920*2, 1080*2), test=test)
+    create_image("purpleTextConsole", textConsoleSplit(Colors.purple), size=(1920*2, 1080*2), test=test)
+    create_video("textAndConsole4kNew", (big + list(reversed(test10)) + small + test10)*3, size=(1920*2, 1080*2), test=test)
     # create_video("test6HD4", idea, size=(1920, 1080), test=test, fps=30)
     # create_video("test4k", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920*2, 1080*2))
     # create_image("test0Container", test0[0], size=(1920*2, 1080*2))
