@@ -11,7 +11,8 @@ from pygments.token import Token as Tokens, _TokenType as Token
 class Language:
     extention: str
     lexer: Lexer
-    strings: set = {Tokens.Literal.String.Symbol, Tokens.Literal.String.Escape, Tokens.Literal.String.Double, Tokens.Literal.String.Backtick, Tokens.Literal.String.Char, Tokens.Literal.String.Doc, Tokens.Literal.String.Affix, Tokens.Literal.String.Single, Tokens.Literal.String.Heredoc, Tokens.Literal.String.Other, Tokens.Literal.String.Delimiter, Tokens.Literal.String.Regex}
+    strings: set = {Tokens.Literal.String.Symbol, Tokens.Literal.String.Escape, Tokens.Literal.String.Double, Tokens.Literal.String.Backtick, Tokens.Literal.String.Char, Tokens.Literal.String.Doc,
+                    Tokens.Literal.String.Affix, Tokens.Literal.String.Single, Tokens.Literal.String.Heredoc, Tokens.Literal.String.Other, Tokens.Literal.String.Delimiter, Tokens.Literal.String.Regex}
     comments: set = Tokens.Comment.subtypes
     numbers: set = Tokens.Literal.Number.subtypes
     symbols: set = {Tokens.Punctuation, Tokens.Operator, Tokens.Text}
@@ -56,6 +57,8 @@ class Language:
 
         if token == Tokens.Name.Namespace:
             return self.color_symbols
+        if token == Tokens.Name.Function:
+            return Colors.red
 
         if token == Tokens.Name:
             return self.color_default
