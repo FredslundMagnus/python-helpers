@@ -78,6 +78,7 @@ class Python(Language):
     lexer: Lexer = get_lexer_by_name('python')
 
     def tokenize(self, code: str) -> list[list[Token]]:
+        modules: set[str] = {}
         output: list[list[Color]] = []
         line = []
         for token, word in lex(code, self.lexer):
@@ -90,6 +91,9 @@ class Python(Language):
                     line.append(token)
                 elif token in self.strings:
                     line.append(token)
+                elif token == Tokens.Name.Namespace or token in modules:
+                    modules.add(word)
+                    line.append(Tokens.Name.Namespace)
                 elif word in {'import', 'in'}:
                     line.append(Tokens.Keyword)
                 elif token == Tokens.Name.Builtin or word in self.builtin_functions:  # Figure aot builtin methods
