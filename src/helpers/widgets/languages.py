@@ -64,6 +64,8 @@ class Language:
             return self.color_default
         if token == Tokens.Name.Builtin:
             return self.color_classes
+        if token == Tokens.Name.Class:
+            return self.color_classes
 
         print(token)
 
