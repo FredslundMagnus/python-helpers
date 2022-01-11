@@ -69,7 +69,7 @@ children = [
         filename="example_of_filename.py",
         child=Code.fromFile(
             "test.py",
-            fontSize=float("inf"),
+            # fontSize=float("inf"),
             functions={"arrange", "zeros", "pack"},
             classes={"Tester", "VideoWriter", "uint8"}
         ),
