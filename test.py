@@ -1,4 +1,5 @@
 import numpy as np
+import cv2
 from numpy import arange, Tester
 outputVideo = cv2.VideoWriter()
 outputVideo.open("foo.avi", -1, 25, (640, 480), True)
