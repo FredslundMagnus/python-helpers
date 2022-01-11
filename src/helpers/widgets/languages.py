@@ -74,6 +74,8 @@ class Language:
             return self.color_functions               # Functions
         if token == Tokens.Name.Builtin.Pseudo:       # self
             return self.color_self                    # self
+        if token == Tokens.Name.Decorator:            # Decorator
+            return self.color_functions
         print(token)
         return Colors.red
 
