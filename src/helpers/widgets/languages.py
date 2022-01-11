@@ -95,6 +95,8 @@ class Python(Language):
                 elif token == Tokens.Name.Namespace or word in modules:
                     modules.add(word)
                     line.append(Tokens.Name.Namespace)
+                elif word in {'lambda'}:
+                    line.append(Tokens.Keyword.Constant)
                 elif word in {'import', 'in'}:
                     line.append(Tokens.Keyword)
                 elif token == Tokens.Name.Builtin or word in self.builtin_functions:  # Figure aot builtin methods
