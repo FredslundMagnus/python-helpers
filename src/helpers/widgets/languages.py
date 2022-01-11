@@ -21,10 +21,10 @@ class Language:
     builtin_classes: set = {"bool", "bytearray", "bytes", "classmethod", "complex", "dict", "property", "range", "reversed",
                             "enumerate", "filter", "float", "frozenset", "int", "memoryview", "map", "list", "object", "set",
                             "slice", "staticmethod", "str", "super", "tuple", "type", "zip"}
-    builtin_functions: set = {"aiter()", "anext()", "ascii()", "breakpoint()", "callable()", "exec()", "help()",
-                              "eval()", "format()", "getattr()", "globals()", "hasattr()", "hash()", "hex()", "id()", "input()", "isinstance()", "__import__()",
-                              "abs()", "all()", "any()", "bin()", "chr()", "compile()", "delattr()", "dir()", "divmod()", "issubclass()", "iter()", "vars()", " sorted()",
-                              "len()", "locals()", "max()", "min()", "next()", "oct()", "open()", "ord()", "pow()", "print()", "repr()", "round()", "setattr()", "sum()"}
+    builtin_functions: set = {"aiter", "anext", "ascii", "breakpoint", "callable", "exec", "help",
+                              "eval", "format", "getattr", "globals", "hasattr", "hash", "hex", "id", "input", "isinstance", "__import__",
+                              "abs", "all", "any", "bin", "chr", "compile", "delattr", "dir", "divmod", "issubclass", "iter", "vars", " sorted",
+                              "len", "locals", "max", "min", "next", "oct", "open", "ord", "pow", "print", "repr", "round", "setattr", "sum"}
     color_logicals: Color = Color(86, 156, 214)
     color_systemWords: Color = Color(197, 134, 192)
     color_classes: Color = Color(78, 201, 176)
