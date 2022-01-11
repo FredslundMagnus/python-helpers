@@ -75,7 +75,7 @@ children = [
             notModules={"database"}
         ),
     ),
-    FileEditor(filename="another_great_but_long_name.py"),
+    FileEditor(filename="Terminal"),
     FileEditor(filename="short_name.py"),
 ]
 
@@ -143,6 +143,16 @@ test7 = Background.transition(
 test8 = Background(color=Colors.green, boxes=[(1, 1, 10, 8), (11, 1, 15, 8, Colors.gray.c900)], children=children)
 test9 = Background(color=Colors.green, boxes=[(1, 1, 10, 8), (11, 1, 15, 8, Colors.black)], children=children)
 
+test10 = Background.transition(
+    Background(color=Colors.green, boxes=[(1, 1, 10, 8), (11, 1, 15, 8, Colors.gray.c900)]),
+    Background(color=Colors.green, boxes=[(16/9, 1, 16-16/9, 8), (23, 1, 27, 8, Colors.gray.c900)]),
+    frames=40,
+    curve=Curves.easeInOut,
+    children=children,
+)
+
+small = [Background(color=Colors.green, boxes=[(1, 1, 10, 8), (11, 1, 15, 8, Colors.gray.c900)]) for _ in range(40)]
+big = [Background(color=Colors.green, boxes=[(16/9, 1, 16-16/9, 8), (23, 1, 27, 8, Colors.gray.c900)]) for _ in range(40)]
 
 test: bool = False
 idea = list(reversed(test6)) + test7 + list(reversed(test7)) + test6
@@ -153,8 +163,9 @@ if test:
     create_video("test6HD", idea, size=(1920*2, 1080*2), test=test)
 else:
     # create_image("testLang", test4[0], size=(1920*2, 1080*2), test=test)
-    create_image("withConsole1", test8, size=(1920*2, 1080*2), test=test)
-    create_image("withConsole2", test9, size=(1920*2, 1080*2), test=test)
+    # create_image("withConsole1", test8, size=(1920*2, 1080*2), test=test)
+    # create_image("withConsole2", test9, size=(1920*2, 1080*2), test=test)
+    create_video("test6HD4", (big + list(reversed(test10)) + small + test10)*3, size=(1920*2, 1080*2), test=test)
     # create_video("test6HD4", idea, size=(1920, 1080), test=test, fps=30)
     # create_video("test4k", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920*2, 1080*2))
     # create_image("test0Container", test0[0], size=(1920*2, 1080*2))
