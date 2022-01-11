@@ -34,6 +34,7 @@ class Language:
     color_default: Color = Color(156, 220, 254)
     color_comments: Color = Color(106, 153, 85)
     color_strings: Color = Color(206, 145, 120)
+    color_modules: Color = color_classes
     # SYMBOLS = {' ', ':', ',' , '=', '(', ')', '-', '>', '<', '*', '+', '.'}
     FUNCTIONS = {'print'}
     CLASSES = {'int', 'bool'}
