@@ -52,6 +52,6 @@ class Code(Widget):
         for y, (line, colors) in enumerate(zip(self.lines, self.colors)):
             if self.useLineNumbers:
                 for _x, c in enumerate(str(y+1)):
-                    canvas.text(((offset.dx + _x*self.charWidth)*ratio, (offset.dy + y*self.fontSize*self.lineHeight)*ratio), c, color.color, font)
+                    canvas.text(((offset.dx + _x*self.charWidth)*ratio, (offset.dy + y*self.fontSize*self.lineHeight)*ratio), c, Colors.gray.c700.color, font)
             for x, (char, color) in enumerate(zip(line, colors)):
                 canvas.text(((offset.dx + (x + self.useLineNumbers*4)*self.charWidth)*ratio, (offset.dy + y*self.fontSize*self.lineHeight)*ratio), char, color.color, font)
