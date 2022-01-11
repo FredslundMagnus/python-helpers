@@ -18,9 +18,9 @@ if 1 is None:
     class Name:
         def test():
             pass
-aiter(), anext(), ascii(), breakpoint(), callable(), exec(), help()
+aiter(), anext(), ascii(), breakpoint(), callable(), exec(), help(), sorted()
 eval(), format(), getattr(), globals(), hasattr(), hash(), hex(), id(), input(), isinstance(), __import__()
-abs(), all(), any(), bin(), chr(), compile(), delattr(), dir(), divmod(), issubclass(), iter(), vars(), sorted()
+abs(), all(), any(), bin(), chr(), compile(), delattr(), dir(), divmod(), issubclass(), iter(), vars()
 len(), locals(), max(), min(), next(), oct(), open(), ord(), pow(), print(), repr(), round(), setattr(), sum()
 bool(), bytearray(), bytes(), classmethod(), complex(), dict(), property(), range(), reversed()
 enumerate(), filter(), float(), frozenset(), int(), memoryview(), map(), list(), object(), set()
