@@ -55,7 +55,7 @@ class Background:
 
     def name(self, size: tuple[int, int] = (1920, 1080)) -> str:
         width, height = size
-        return join(self.folder, f"tt-{self.color_name}-{width}-{height}-{self.boxes_name}.png")
+        return join(self.folder, f"background-{self.color_name}-{width}-{height}-{self.boxes_name}.png")
 
     def render(self, antialiasing: float = 0.001, quality: int = 11, size: tuple[int, int] = (1920, 1080)) -> None:
         width, height = size
@@ -63,6 +63,7 @@ class Background:
 
     def load(self, size: tuple[int, int] = (1920, 1080)):
         name = self.name(size)
+        print(name)
         if not exists(name):
             self.render(size=size)
         return IMG.open(name)
