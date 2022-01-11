@@ -6,7 +6,7 @@ from helpers.widgets.widget import *
 
 
 class Code(Widget):
-    def __init__(self, code: str, language: Language = Languages.python, fontSize: float = 16.0, lineHeight: float = 1.5) -> None:
+    def __init__(self, code: str, language: Language = Languages.python, fontSize: float = 16.0, lineHeight: float = 1.5, functions: set[str] = {}, classes: set[str] = {}) -> None:
         self.code = code
         self.fontSize = fontSize
         self.font: Font = Fonts.CascadiaCode
@@ -16,14 +16,14 @@ class Code(Widget):
         _size = self.font.pil(10000).getsize("m")
         self.charWidth = fontSize/_size[1]*_size[0]
         self.size = Size(self.charWidth*max(len(line) for line in self.lines), fontSize*(len(self.lines) + (len(self.lines)-1)*(self.lineHeight-1.0)))
-        self.colors: list[list[Color]] = self.language.colorize(self.code)
+        self.colors: list[list[Color]] = self.language.colorize(self.code, functions, classes)
         super().__init__()
 
     @staticmethod
-    def fromFile(filename: str, fontSize: float = 16.0, lineHeight: float = 1.5) -> Code:
+    def fromFile(filename: str, fontSize: float = 16.0, lineHeight: float = 1.5, functions: set[str] = {}, classes: set[str] = {}) -> Code:
         with open(filename) as f:
             code = f.read()
-        return Code(code, language=Languages.fromExtension(filename.split('.')[-1]), fontSize=fontSize, lineHeight=lineHeight)
+        return Code(code, language=Languages.fromExtension(filename.split('.')[-1]), fontSize=fontSize, lineHeight=lineHeight, functions=functions, classes=classes)
 
     def draw(self, canvas: ImageDraw, offset: Offset, max_size: Size, ratio: float) -> None:
         for y, (line, colors) in enumerate(zip(self.lines, self.colors)):
