@@ -40,7 +40,7 @@ class FileEditor(Widget):
                 ),
                 Expanded(
                     child=Padding(
-                        padding=Edges.all(10),
+                        padding=Edges.all(16),
                         child=self.child,
                     ),
                 ),
