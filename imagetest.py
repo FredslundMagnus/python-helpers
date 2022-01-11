@@ -140,6 +140,10 @@ test7 = Background.transition(
     children=ani6,
 )
 
+test8 = Background(color=Colors.green, boxes=[(1, 1, 10, 8), (11, 1, 15, 8, Colors.gray.c900)], children=children)
+test9 = Background(color=Colors.green, boxes=[(1, 1, 10, 8), (11, 1, 15, 8, Colors.black)], children=children)
+
+
 test: bool = False
 idea = list(reversed(test6)) + test7 + list(reversed(test7)) + test6
 
@@ -148,7 +152,9 @@ if test:
     # create_image("test0Container", test0[0], size=(1920*2, 1080*2), test=test)
     create_video("test6HD", idea, size=(1920*2, 1080*2), test=test)
 else:
-    create_image("testLang", test4[0], size=(1920*2, 1080*2), test=test)
+    # create_image("testLang", test4[0], size=(1920*2, 1080*2), test=test)
+    create_image("withConsole1", test8, size=(1920*2, 1080*2), test=test)
+    create_image("withConsole2", test9, size=(1920*2, 1080*2), test=test)
     # create_video("test6HD4", idea, size=(1920, 1080), test=test, fps=30)
     # create_video("test4k", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920*2, 1080*2))
     # create_image("test0Container", test0[0], size=(1920*2, 1080*2))
