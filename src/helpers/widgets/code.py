@@ -4,6 +4,8 @@ from helpers.fonts import Font, Fonts
 from helpers.widgets.languages import Language, Languages
 from helpers.widgets.widget import *
 
+print(float("inf"))
+
 
 class Code(Widget):
     def __init__(self, code: str, language: Language = Languages.python, fontSize: float = 16.0, lineHeight: float = 1.5, functions: set[str] = {}, classes: set[str] = {}) -> None:
