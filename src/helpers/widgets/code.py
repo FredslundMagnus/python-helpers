@@ -29,6 +29,7 @@ class Code(Widget):
 
     def draw(self, canvas: ImageDraw, offset: Offset, max_size: Size, ratio: float) -> None:
         for fontsize in range(1, 1000):
+            print(self.charWidth*max(len(line) for line in self.lines))
             size = Size(self.charWidth*max(len(line) for line in self.lines), fontsize*(len(self.lines) + (len(self.lines)-1)*(self.lineHeight-1.0)))
             print(size, max_size)
             if size.width > max_size.width or size.height > max_size.height:
