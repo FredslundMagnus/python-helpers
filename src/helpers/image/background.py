@@ -63,7 +63,6 @@ class Background:
 
     def load(self, size: tuple[int, int] = (1920, 1080)):
         name = self.name(size)
-        print(name)
         if not exists(name):
             self.render(size=size)
         return IMG.open(name)
