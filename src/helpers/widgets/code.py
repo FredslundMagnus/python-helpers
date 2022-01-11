@@ -4,10 +4,6 @@ from helpers.fonts import Font, Fonts
 from helpers.widgets.languages import Language, Languages
 from helpers.widgets.widget import *
 
-print(float("inf"))
-float.infinity = float("inf")
-print(float.infinity)
-
 
 class Code(Widget):
     def __init__(self, code: str, language: Language = Languages.python, fontSize: float = 16.0, lineHeight: float = 1.5, functions: set[str] = {}, classes: set[str] = {}) -> None:
@@ -19,7 +15,9 @@ class Code(Widget):
         self.lines = self.code.splitlines()
         _size = self.font.pil(10000).getsize("m")
         self.charWidth = fontSize/_size[1]*_size[0]
-        self.size = Size(self.charWidth*max(len(line) for line in self.lines), fontSize*(len(self.lines) + (len(self.lines)-1)*(self.lineHeight-1.0)))
+        self.size = None
+        if self.fontSize != float("inf"):
+            self.size = Size(self.charWidth*max(len(line) for line in self.lines), fontSize*(len(self.lines) + (len(self.lines)-1)*(self.lineHeight-1.0)))
         self.colors: list[list[Color]] = self.language.colorize(self.code, functions, classes)
         super().__init__()
 
