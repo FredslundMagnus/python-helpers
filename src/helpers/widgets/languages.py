@@ -108,6 +108,12 @@ class Python(Language):
                     line.append(Tokens.Name.Function)
                 elif word in classes:
                     line.append(Tokens.Name.Class)
+                elif token == Tokens.Name.Function:
+                    functions.add(word)
+                    line.append(Tokens.Name.Function)
+                elif token == Tokens.Name.Class:
+                    classes.add(word)
+                    line.append(Tokens.Name.Class)
                 else:
                     line.append(token)
         output.append(line)
