@@ -23,7 +23,7 @@ class Language:
                             "slice", "staticmethod", "str", "super", "tuple", "type", "zip"}
     builtin_functions: set = {"aiter", "anext", "ascii", "breakpoint", "callable", "exec", "help",
                               "eval", "format", "getattr", "globals", "hasattr", "hash", "hex", "id", "input", "isinstance", "__import__",
-                              "abs", "all", "any", "bin", "chr", "compile", "delattr", "dir", "divmod", "issubclass", "iter", "vars", " sorted",
+                              "abs", "all", "any", "bin", "chr", "compile", "delattr", "dir", "divmod", "issubclass", "iter", "vars", "sorted",
                               "len", "locals", "max", "min", "next", "oct", "open", "ord", "pow", "print", "repr", "round", "setattr", "sum"}
     color_logicals: Color = Color(86, 156, 214)
     color_systemWords: Color = Color(197, 134, 192)
