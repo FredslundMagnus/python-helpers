@@ -154,22 +154,24 @@ test9 = Background(color=Colors.green, boxes=[(1, 1, 10, 8), (11, 1, 15, 8, Colo
 
 test10 = Background.transition(
     Background(color=Colors.green, boxes=[(1, 1, 10, 8), (11, 1, 15, 8, Colors.gray.c900)]),
-    Background(color=Colors.green, boxes=[(16/9, 1, 16-16/9, 8), (23, 1, 27, 8, Colors.gray.c900)]),
+    Background(color=Colors.green, boxes=[(16/9, 1, 16-16/9, 8), (17, 1, 21, 8, Colors.gray.c900)]),
     frames=40,
     curve=Curves.easeInOut,
     children=children,
 )
 
 small = [Background(color=Colors.green, boxes=[(1, 1, 10, 8), (11, 1, 15, 8, Colors.gray.c900)], children=children) for _ in range(40)]
-big = [Background(color=Colors.green, boxes=[(16/9, 1, 16-16/9, 8), (23, 1, 27, 8, Colors.gray.c900)], children=children) for _ in range(40)]
+big = [Background(color=Colors.green, boxes=[(16/9, 1, 16-16/9, 8), (17, 1, 21, 8, Colors.gray.c900)], children=children) for _ in range(40)]
 
-test: bool = False
+test: bool = True
 idea = list(reversed(test6)) + test7 + list(reversed(test7)) + test6
 
 if test:
     # create_video("testHD", test0[:20], size=(1920*2, 1080*2), test=test)
     # create_image("test0Container", test0[0], size=(1920*2, 1080*2), test=test)
     create_video("test6HD", idea, size=(1920*2, 1080*2), test=test)
+    create_video("textAndConsole4kTest", (big + list(reversed(test10)) + small + test10)*3, size=(1920*2, 1080*2), test=test)
+
 else:
     # create_image("testLang", test4[0], size=(1920*2, 1080*2), test=test)
     # create_image("withConsole1", test8, size=(1920*2, 1080*2), test=test)
