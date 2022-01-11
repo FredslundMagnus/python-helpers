@@ -29,18 +29,16 @@ class Code(Widget):
         return Code(code, language=Languages.fromExtension(filename.split('.')[-1]), fontSize=fontSize, lineHeight=lineHeight, functions=functions, classes=classes)
 
     def draw(self, canvas: ImageDraw, offset: Offset, max_size: Size, ratio: float) -> None:
+        _size = self.font.pil(10000).getsize("m")
         for fontsize in range(1, 1000):
             _size = self.font.pil(10000).getsize("m")
             charWidth = fontsize/_size[1]*_size[0]
-            print(charWidth*max(len(line) for line in self.lines))
             size = Size(charWidth*max(len(line) for line in self.lines), fontsize*(len(self.lines) + (len(self.lines)-1)*(self.lineHeight-1.0)))
-            print(size, max_size)
             if size.width > max_size.width or size.height > max_size.height:
                 break
-        print(fontsize)
         fontsize -= 1
-        print(fontsize)
+        charWidth = fontsize/_size[1]*_size[0]
         font = self.font.pil(fontsize * ratio)
         for y, (line, colors) in enumerate(zip(self.lines, self.colors)):
             for x, (char, color) in enumerate(zip(line, colors)):
-                canvas.text(((offset.dx + x*self.charWidth)*ratio, (offset.dy + y*self.fontSize*self.lineHeight)*ratio), char, color.color, font)
+                canvas.text(((offset.dx + x*charWidth)*ratio, (offset.dy + y*self.fontSize*self.lineHeight)*ratio), char, color.color, font)
