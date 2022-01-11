@@ -32,6 +32,3 @@ len(), locals(), max(), min(), next(), oct(), open(), ord(), pow(), print(), rep
 bool(), bytearray(), bytes(), classmethod(), complex(), dict(), property(), range(), reversed()
 enumerate(), filter(), float(), frozenset(), int(), memoryview(), map(), list(), object(), set()
 slice(), staticmethod(), str(), super(), tuple(), type(), zip()
-
-print(float("inf"))
-print(float("inf"))
