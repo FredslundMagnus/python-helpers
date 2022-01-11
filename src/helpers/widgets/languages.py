@@ -69,11 +69,8 @@ class Language:
             return self.color_classes                 # Classes
         if token == Tokens.Name.Function:             # Functions
             return self.color_functions               # Functions
-
-        if token == Tokens.Name.Builtin:
-            return Colors.red
-
         print(token)
+        return Colors.red
 
 
 class Python(Language):
