@@ -54,19 +54,17 @@ class Language:
             return self.color_systemWords             #
         if token in self.logicals:                    #
             return self.color_logicals                #
+        if token == Tokens.Name.Namespace:            # Modules
+            return self.color_symbols                 # Modules
+        if token == Tokens.Name:                      # Variables
+            return self.color_default                 # Variables
+        if token == Tokens.Name.Class:                # Classes
+            return self.color_classes                 # Classes
+        if token == Tokens.Name.Function:             # Functions
+            return self.color_functions               # Functions
 
-        if token == Tokens.Name.Namespace:
-            return self.color_symbols
-
-        if token == Tokens.Name:
-            return self.color_default
         if token == Tokens.Name.Builtin:
             return Colors.red
-
-        if token == Tokens.Name.Class:
-            return self.color_classes
-        if token == Tokens.Name.Function:
-            return self.color_functions
 
         print(token)
 
@@ -90,6 +88,9 @@ class Python(Language):
                     line.append(token)
                 elif word in {'import'}:
                     line.append(Tokens.Keyword)
+                elif token == Tokens.Name.Builtin:  # Figure aot builtin methods
+                    print(word)
+                    line.append(Tokens.Name.Builtin)
                 else:
                     line.append(token)
         output.append(line)
