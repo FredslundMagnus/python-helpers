@@ -95,7 +95,7 @@ class Python(Language):
                     if word in self.builtin_classes:
                         line.append(Tokens.Name.Class)
                     else:
-                        line.append(Tokens.Name.Builtin)
+                        line.append(Tokens.Name.Function)
                 else:
                     line.append(token)
         output.append(line)
