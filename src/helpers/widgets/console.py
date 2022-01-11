@@ -13,6 +13,7 @@ class Console(Widget):
         self.lineHeight = lineHeight
         self.lines = self.code.splitlines()
         if fitLines is not None:
+            self.fontSize = float('inf')
             for _ in range(fitLines - len(self.lines)):
                 self.lines.append("")
         _size = self.font.pil(10000).getsize("m")
