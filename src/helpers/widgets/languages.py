@@ -17,8 +17,8 @@ class Language:
     numbers: set = Tokens.Literal.Number.subtypes
     symbols: set = {Tokens.Punctuation, Tokens.Operator, Tokens.Text}
     systemwords: set = {Tokens.Keyword, Tokens.Keyword.Namespace}
-    booleans: set = {Tokens.Keyword.Constant, Tokens.Literal.String.Interpol, Tokens.Operator.Word}
-    color_booleans: Color = Color(86, 156, 214)
+    logicals: set = {Tokens.Keyword.Constant, Tokens.Literal.String.Interpol, Tokens.Operator.Word}
+    color_logicals: Color = Color(86, 156, 214)
     color_systemWords: Color = Color(197, 134, 192)
     color_classes: Color = Color(78, 201, 176)
     color_symbols: Color = Color(255, 255, 255)
@@ -52,8 +52,8 @@ class Language:
             return self.color_symbols                 #
         if token in self.systemwords:                 #
             return self.color_systemWords             #
-        if token in self.booleans:                    #
-            return self.color_booleans                #
+        if token in self.logicals:                    #
+            return self.color_logicals                #
 
         if token == Tokens.Name.Namespace:
             return self.color_symbols
