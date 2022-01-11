@@ -36,6 +36,8 @@ class Language:
     color_strings: Color = Color(206, 145, 120)
     # color_modules: Color = color_classes
     color_modules: Color = color_symbols
+    # color_self: Color = color_logicals
+    color_self: Color = color_default
     FUNCTIONS = {'print'}
     CLASSES = {'int', 'bool'}
     BOOLEANS = {'True', 'False', 'not', 'and', 'or', 'in', 'None', 'is', 'lambda', 'class', 'def'}
@@ -70,6 +72,8 @@ class Language:
             return self.color_classes                 # Classes
         if token == Tokens.Name.Function:             # Functions
             return self.color_functions               # Functions
+        if token == Tokens.Name.Builtin.Pseudo:       # self
+            return self.color_self                    # self
         print(token)
         return Colors.red
 
