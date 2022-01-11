@@ -78,7 +78,7 @@ class Python(Language):
     lexer: Lexer = get_lexer_by_name('python')
 
     def tokenize(self, code: str) -> list[list[Token]]:
-        modules: set[str] = {}
+        modules: set[str] = set()
         output: list[list[Color]] = []
         line = []
         for token, word in lex(code, self.lexer):
