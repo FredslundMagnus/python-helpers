@@ -43,10 +43,10 @@ class Language:
     BOOLEANS = {'True', 'False', 'not', 'and', 'or', 'in', 'None', 'is', 'lambda', 'class', 'def'}
     SYSTEMWORDS = {'while', 'if', 'return', 'for', 'else', 'raise', 'pass', 'break', 'try', 'except', 'yield', 'continue', 'assert'}
 
-    def tokenize(self, code: str, functions: set[str], classes: set[str]) -> list[list[Token]]:
+    def tokenize(self, code: str, functions: set[str], classes: set[str], notModules: set[str]) -> list[list[Token]]:
         pass
 
-    def colorize(self, code: str, functions: set[str], classes: set[str]) -> list[list[Color]]:
+    def colorize(self, code: str, functions: set[str], classes: set[str], notModules: set[str]) -> list[list[Color]]:
         tokens: list[list[Token]] = self.tokenize(code, functions, classes)
         print(set.union(*[set(token) for token in tokens]))
         return [[self.color(token) for token in line] for line in tokens]
@@ -84,7 +84,7 @@ class Python(Language):
     extention: str = "py"
     lexer: Lexer = get_lexer_by_name('python')
 
-    def tokenize(self, code: str, functions: set[str], classes: set[str]) -> list[list[Token]]:
+    def tokenize(self, code: str, functions: set[str], classes: set[str], notModules: set[str]) -> list[list[Token]]:
         modules: set[str] = set()
         output: list[list[Color]] = []
         line = []

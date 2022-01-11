@@ -6,7 +6,7 @@ from helpers.widgets.widget import *
 
 
 class Code(Widget):
-    def __init__(self, code: str, language: Language = Languages.python, fontSize: float = 16.0, lineHeight: float = 1.5, functions: set[str] = {}, classes: set[str] = {}, useLineNumbers: bool = True) -> None:
+    def __init__(self, code: str, language: Language = Languages.python, fontSize: float = 16.0, lineHeight: float = 1.5, functions: set[str] = {}, classes: set[str] = {}, notModules: set[str] = {}, useLineNumbers: bool = True) -> None:
         self.code = code
         self.fontSize = fontSize
         self.font: Font = Fonts.CascadiaCode
@@ -20,14 +20,14 @@ class Code(Widget):
         if self.fontSize != float("inf"):
             self.charWidth = fontSize/_size[1]*_size[0]
             self.size = Size(self.charWidth*(max(len(line) for line in self.lines) + self.useLineNumbers*4), fontSize*(len(self.lines) + (len(self.lines)-1)*(self.lineHeight-1.0)))
-        self.colors: list[list[Color]] = self.language.colorize(self.code, functions, classes)
+        self.colors: list[list[Color]] = self.language.colorize(self.code, functions, classes, notModules)
         super().__init__()
 
     @staticmethod
-    def fromFile(filename: str, fontSize: float = 16.0, lineHeight: float = 1.5, functions: set[str] = {}, classes: set[str] = {}, useLineNumbers: bool = True) -> Code:
+    def fromFile(filename: str, fontSize: float = 16.0, lineHeight: float = 1.5, functions: set[str] = {}, classes: set[str] = {}, notModules: set[str] = {}, useLineNumbers: bool = True) -> Code:
         with open(filename) as f:
             code = f.read().strip()
-        return Code(code, language=Languages.fromExtension(filename.split('.')[-1]), fontSize=fontSize, lineHeight=lineHeight, functions=functions, classes=classes, useLineNumbers=useLineNumbers)
+        return Code(code, language=Languages.fromExtension(filename.split('.')[-1]), fontSize=fontSize, lineHeight=lineHeight, functions=functions, classes=classes, notModules=notModules, useLineNumbers=useLineNumbers)
 
     def draw(self, canvas: ImageDraw, offset: Offset, max_size: Size, ratio: float) -> None:
         if self.size is None:

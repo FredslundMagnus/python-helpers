@@ -71,7 +71,8 @@ children = [
             "main.py",
             fontSize=float("inf"),
             functions={"dtu", "set", "get"},
-            classes={"Parameters", "Database", "Colors"}
+            classes={"Parameters", "Database", "Colors"},
+            notModules={"database"}
         ),
     ),
     FileEditor(filename="another_great_but_long_name.py"),
