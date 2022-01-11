@@ -19,10 +19,9 @@ if 1 is None:
         def test():
             pass
 aiter(), anext(), ascii(), breakpoint(), callable(), exec(), help()
-abs(), all(), any(), bin(), chr(), compile(), delattr(), dir(), divmod(), issubclass(), iter()
-bool(), bytearray(), bytes(), classmethod(), complex(), dict()
-enumerate(), filter(), float(), frozenset(), int()
-eval(), format(), getattr(), globals(), hasattr(), hash(), hex(), id(), input(), isinstance()
-len(), list(), locals(), map(), max(), memoryview(), min(), next(), object(), oct()
-open(), ord(), pow(), print(), property(), range(), repr(), reversed(), round(), set(), setattr()
-slice(), sorted(), staticmethod(), str(), sum(), super(), tuple(), type(), vars(), zip(), __import__()
+eval(), format(), getattr(), globals(), hasattr(), hash(), hex(), id(), input(), isinstance(), __import__()
+abs(), all(), any(), bin(), chr(), compile(), delattr(), dir(), divmod(), issubclass(), iter(), vars(),  sorted()
+len(), locals(), max(), min(), next(), oct(), open(), ord(), pow(), print(), repr(), round(), setattr(), sum()
+bool(), bytearray(), bytes(), classmethod(), complex(), dict(), property(), range(), reversed()
+enumerate(), filter(), float(), frozenset(), int(), memoryview(), map(), list(), object(), set()
+slice(), staticmethod(), str(), super(), tuple(), type(), zip()
