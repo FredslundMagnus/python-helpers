@@ -51,4 +51,4 @@ class Code(Widget):
         font = self.font.pil(self.fontSize * ratio)
         for y, (line, colors) in enumerate(zip(self.lines, self.colors)):
             for x, (char, color) in enumerate(zip(line, colors)):
-                canvas.text(((offset.dx + x*self.charWidth + self.useLineNumbers*4)*ratio, (offset.dy + y*self.fontSize*self.lineHeight)*ratio), char, color.color, font)
+                canvas.text(((offset.dx + (x + self.useLineNumbers*4)*self.charWidth)*ratio, (offset.dy + y*self.fontSize*self.lineHeight)*ratio), char, color.color, font)
