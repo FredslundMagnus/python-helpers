@@ -93,7 +93,7 @@ class Python(Language):
                 output.append(line)
                 line = []
                 continue
-            for _ in word:
+            for char in word:
                 if token in self.comments:
                     line.append(token)
                 elif token in self.strings:
@@ -120,6 +120,8 @@ class Python(Language):
                 elif token == Tokens.Name.Class:
                     classes.add(word)
                     line.append(Tokens.Name.Class)
+                elif token == Tokens.Name.Decorator and char == "@":
+                    line.append(Tokens.Operator)
                 else:
                     line.append(token)
         output.append(line)
