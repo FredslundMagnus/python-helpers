@@ -77,13 +77,13 @@ children = [
     ),
     FileEditor(
         filename="Terminal",
-        child=Column(
-            children=[
-                Text("C:\\Python> python example.py"),
-                Text("Hello World!"),
-                Text(""),
-                Text("C:\\Python>"),
-            ],
+        child=Console(
+            """C:\\Python> python example.py
+Hello World!
+
+C:\\Python>"""
+            ),
+
         ),
     ),
     FileEditor(filename="short_name.py"),
@@ -94,22 +94,22 @@ test0 = [Background(color=Colors.blue, boxes=[(1, 1, 5, 8), (6, 1, 10, 8), (11, 
 test1 = Background.transition(
     Background(color=Colors.blue, boxes=[(1, 1, 5, 8), (6, 1, 10, 8), (11, 1, 15, 8)]),
     Background(color=Colors.blue, boxes=[(1, 1, 7.5, 8), (8.5, 1, 15, 8), (17, 1, 30, 8)]),
-    frames=40,
-    curve=Curves.easeInOut,
-    children=children,
+    frames = 40,
+    curve = Curves.easeInOut,
+    children = children,
 )
 
-test2 = [Background(color=Colors.blue, boxes=[(1, 1, 7.5, 8), (8.5, 1, 15, 8)], children=children) for _ in range(40)]
+test2=[Background(color = Colors.blue, boxes = [(1, 1, 7.5, 8), (8.5, 1, 15, 8)], children = children) for _ in range(40)]
 
-test3 = Background.transition(
+test3=Background.transition(
     Background(color=Colors.blue, boxes=[(1, 1, 7.5, 8), (8.5, 1, 15, 8)]),
     Background(color=Colors.blue, boxes=[(16/9, 1, 16-16/9, 8), (17, 1, 30, 8)]),
-    frames=40,
-    curve=Curves.easeInOut,
-    children=children,
+    frames = 40,
+    curve = Curves.easeInOut,
+    children = children,
 )
 
-test4 = [Background(color=Colors.blue, boxes=[(16/9, 1, 16-16/9, 8)], children=children) for _ in range(40)]
+test4=[Background(color = Colors.blue, boxes = [(16/9, 1, 16-16/9, 8)], children = children) for _ in range(40)]
 
 # test5 = Background.transition(
 #     Background(color=Colors.blue, boxes=[(16/9, 1, 16-16/9, 8), (17, 1, 30, 8)]),
@@ -120,60 +120,60 @@ test4 = [Background(color=Colors.blue, boxes=[(16/9, 1, 16-16/9, 8)], children=c
 
 
 def ani6(animation: float) -> list[Widget]:
-    start, end = 0.5, 1.0
-    scale = start + (end-start)*animation
-    return [Scale(scale=scale, child=child) for child in children]
+    start, end=0.5, 1.0
+    scale=start + (end-start)*animation
+    return [Scale(scale = scale, child = child) for child in children]
 
 
 def box(center_x: float = 8.0, center_y: float = 4.5, ratio: float = 16/9, height: float | None = None, width: float | None = None) -> tuple(float, float, float, float):
     if height is None:
-        height = width/ratio
+        height=width/ratio
     if width is None:
-        width = height*ratio
-    h_height, h_width = height/2, width/2
+        width=height*ratio
+    h_height, h_width=height/2, width/2
     return (center_x-h_width, center_y-h_height, center_x+h_width, center_y+h_height)
 
 
-test6 = Background.transition(
+test6=Background.transition(
     Background(color=Colors.blue, boxes=[box(height=3.5, center_x=8.0-4.0+16/9/4), box(height=3.5, center_x=8.0+4.0-16/9/4)]),
     Background(color=Colors.blue, boxes=[box(height=7.0), box(height=7.0, center_x=8.0+16.0)]),
-    frames=40,
-    curve=Curves.easeInOut,
-    children=ani6,
+    frames = 40,
+    curve = Curves.easeInOut,
+    children = ani6,
 )
 
-test7 = Background.transition(
+test7=Background.transition(
     Background(color=Colors.blue, boxes=[box(height=3.5, center_x=8.0-4.0+16/9/4), box(height=3.5, center_x=8.0+4.0-16/9/4)]),
     Background(color=Colors.blue, boxes=[box(height=7.0, center_x=8.0-16.0), box(height=7.0)]),
-    frames=40,
-    curve=Curves.easeInOut,
-    children=ani6,
+    frames = 40,
+    curve = Curves.easeInOut,
+    children = ani6,
 )
 
-test8 = Background(color=Colors.green, boxes=[(1, 1, 10, 8), (11, 1, 15, 8, Colors.gray.c900)], children=children)
-test9 = Background(color=Colors.green, boxes=[(1, 1, 10, 8), (11, 1, 15, 8, Colors.black)], children=children)
+test8=Background(color = Colors.green, boxes = [(1, 1, 10, 8), (11, 1, 15, 8, Colors.gray.c900)], children = children)
+test9=Background(color = Colors.green, boxes = [(1, 1, 10, 8), (11, 1, 15, 8, Colors.black)], children = children)
 
-test10 = Background.transition(
+test10=Background.transition(
     Background(color=Colors.green, boxes=[(1, 1, 10, 8), (11, 1, 15, 8, Colors.gray.c900)]),
     Background(color=Colors.green, boxes=[(16/9, 1, 16-16/9, 8), (23, 1, 27, 8, Colors.gray.c900)]),
-    frames=40,
-    curve=Curves.easeInOut,
-    children=children,
+    frames = 40,
+    curve = Curves.easeInOut,
+    children = children,
 )
 
-small = [Background(color=Colors.green, boxes=[(1, 1, 10, 8), (11, 1, 15, 8, Colors.gray.c900)]) for _ in range(40)]
-big = [Background(color=Colors.green, boxes=[(16/9, 1, 16-16/9, 8), (23, 1, 27, 8, Colors.gray.c900)]) for _ in range(40)]
+small =[Background(color = Colors.green, boxes = [(1, 1, 10, 8), (11, 1, 15, 8, Colors.gray.c900)]) for _ in range(40)]
+big =[Background(color = Colors.green, boxes = [(16/9, 1, 16-16/9, 8), (23, 1, 27, 8, Colors.gray.c900)]) for _ in range(40)]
 
-test: bool = False
-idea = list(reversed(test6)) + test7 + list(reversed(test7)) + test6
+test: bool=False
+idea=list(reversed(test6)) + test7 + list(reversed(test7)) + test6
 
 if test:
     # create_video("testHD", test0[:20], size=(1920*2, 1080*2), test=test)
     # create_image("test0Container", test0[0], size=(1920*2, 1080*2), test=test)
-    create_video("test6HD", idea, size=(1920*2, 1080*2), test=test)
+    create_video("test6HD", idea, size = (1920*2, 1080*2), test = test)
 else:
     # create_image("testLang", test4[0], size=(1920*2, 1080*2), test=test)
-    create_image("withConsole1", test8, size=(1920*2, 1080*2), test=test)
+    create_image("withConsole1", test8, size = (1920*2, 1080*2), test = test)
     # create_image("withConsole2", test9, size=(1920*2, 1080*2), test=test)
     # create_video("test6HD4", (big + list(reversed(test10)) + small + test10)*3, size=(1920*2, 1080*2), test=test)
     # create_video("test6HD4", idea, size=(1920, 1080), test=test, fps=30)
