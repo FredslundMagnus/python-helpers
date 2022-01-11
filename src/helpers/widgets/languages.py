@@ -82,13 +82,11 @@ class Python(Language):
                 line = []
                 continue
             for _ in word:
-                if word == "f":
-                    print("f", token)
                 if token in self.comments:
                     line.append(token)
                 elif token in self.strings:
                     line.append(token)
-                elif word in {'import'}:
+                elif word in {'import', 'in'}:
                     line.append(Tokens.Keyword)
                 elif token == Tokens.Name.Builtin:  # Figure aot builtin methods
                     print(word)
