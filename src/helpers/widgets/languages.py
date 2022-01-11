@@ -63,7 +63,7 @@ class Language:
         if token in self.logicals:                    #
             return self.color_logicals                #
         if token == Tokens.Name.Namespace:            # Modules
-            return self.color_symbols                 # Modules
+            return self.color_modules                 # Modules
         if token == Tokens.Name:                      # Variables
             return self.color_default                 # Variables
         if token == Tokens.Name.Class:                # Classes
