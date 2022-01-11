@@ -11,13 +11,16 @@ from pygments.token import Token as Tokens, _TokenType as Token
 class Language:
     extention: str
     lexer: Lexer
-    strings: set = {Tokens.Literal.String.Symbol, Tokens.Literal.String.Escape, Tokens.Literal.String.Double, Tokens.Literal.String.Backtick, Tokens.Literal.String.Char, Tokens.Literal.String.Doc,
-                    Tokens.Literal.String.Single, Tokens.Literal.String.Heredoc, Tokens.Literal.String.Other, Tokens.Literal.String.Delimiter, Tokens.Literal.String.Regex}
+    strings: set = {Tokens.Literal.String.Symbol, Tokens.Literal.String.Escape, Tokens.Literal.String.Double, Tokens.Literal.String.Backtick, Tokens.Literal.String.Char,
+                    Tokens.Literal.String.Doc, Tokens.Literal.String.Single, Tokens.Literal.String.Heredoc, Tokens.Literal.String.Other, Tokens.Literal.String.Delimiter, Tokens.Literal.String.Regex}
     comments: set = Tokens.Comment.subtypes
     numbers: set = Tokens.Literal.Number.subtypes
     symbols: set = {Tokens.Punctuation, Tokens.Operator, Tokens.Text}
     systemwords: set = {Tokens.Keyword, Tokens.Keyword.Namespace}
     logicals: set = {Tokens.Keyword.Constant, Tokens.Literal.String.Interpol, Tokens.Operator.Word, Tokens.Literal.String.Affix}
+    builtin_classes: set = {"bool", "bytearray", "bytes", "classmethod", "complex", "dict", "property", "range", "reversed",
+                            "enumerate", "filter", "float", "frozenset", "int", "memoryview", "map", "list", "object", "set",
+                            "slice", "staticmethod", "str", "super", "tuple", "type", "zip"}
     color_logicals: Color = Color(86, 156, 214)
     color_systemWords: Color = Color(197, 134, 192)
     color_classes: Color = Color(78, 201, 176)
@@ -89,8 +92,10 @@ class Python(Language):
                 elif word in {'import', 'in'}:
                     line.append(Tokens.Keyword)
                 elif token == Tokens.Name.Builtin:  # Figure aot builtin methods
-                    print(word)
-                    line.append(Tokens.Name.Builtin)
+                    if word in self.builtin_classes:
+                        line.append(Tokens.Name.Class)
+                    else:
+                        line.append(Tokens.Name.Builtin)
                 else:
                     line.append(token)
         output.append(line)
