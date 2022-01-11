@@ -91,7 +91,7 @@ class Python(Language):
                     line.append(token)
                 elif token in self.strings:
                     line.append(token)
-                elif token == Tokens.Name.Namespace or token in modules:
+                elif token == Tokens.Name.Namespace or word in modules:
                     modules.add(word)
                     line.append(Tokens.Name.Namespace)
                 elif word in {'import', 'in'}:
