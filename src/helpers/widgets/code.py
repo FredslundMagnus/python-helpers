@@ -5,6 +5,7 @@ from helpers.widgets.languages import Language, Languages
 from helpers.widgets.widget import *
 
 print(float("inf"))
+float.infinity = float("inf")
 print(float.infinity)
 
 
