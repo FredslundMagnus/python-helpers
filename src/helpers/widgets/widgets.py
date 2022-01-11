@@ -17,5 +17,6 @@ from helpers.widgets.scale import Scale
 from helpers.widgets.languages import Language, Languages
 from helpers.widgets.fileEditor import FileEditor
 from helpers.widgets.code import Code
+from helpers.widgets.console import Console
 
-widgets = [Size, Widget, Offset, Container, Padding, Edges, Align, Alignment, Center, Row, Column, Expanded, Spacer, SizedBox, Text, Scale, Language, Languages, FileEditor, Code]
+widgets = [Size, Widget, Offset, Container, Padding, Edges, Align, Alignment, Center, Row, Column, Expanded, Spacer, SizedBox, Text, Scale, Language, Languages, FileEditor, Code, Console]

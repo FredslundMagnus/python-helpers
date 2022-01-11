@@ -66,7 +66,7 @@ def create_image(name: str, file: Background, size: tuple[int, int] = (1920, 108
 # )
 children = [
     FileEditor(
-        filename="example_of_filename.py",
+        filename="example.py",
         child=Code.fromFile(
             "main.py",
             fontSize=float("inf"),
@@ -75,7 +75,17 @@ children = [
             notModules={"database"}
         ),
     ),
-    FileEditor(filename="Terminal"),
+    FileEditor(
+        filename="Terminal",
+        child=Column(
+            children=[
+                Text("C:\\Python> python example.py"),
+                Text("Hello World!"),
+                Text(""),
+                Text("C:\\Python>"),
+            ],
+        ),
+    ),
     FileEditor(filename="short_name.py"),
 ]
 
@@ -163,9 +173,9 @@ if test:
     create_video("test6HD", idea, size=(1920*2, 1080*2), test=test)
 else:
     # create_image("testLang", test4[0], size=(1920*2, 1080*2), test=test)
-    # create_image("withConsole1", test8, size=(1920*2, 1080*2), test=test)
+    create_image("withConsole1", test8, size=(1920*2, 1080*2), test=test)
     # create_image("withConsole2", test9, size=(1920*2, 1080*2), test=test)
-    create_video("test6HD4", (big + list(reversed(test10)) + small + test10)*3, size=(1920*2, 1080*2), test=test)
+    # create_video("test6HD4", (big + list(reversed(test10)) + small + test10)*3, size=(1920*2, 1080*2), test=test)
     # create_video("test6HD4", idea, size=(1920, 1080), test=test, fps=30)
     # create_video("test4k", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920*2, 1080*2))
     # create_image("test0Container", test0[0], size=(1920*2, 1080*2))
