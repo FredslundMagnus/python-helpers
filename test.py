@@ -15,8 +15,16 @@ if 1 in {2, 1}:
 True, False, not True and False or True, None, lambda a: a
 if 1 is None:
     class Name:
-        def test():
-            pass
+        pass
+
+
+def test():
+    pass
+
+
+Name()
+test()
+
 aiter(), anext(), ascii(), breakpoint(), callable(), exec(), help()
 eval(), format(), getattr(), globals(), hasattr(), hash(), hex(), id(), input(), isinstance(), __import__()
 abs(), all(), any(), bin(), chr(), compile(), delattr(), dir(), divmod(), issubclass(), iter(), vars(), sorted()
