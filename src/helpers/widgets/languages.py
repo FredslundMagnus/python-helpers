@@ -82,6 +82,8 @@ class Python(Language):
                 line = []
                 continue
             for _ in word:
+                if word == "f":
+                    print("f", token)
                 if token in self.comments:
                     line.append(token)
                 elif token in self.strings:
