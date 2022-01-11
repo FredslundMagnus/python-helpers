@@ -68,10 +68,10 @@ children = [
     FileEditor(
         filename="example_of_filename.py",
         child=Code.fromFile(
-            "test.py",
+            "main.py",
             fontSize=float("inf"),
-            functions={"arrange", "zeros", "pack"},
-            classes={"Tester", "VideoWriter", "uint8"}
+            functions={"dtu", "set", "get"},
+            classes={"Parameters", "Database", "Colors"}
         ),
     ),
     FileEditor(filename="another_great_but_long_name.py"),
