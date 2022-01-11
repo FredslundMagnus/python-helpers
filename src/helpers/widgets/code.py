@@ -14,9 +14,10 @@ class Code(Widget):
         self.language = language
         self.lines = self.code.splitlines()
         _size = self.font.pil(10000).getsize("m")
-        self.charWidth = fontSize/_size[1]*_size[0]
+        self.charWidth = None
         self.size = None
         if self.fontSize != float("inf"):
+            self.charWidth = fontSize/_size[1]*_size[0]
             self.size = Size(self.charWidth*max(len(line) for line in self.lines), fontSize*(len(self.lines) + (len(self.lines)-1)*(self.lineHeight-1.0)))
         self.colors: list[list[Color]] = self.language.colorize(self.code, functions, classes)
         super().__init__()
@@ -29,8 +30,10 @@ class Code(Widget):
 
     def draw(self, canvas: ImageDraw, offset: Offset, max_size: Size, ratio: float) -> None:
         for fontsize in range(1, 1000):
-            print(self.charWidth*max(len(line) for line in self.lines))
-            size = Size(self.charWidth*max(len(line) for line in self.lines), fontsize*(len(self.lines) + (len(self.lines)-1)*(self.lineHeight-1.0)))
+            _size = self.font.pil(10000).getsize("m")
+            charWidth = fontsize/_size[1]*_size[0]
+            print(charWidth*max(len(line) for line in self.lines))
+            size = Size(charWidth*max(len(line) for line in self.lines), fontsize*(len(self.lines) + (len(self.lines)-1)*(self.lineHeight-1.0)))
             print(size, max_size)
             if size.width > max_size.width or size.height > max_size.height:
                 break
