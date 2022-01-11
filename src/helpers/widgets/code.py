@@ -45,7 +45,7 @@ class Code(Widget):
                 size = Size(charWidth*max(len(line) for line in self.lines), fontsize*(len(self.lines) + (len(self.lines)-1)*(self.lineHeight-1.0)))
                 if size.width > max_size.width or size.height > max_size.height:
                     break
-            self.fontSize = fontsize - 1
+            self.fontSize = fontsize - 1/1000
             self.charWidth = self.fontSize/_size[1]*_size[0]
         font = self.font.pil(self.fontSize * ratio)
         for y, (line, colors) in enumerate(zip(self.lines, self.colors)):
