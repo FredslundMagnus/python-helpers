@@ -57,8 +57,6 @@ class Language:
 
         if token == Tokens.Name.Namespace:
             return self.color_symbols
-        if token == Tokens.Name.Function:
-            return Colors.red
 
         if token == Tokens.Name:
             return self.color_default
