@@ -36,9 +36,9 @@ class Code(Widget):
             size = Size(charWidth*max(len(line) for line in self.lines), fontsize*(len(self.lines) + (len(self.lines)-1)*(self.lineHeight-1.0)))
             if size.width > max_size.width or size.height > max_size.height:
                 break
-        fontsize -= 1
-        charWidth = fontsize/_size[1]*_size[0]
+        self.fontSize = fontsize - 1
+        self.charWidth = self.fontSize/_size[1]*_size[0]
         font = self.font.pil(fontsize * ratio)
         for y, (line, colors) in enumerate(zip(self.lines, self.colors)):
             for x, (char, color) in enumerate(zip(line, colors)):
-                canvas.text(((offset.dx + x*charWidth)*ratio, (offset.dy + y*self.fontSize*self.lineHeight)*ratio), char, color.color, font)
+                canvas.text(((offset.dx + x*self.charWidth)*ratio, (offset.dy + y*self.fontSize*self.lineHeight)*ratio), char, color.color, font)
