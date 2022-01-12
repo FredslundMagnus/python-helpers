@@ -14,7 +14,7 @@ class VideoFormat(Enum):
     avi = 0
 
 
-def create_video(name: str, files: list[Background], fps: int = 60, size: tuple[int, int] = (1920, 1080), test: bool = False, videoFormat: VideoFormat = VideoFormat.avi):
+def create_video(name: str, files: list[Background], fps: int = 60, size: tuple[int, int] = (1920, 1080), test: bool = False, videoFormat: VideoFormat = VideoFormat.mov):
     video = cv2.VideoWriter(f'Videos/{name}.{videoFormat.name.split(".")[-1]}', videoFormat.value, fps, size)
 
     for i, image in enumerate(files, start=1):
@@ -181,11 +181,11 @@ else:
     # create_image("testLang", test4[0], size=(1920*2, 1080*2), test=test)
     # create_image("withConsole1", test8, size=(1920*2, 1080*2), test=test)
     # create_image("withConsole2", test9, size=(1920*2, 1080*2), test=test)
-    create_image("redTextConsole", textConsoleSplit(Colors.red), size=(1920*2, 1080*2), test=test)
-    create_image("deepOrangeTextConsole", textConsoleSplit(Colors.deepOrange), size=(1920*2, 1080*2), test=test)
-    create_image("orangeTextConsole", textConsoleSplit(Colors.orange), size=(1920*2, 1080*2), test=test)
-    create_image("deepPurpleTextConsole", textConsoleSplit(Colors.deepPurple), size=(1920*2, 1080*2), test=test)
-    create_image("purpleTextConsole", textConsoleSplit(Colors.purple), size=(1920*2, 1080*2), test=test)
+    # create_image("redTextConsole", textConsoleSplit(Colors.red), size=(1920*2, 1080*2), test=test)
+    # create_image("deepOrangeTextConsole", textConsoleSplit(Colors.deepOrange), size=(1920*2, 1080*2), test=test)
+    # create_image("orangeTextConsole", textConsoleSplit(Colors.orange), size=(1920*2, 1080*2), test=test)
+    # create_image("deepPurpleTextConsole", textConsoleSplit(Colors.deepPurple), size=(1920*2, 1080*2), test=test)
+    create_image("brownTextConsole", textConsoleSplit(Colors.brown), size=(1920*2, 1080*2), test=test)
     create_video("textAndConsole4kNew", (big + list(reversed(test10)) + small + test10)*3, size=(1920*2, 1080*2), test=test)
     # create_video("test6HD4", idea, size=(1920, 1080), test=test, fps=30)
     # create_video("test4k", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920*2, 1080*2))
