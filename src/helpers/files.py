@@ -23,7 +23,7 @@ class GitIgnore:
         else:
             with open(GitIgnore.file, "r") as f:
                 for _line in f:
-                    print(_line, _line == line, line)
+                    print(_line, _line.strip() == line.strip(), line)
 
 
 def makeSureFolderExists(name: str, gitignore: bool = False) -> str:
