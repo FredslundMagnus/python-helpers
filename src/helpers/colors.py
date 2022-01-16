@@ -1,6 +1,11 @@
 from __future__ import annotations
 
 
+def _interpolate(color1: tuple[int, int, int], color2: tuple[int, int, int], x: float) -> Color:
+    # Should convert RGB to HSV
+    return tuple(int((v2 - v1)*x+v1) for v1, v2 in zip(color1, color2))
+
+
 class Transparent:
     def __init__(self, r: int, g: int, b: int, alpha: int) -> None:
         self.color: tuple[int, int, int, int] = (r, g, b, alpha)
@@ -16,8 +21,8 @@ class Color:
 
     @staticmethod
     def interpolate(color1: Color, color2: Color, x: float) -> Color:
-        # Should convert RGB to HSV
-        return Color(*(int((v2 - v1)*x+v1) for v1, v2 in zip(color1.color, color2.color)))
+        return Color(*_interpolate(color1.color, color2.color, x))
+        # return Color(*(int((v2 - v1)*x+v1) for v1, v2 in zip(color1.color, color2.color)))
 
 
 class MaterialColor(Color):
