@@ -1,6 +1,6 @@
 from __future__ import annotations
 from PIL import Image, ImageDraw, ImageFilter
-from helpers.colors import Colors, Color
+from helpers.colors import Colors, Color, _interpolate
 from helpers.widgets.widget import Widget
 from helpers.widgets.root import Root
 from helpers.curves import Curve, Curves
@@ -173,6 +173,11 @@ def calculate_color(x: float, y: float, z: float) -> tuple[float, float, float]:
     # return Color.interpolate(color, Colors.white,  cos_angle).color
 
 
+@njit
+def getColor(pixel_color: tuple[int, int, int], value: float) -> tuple[int, int, int]:
+    return _interpolate(_interpolate(pixel_color, (0, 0, 0), 0.9), pixel_color,  value).color
+
+
 def drawBackground(canvas: ImageDraw.ImageDraw, pixel_color: Color, size: tuple[int, int]):
     z = -2.0
     for y in range(size[1]):
@@ -180,7 +185,8 @@ def drawBackground(canvas: ImageDraw.ImageDraw, pixel_color: Color, size: tuple[
         for x in range(size[0]):
             _x = x / (size[1] - 1)
             cos_angle = calculate_color(_x, _y, z)
-            color = Color.interpolate(Color.interpolate(pixel_color, Colors.black, 0.9), pixel_color,  cos_angle*intencity).color
+            # color = Color.interpolate(Color.interpolate(pixel_color, Colors.black, 0.9), pixel_color,  cos_angle*intencity).color
+            color = getColor(pixel_color.color, cos_angle*intencity)
             canvas.point((x, y), (*color, 255))
 
 
