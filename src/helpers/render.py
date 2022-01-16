@@ -283,7 +283,7 @@ class VideoFormat(Enum):
 
 
 def render_video(name: str, files: list[Background], fps: int = 60, size: tuple[int, int] = (1920, 1080), test: bool = False, videoFormat: VideoFormat = VideoFormat.mov):
-    video = cv2.VideoWriter(f'Videos/{name}.{videoFormat.name.split(".")[-1]}', videoFormat.value, fps, size)
+    video = cv2.VideoWriter(f'{makeSureFolderExists("Videos", gitignore=True)}/{name}.{videoFormat.name.split(".")[-1]}', videoFormat.value, fps, size)
 
     for i, image in enumerate(files, start=1):
         print(f"{i} out of {len(files)}")
@@ -307,4 +307,4 @@ def render_image(name: str, file: Background, size: tuple[int, int] = (1920, 108
     background = Image.new(mode="RGBA", size=size, color=(*file.color.color, 255)) if test else combined
     for img in (root.draw(size=size, test=test) for root in file.children):
         background.paste(img, (0, 0), img)
-    background.save(f"Images/{name}.png")
+    background.save(f"{makeSureFolderExists('Images', gitignore=True)}/{name}.png")

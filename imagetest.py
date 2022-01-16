@@ -102,7 +102,7 @@ def big(color): return [Background(color=color, boxes=[(16/9, 1, 16-16/9, 8), (1
 
 
 test: bool = False
-size = (1920, 1080)
+size = (1920*2, 1080*2)
 idea = list(reversed(test6)) + test7 + list(reversed(test7)) + test6
 
 
@@ -110,7 +110,7 @@ def textConsoleSplit(color: Color) -> Background:
     return Background(color=color, boxes=[(1, 1, 10, 8), (11, 1, 15, 8, Colors.gray.c900)], children=children)
 
 
-render_video(f"textAndConsole4kTestRender{test}", (big(Colors.green) + list(reversed(test10(Colors.green))) + small(Colors.green) + test10(Colors.green))*3, size=(1920*2, 1080*2), test=test)
+# render_video(f"textAndConsole4kTestRender{test}", (big(Colors.green) + list(reversed(test10(Colors.green))) + small(Colors.green) + test10(Colors.green))*3, size=(1920*2, 1080*2), test=test)
 
 
 # render_image("testLang", test4[0], size=(1920*2, 1080*2), test=test)
@@ -123,12 +123,16 @@ render_video(f"textAndConsole4kTestRender{test}", (big(Colors.green) + list(reve
 # render_image("brownTextConsole", textConsoleSplit(Colors.brown), size=(1920*2, 1080*2), test=test)
 # render_video("textAndConsole4kNewGreenRender", (big(Colors.green) + list(reversed(test10(Colors.green))) + small(Colors.green) + test10(Colors.green))*3, size=(1920*2, 1080*2), test=test)
 
+def example(color: Color):
+    return (big(color) + list(reversed(test10(color))) + small(color) + test10(color))*3
+
+
 start = time()
-render_video("textAndConsole4kNewPinkRenderSmall", (big(Colors.pink) + list(reversed(test10(Colors.pink)))[:10]), size=(1920, 1080), test=test)
+render_video("PinkRenderSmall", example(Colors.pink), size=size, test=test)
 end = time()
 print(end - start)  # 101.64646553993225
 start = time()
-render_video("textAndConsole4kNewIndigoRenderSmall", (big(Colors.indigo) + list(reversed(test10(Colors.indigo)))[:10]), size=(1920, 1080), test=test)
+render_video("IndigoRenderSmall", example(Colors.indigo), size=size, test=test)
 end = time()
 print(end - start)  # 18.415156364440918
 
