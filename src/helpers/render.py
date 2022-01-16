@@ -174,9 +174,9 @@ def calculate_highlight(x: float, y: float, z: float) -> tuple[float, float, flo
 
 
 @njit
-def _interpolate(pixel_color: tuple[int, int, int], value: float) -> tuple[int, int, int]:
+def _interpolate(pixel_color: tuple[int, int, int], value: float) -> tuple[int, int, int, int]:
     temp = (0.1 + 0.9*value)
-    return (temp * pixel_color[0], temp * pixel_color[1], temp * pixel_color[2], 255)
+    return (int(temp * pixel_color[0]), int(temp * pixel_color[1]), int(temp * pixel_color[2]), 255)
     # return tuple(int((v2 - v1)*x+v1) for v1, v2 in zip(color1, color2))
 
 
