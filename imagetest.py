@@ -55,6 +55,8 @@ test5 = Background.transition(
     frames=40,
 )
 
+example1 = test1 + test2 + test3 + test4 + test5
+
 
 def ani6(animation: float) -> list[Widget]:
     start, end = 0.5, 1.0
@@ -102,7 +104,7 @@ def big(color): return [Background(color=color, boxes=[(16/9, 1, 16-16/9, 8), (1
 
 
 test: bool = False
-size = (1920*2, 1080*2)
+size = (3840//2, 2160//2)
 idea = list(reversed(test6)) + test7 + list(reversed(test7)) + test6
 
 
@@ -123,18 +125,26 @@ def textConsoleSplit(color: Color) -> Background:
 # render_image("brownTextConsole", textConsoleSplit(Colors.brown), size=(1920*2, 1080*2), test=test)
 # render_video("textAndConsole4kNewGreenRender", (big(Colors.green) + list(reversed(test10(Colors.green))) + small(Colors.green) + test10(Colors.green))*3, size=(1920*2, 1080*2), test=test)
 
+render_image("blueTextConsoleRender", textConsoleSplit(Colors.blue), size=size, test=test)
+
+
+start = time()
+render_video("321", example1, size=size, test=test)
+end = time()
+print(end - start)  # 18.415156364440918
+
+
 def example(color: Color):
     return (big(color) + list(reversed(test10(color))) + small(color) + test10(color))*3
 
-
-start = time()
-render_video("PinkRenderSmall", example(Colors.pink), size=size, test=test)
-end = time()
-print(end - start)  # 101.64646553993225
-start = time()
-render_video("IndigoRenderSmall", example(Colors.indigo), size=size, test=test)
-end = time()
-print(end - start)  # 18.415156364440918
+# start = time()
+# render_video("PinkRenderSmall", example(Colors.pink), size=size, test=test)
+# end = time()
+# print(end - start)  # 101.64646553993225
+# start = time()
+# render_video("IndigoRenderSmall", example(Colors.indigo), size=size, test=test)
+# end = time()
+# print(end - start)  # 18.415156364440918
 
 # render_video("test6HD4", idea, size=(1920, 1080), test=test, fps=30)
 # render_video("test4k", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920*2, 1080*2))

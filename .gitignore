@@ -1,9 +1,7 @@
 *pov
 *pyc
-
 .vscode/*
-
-
+Boxes/*
 Colors/*
 Videos/*
 __pycache__
