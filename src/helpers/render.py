@@ -4,6 +4,7 @@ from helpers.colors import Colors, Color
 from helpers.widgets.widget import Widget
 from helpers.widgets.root import Root
 from helpers.curves import Curve, Curves
+from helpers.files import makeSureFolderExists
 import numpy as np
 from numba import njit
 from time import time
@@ -53,15 +54,11 @@ class Background:
 
     def empty_name(self, size: tuple[int, int] = (1920, 1080)) -> str:
         width, height = size
-        if not exists("Colors"):
-            mkdir("Colors")
-        return join("Colors", f"color-{width}-{height}-{self.color_name}.png")
+        return join(makeSureFolderExists("Colors", gitignore=True), f"color-{width}-{height}-{self.color_name}.png")
 
     def rendered_boxes_name(self, size: tuple[int, int] = (1920, 1080)) -> str:
         width, height = size
-        if not exists("Boxes"):
-            mkdir("Boxes")
-        return join("Boxes", f"boxes-{width}-{height}-{self.boxes_name}.png")
+        return join(makeSureFolderExists("Boxes", gitignore=True), f"boxes-{width}-{height}-{self.boxes_name}.png")
 
     def render(self, size: tuple[int, int] = (1920, 1080)) -> None:
         empty_name = self.empty_name(size)
