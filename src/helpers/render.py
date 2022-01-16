@@ -175,6 +175,7 @@ def calculate_color(x: float, y: float, z: float) -> tuple[float, float, float]:
 
 @njit
 def getColor(pixel_color: tuple[int, int, int], value: float) -> tuple[int, int, int]:
+    return _interpolate((0, 0, 0), pixel_color, 0.1 + 0.9*value)
     return _interpolate(_interpolate(pixel_color, (0, 0, 0), 0.9), pixel_color,  value).color
 
 
@@ -186,7 +187,8 @@ def drawBackground(canvas: ImageDraw.ImageDraw, pixel_color: Color, size: tuple[
             _x = x / (size[1] - 1)
             cos_angle = calculate_color(_x, _y, z)
             # color = Color.interpolate(Color.interpolate(pixel_color, Colors.black, 0.9), pixel_color,  cos_angle*intencity).color
-            color = getColor(pixel_color.color, cos_angle*intencity)
+            # color = getColor(pixel_color.color, cos_angle*intencity)
+            color = Color.interpolate(Colors.black, pixel_color,  cos_angle*intencity*0.9+0.1).color
             canvas.point((x, y), (*color, 255))
 
 
