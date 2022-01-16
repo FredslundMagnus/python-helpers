@@ -103,54 +103,27 @@ def small(color): return [Background(color=color, boxes=[(1, 1, 10, 8), (11, 1, 
 def big(color): return [Background(color=color, boxes=[(16/9, 1, 16-16/9, 8), (17, 1, 21, 8, Colors.gray.c900)], children=children) for _ in range(40)]
 
 
-test: bool = False
-size = (3840//2, 2160//2)
-idea = list(reversed(test6)) + test7 + list(reversed(test7)) + test6
-
-
 def textConsoleSplit(color: Color) -> Background:
     return Background(color=color, boxes=[(1, 1, 10, 8), (11, 1, 15, 8, Colors.gray.c900)], children=children)
-
-
-# render_video(f"textAndConsole4kTestRender{test}", (big(Colors.green) + list(reversed(test10(Colors.green))) + small(Colors.green) + test10(Colors.green))*3, size=(1920*2, 1080*2), test=test)
-
-
-# render_image("testLang", test4[0], size=(1920*2, 1080*2), test=test)
-# render_image("withConsole1", test8, size=(1920*2, 1080*2), test=test)
-# render_image("withConsole2", test9, size=(1920*2, 1080*2), test=test)
-# render_image("redTextConsole", textConsoleSplit(Colors.red), size=(1920*2, 1080*2), test=test)
-# render_image("deepOrangeTextConsole", textConsoleSplit(Colors.deepOrange), size=(1920*2, 1080*2), test=test)
-# render_image("orangeTextConsole", textConsoleSplit(Colors.orange), size=(1920*2, 1080*2), test=test)
-# render_image("yellowTextConsoleRender", textConsoleSplit(Colors.yellow), size=(1920*2, 1080*2), test=test)
-# render_image("brownTextConsole", textConsoleSplit(Colors.brown), size=(1920*2, 1080*2), test=test)
-# render_video("textAndConsole4kNewGreenRender", (big(Colors.green) + list(reversed(test10(Colors.green))) + small(Colors.green) + test10(Colors.green))*3, size=(1920*2, 1080*2), test=test)
-
-render_image("blueTextConsoleRender", textConsoleSplit(Colors.blue), size=size, test=test)
-
-
-start = time()
-render_video("321", example1[:10], size=size, test=test)
-end = time()
-print(end - start)  # 86.44119358062744, 89.99770712852478, 88.75808334350586 , 52.393105030059814, 48.77566599845886
 
 
 def example(color: Color):
     return (big(color) + list(reversed(test10(color))) + small(color) + test10(color))*3
 
-# start = time()
-# render_video("PinkRenderSmall", example(Colors.pink), size=size, test=test)
-# end = time()
-# print(end - start)  # 101.64646553993225
-# start = time()
-# render_video("IndigoRenderSmall", example(Colors.indigo), size=size, test=test)
-# end = time()
-# print(end - start)  # 18.415156364440918
 
-# render_video("test6HD4", idea, size=(1920, 1080), test=test, fps=30)
-# render_video("test4k", (test0 + test1 + test2 + test3 + test4 + list(reversed(test3)) + test2 + list(reversed(test1))) * 3, size=(1920*2, 1080*2))
-# render_image("test0Container", test0[0], size=(1920*2, 1080*2))
-# render_image("test1Container", test2[0], size=(1920*2, 1080*2))
-# render_image("test2Container", test4[0], size=(1920*2, 1080*2))
-# render_image("test0ContainerSmall", test0[0], size=(1920, 1080))
-# render_image("test1ContainerSmall", test2[0], size=(1920, 1080))
-# render_image("test2ContainerSmall", test4[0], size=(1920, 1080))
+test: bool = False
+size = (3840, 2160)
+idea = list(reversed(test6)) + test7 + list(reversed(test7)) + test6
+
+
+render_image("green", textConsoleSplit(Colors.green), size=size, test=test)
+render_image("blue", textConsoleSplit(Colors.blue), size=size, test=test)
+render_image("brown", textConsoleSplit(Colors.brown), size=size, test=test)
+render_image("deepOrange", textConsoleSplit(Colors.deepOrange), size=size, test=test)
+render_image("red", textConsoleSplit(Colors.red), size=size, test=test)
+
+render_video("green", example(Colors.green), size=size, test=test)
+render_video("blue", example(Colors.blue), size=size, test=test)
+render_video("brown", example(Colors.brown), size=size, test=test)
+render_video("deepOrange", example(Colors.deepOrange), size=size, test=test)
+render_video("red", example(Colors.red), size=size, test=test)
