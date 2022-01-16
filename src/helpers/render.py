@@ -186,10 +186,10 @@ def drawBackground(canvas: ImageDraw.ImageDraw, pixel_color: Color, size: tuple[
         for x in range(size[0]):
             _x = x / (size[1] - 1)
             cos_angle = calculate_color(_x, _y, z)
-            # color = Color.interpolate(Color.interpolate(pixel_color, Colors.black, 0.9), pixel_color,  cos_angle*intencity).color
+            color = Color.interpolate(Color.interpolate(pixel_color, Colors.black, 0.9), pixel_color,  cos_angle*intencity).color
             # color = getColor(pixel_color.color, cos_angle*intencity)
             # color = Color.interpolate(Colors.black, pixel_color,  cos_angle*intencity*0.9+0.1).color
-            color = _interpolate((0, 0, 0), pixel_color, cos_angle*intencity)
+            # color = _interpolate(pixel_color, cos_angle*intencity)
             canvas.point((x, y), (*color, 255))
 
 
@@ -282,7 +282,8 @@ def drawBox(canvas: ImageDraw.ImageDraw, box: tuple[float, float, float, float, 
                 continue
             _x = x / (size[1] - 1)
             cos_angle = calculate_color(_x, _y, z)
-            color = Color.interpolate(Color.interpolate(pixel_color, Colors.black, 0.9), pixel_color,  cos_angle*intencity).color
+            # color = Color.interpolate(Color.interpolate(pixel_color, Colors.black, 0.9), pixel_color,  cos_angle*intencity).color
+            color = _interpolate(pixel_color, cos_angle*intencity)
             canvas.point((x, y), (*color, 255))
 
 
