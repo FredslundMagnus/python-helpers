@@ -187,9 +187,9 @@ def fixScale(v: int, size: tuple[int, int]) -> float:
 def drawBackground(canvas: ImageDraw.ImageDraw, pixel_color: Color, size: tuple[int, int]):
     z = -2.0
     for y in range(size[1]):
-        _y = fixScale(y)
+        _y = fixScale(y, size)
         for x in range(size[0]):
-            _x = fixScale(x)
+            _x = fixScale(x, size)
             cos_angle = calculate_highlight(_x, _y, z)
             # color = Color.interpolate(Color.interpolate(pixel_color, Colors.black, 0.9), pixel_color,  cos_angle*intencity).color
             # color = getColor(pixel_color.color, cos_angle*intencity)
@@ -202,11 +202,11 @@ def drawBox(canvas: ImageDraw.ImageDraw, box: tuple[float, float, float, float, 
     z = -1.9
     pixel_color = box[4]
     for y in range(size[1]):
-        _y = y / (size[1] - 1)
+        _y = fixScale(y, size)
         for x in range(size[0]):
             if not (factor * box[0] < x < factor * box[2] and factor * box[1] < y < factor * box[3]):
                 continue
-            _x = x / (size[1] - 1)
+            _x = fixScale(x, size)
             cos_angle = calculate_highlight(_x, _y, z)
             # color = Color.interpolate(Color.interpolate(pixel_color, Colors.black, 0.9), pixel_color,  cos_angle*intencity).color
             color = _interpolate(pixel_color.color, cos_angle*intencity)
