@@ -32,9 +32,10 @@ factor = None
 
 
 class Background:
-    def __init__(self, color: Color, boxes: list[tuple[float, float, float, float] | tuple[float, float, float, float, Color]] = [], box_color: Color = Colors.gray.c800, folder: str = "BackgroundsNew", children: list[Widget] = []) -> None:
+    def __init__(self, color: Color, boxes: list[tuple[float, float, float, float] | tuple[float, float, float, float, Color]] = [], box_color: Color = Colors.gray.c800, folder: str = "Background", save_together: bool = False, children: list[Widget] = []) -> None:
         self.folder = folder
         self.color = color
+        self.save_together = save_together
         self.color_name = str(self.color.color)[1: -1].replace(', ', '_')
         self.boxes: list[tuple[float, float, float, float, Color]] = [(tuple(list(b) + [box_color]) if len(b) == 4 else b) for b in boxes]
         self.children = [Root(*box[:4], child) for child, box in zip(children, boxes)]
@@ -91,16 +92,20 @@ class Background:
             im2 = Image.open(boxes_name)
 
         im.alpha_composite(im2, (0, 0))
-        im.save(self.name(size))
+        if self.save_together:
+            im.save(self.name(size))
         return im
 
     def load(self, size: tuple[int, int] = (1920, 1080)):
         global factor
         factor = size[0] / 16
-        name = self.name(size)
-        if not exists(name):
+        if self.save_together:
+            name = self.name(size)
+            if not exists(name):
+                return self.render(size=size)
+            return Image.open(name)
+        else:
             return self.render(size=size)
-        return Image.open(name)
 
     @staticmethod
     def transition(background1: Background, background2: Background, frames: int, curve: Curve = Curves.easeInOut, children: list[Widget] = []) -> list[Background]:
