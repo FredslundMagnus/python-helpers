@@ -37,7 +37,7 @@ class GitIgnore:
         with open(GitIgnore.file, "r") as f:
             file = f.read().splitlines()
         with open(GitIgnore.file, "w") as f:
-            for line in sorted(set(file)):
+            for line in (l.strip() for l in sorted(set(file)) if l.strip()):
                 f.write(f"{line}\n")
 
 
