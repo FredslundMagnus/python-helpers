@@ -16,7 +16,7 @@ class GitIgnore:
 
     @staticmethod
     def add(line: str) -> None:
-        line = line.replace("\n", "").strip()
+        line = line.strip()
         print(GitIgnore.exists())
         if not GitIgnore.exists():
             with open(GitIgnore.file, "w") as f:
