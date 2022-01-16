@@ -14,6 +14,7 @@ class GitIgnore:
         GitIgnore.add("*pyc")
         GitIgnore.add("__pycache__")
         GitIgnore.add(".vscode/*")
+        GitIgnore.fix()
 
     @staticmethod
     def add(line: str) -> None:
@@ -26,15 +27,18 @@ class GitIgnore:
                 for _line in f:
                     if _line.strip() == line:
                         return
-                print(f.read())
-                print(f.read())
-                shouldAddNewline = True if len(f.read()) == 0 else f.read()[-1] != '\n'
             with open(GitIgnore.file, "a") as f:
-                print(1, _line)
-                print(2, _line == '')
-                print(3, shouldAddNewline)
-                newline = '\n' if shouldAddNewline else ''
-                f.write(f"{newline}{line}")
+                f.write(f"\n{line}")
+
+    @staticmethod
+    def fix() -> None:
+        if not GitIgnore.exists():
+            return
+        with open(GitIgnore.file, "r") as f:
+            file = f.read().splitlines()
+        with open(GitIgnore.file, "w") as f:
+            for line in sorted(set(file)):
+                f.write(f"{line}")
 
 
 def makeSureFolderExists(name: str, gitignore: bool = False) -> str:
@@ -43,4 +47,5 @@ def makeSureFolderExists(name: str, gitignore: bool = False) -> str:
     print(gitignore)
     if gitignore:
         GitIgnore.add(name + '/*')
+        GitIgnore.fix()
     return name

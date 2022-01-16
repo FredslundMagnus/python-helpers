@@ -5,3 +5,5 @@ __pycache__
 backgrounds/*
 Videos/*
 Images/*
+
+.vscode/*
