@@ -131,8 +131,6 @@ def normalize(v):
     return v / np.sqrt(np.sum(v**2))
 
 
-@njit
-@lru_cache(maxsize=None)
 def calculate_color(x: float, y: float, z: float) -> tuple[float, float, float]:
     # Calculate a vector from the fragment location to the light source
     v_Vertex = np.array([x, y, z])
@@ -170,7 +168,9 @@ def calculate_color(x: float, y: float, z: float) -> tuple[float, float, float]:
     #   object_color = vec3(v_Color) * (1.0 - cos_angle);
     #   color = specular_color + object_color;
     return cos_angle
+
     # return Color.interpolate(color, Colors.white,  cos_angle).color
+calculate_color = njit(lru_cache(maxsize=None)(calculate_color))
 
 
 def drawBackground(canvas: ImageDraw.ImageDraw, pixel_color: Color, size: tuple[int, int]):
