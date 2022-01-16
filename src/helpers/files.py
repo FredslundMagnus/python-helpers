@@ -27,6 +27,8 @@ class GitIgnore:
                     if _line.strip() == line:
                         return
             with open(GitIgnore.file, "a") as f:
+                print(1, _line)
+                print(2, _line == '')
                 newline = '\n'
                 f.write(f"{'' if _line == '' else newline}{line}")
 
