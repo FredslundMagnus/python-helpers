@@ -20,7 +20,8 @@ class GitIgnore:
 
     @staticmethod
     def add(line: str) -> None:
-        GitIgnore.generate()
+        if not GitIgnore.exists():
+            GitIgnore.generate()
 
         with open(GitIgnore.file, "a") as f:
             f.write(f"\n{line}")
