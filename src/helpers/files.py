@@ -38,7 +38,7 @@ class GitIgnore:
             file = f.read().splitlines()
         with open(GitIgnore.file, "w") as f:
             for line in sorted(set(file)):
-                f.write(f"{line}")
+                f.write(f"{line}\n")
 
 
 def makeSureFolderExists(name: str, gitignore: bool = False) -> str:
