@@ -28,13 +28,13 @@ class GitIgnore:
                         return
                 print(f.read())
                 print(f.read())
-                shouldAddNewline = True if len(f.read()) == 0 else f.read()[-1] == '\n'
+                shouldAddNewline = True if len(f.read()) == 0 else f.read()[-1] != '\n'
             with open(GitIgnore.file, "a") as f:
                 print(1, _line)
                 print(2, _line == '')
                 print(3, shouldAddNewline)
-                newline = '\n'
-                f.write(f"{'' if _line == '' else newline}{line}")
+                newline = '\n' if shouldAddNewline else ''
+                f.write(f"{newline}{line}")
 
 
 def makeSureFolderExists(name: str, gitignore: bool = False) -> str:
