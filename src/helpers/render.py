@@ -170,7 +170,7 @@ def calculate_color(x: float, y: float, z: float) -> tuple[float, float, float]:
     return cos_angle
 
     # return Color.interpolate(color, Colors.white,  cos_angle).color
-calculate_color = njit(lru_cache(maxsize=None)(calculate_color))
+calculate_color = njit(lru_cache(maxsize=None)(calculate_color).__call__)
 
 
 def drawBackground(canvas: ImageDraw.ImageDraw, pixel_color: Color, size: tuple[int, int]):
