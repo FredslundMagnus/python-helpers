@@ -1,9 +1,4 @@
-*pyc
-__pycache__
-.vscode/*
 *pov
-backgrounds/*
-Videos/*
-Images/*
-
+*pyc
 .vscode/*
+__pycache__
