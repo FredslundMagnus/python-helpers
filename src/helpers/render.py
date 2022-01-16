@@ -131,8 +131,8 @@ def normalize(v):
     return v / np.sqrt(np.sum(v**2))
 
 
-@lru_cache(maxsize=None)
 @njit
+@lru_cache(maxsize=None)
 def calculate_color(x: float, y: float, z: float) -> tuple[float, float, float]:
     # Calculate a vector from the fragment location to the light source
     v_Vertex = np.array([x, y, z])
