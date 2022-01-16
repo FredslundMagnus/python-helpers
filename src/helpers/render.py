@@ -133,7 +133,7 @@ def normalize(v):
 
 @lru_cache(maxsize=None)
 @njit
-def calculate_color(x: float, y: float, z: float) -> tuple[float, float, float]:
+def calculate_highlight(x: float, y: float, z: float) -> tuple[float, float, float]:
     # Calculate a vector from the fragment location to the light source
     v_Vertex = np.array([x, y, z])
     v_Normal = np.array([0, 0, 1])
@@ -179,17 +179,37 @@ def _interpolate(pixel_color: tuple[int, int, int], value: float) -> tuple[int, 
     # return tuple(int((v2 - v1)*x+v1) for v1, v2 in zip(color1, color2))
 
 
+@njit
+def fixScale(v: int, size: tuple[int, int]) -> float:
+    return v / (size[1] - 1)
+
+
 def drawBackground(canvas: ImageDraw.ImageDraw, pixel_color: Color, size: tuple[int, int]):
     z = -2.0
     for y in range(size[1]):
-        _y = y / (size[1] - 1)
+        _y = fixScale(y)
         for x in range(size[0]):
-            _x = x / (size[1] - 1)
-            cos_angle = calculate_color(_x, _y, z)
-            color = Color.interpolate(Color.interpolate(pixel_color, Colors.black, 0.9), pixel_color,  cos_angle*intencity).color
+            _x = fixScale(x)
+            cos_angle = calculate_highlight(_x, _y, z)
+            # color = Color.interpolate(Color.interpolate(pixel_color, Colors.black, 0.9), pixel_color,  cos_angle*intencity).color
             # color = getColor(pixel_color.color, cos_angle*intencity)
             # color = Color.interpolate(Colors.black, pixel_color,  cos_angle*intencity*0.9+0.1).color
-            # color = _interpolate(pixel_color, cos_angle*intencity)
+            color = _interpolate(pixel_color.color, cos_angle*intencity)
+            canvas.point((x, y), (*color, 255))
+
+
+def drawBox(canvas: ImageDraw.ImageDraw, box: tuple[float, float, float, float, Color], size: tuple[int, int]) -> None:
+    z = -1.9
+    pixel_color = box[4]
+    for y in range(size[1]):
+        _y = y / (size[1] - 1)
+        for x in range(size[0]):
+            if not (factor * box[0] < x < factor * box[2] and factor * box[1] < y < factor * box[3]):
+                continue
+            _x = x / (size[1] - 1)
+            cos_angle = calculate_highlight(_x, _y, z)
+            # color = Color.interpolate(Color.interpolate(pixel_color, Colors.black, 0.9), pixel_color,  cos_angle*intencity).color
+            color = _interpolate(pixel_color.color, cos_angle*intencity)
             canvas.point((x, y), (*color, 255))
 
 
@@ -270,21 +290,6 @@ def drawBoxBorder(canvas: ImageDraw.ImageDraw, box: tuple[float, float, float, f
         edge(canvas, (box[2], box[3]), (box[0], box[3]), (*Color.interpolate(Colors.black, box[4], colorY(box[3])).color, 255))
     if (box[2] < 8):
         edge(canvas, (box[2], box[3]), (box[2], box[1]), (*Color.interpolate(Colors.black, box[4], colorX(box[2])).color, 255))
-
-
-def drawBox(canvas: ImageDraw.ImageDraw, box: tuple[float, float, float, float, Color], size: tuple[int, int]) -> None:
-    z = -1.9
-    pixel_color = box[4]
-    for y in range(size[1]):
-        _y = y / (size[1] - 1)
-        for x in range(size[0]):
-            if not (factor * box[0] < x < factor * box[2] and factor * box[1] < y < factor * box[3]):
-                continue
-            _x = x / (size[1] - 1)
-            cos_angle = calculate_color(_x, _y, z)
-            # color = Color.interpolate(Color.interpolate(pixel_color, Colors.black, 0.9), pixel_color,  cos_angle*intencity).color
-            color = _interpolate(pixel_color.color, cos_angle*intencity)
-            canvas.point((x, y), (*color, 255))
 
 
 class VideoFormat(Enum):
