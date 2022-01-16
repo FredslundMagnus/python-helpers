@@ -283,7 +283,7 @@ def drawBox(canvas: ImageDraw.ImageDraw, box: tuple[float, float, float, float, 
             _x = x / (size[1] - 1)
             cos_angle = calculate_color(_x, _y, z)
             # color = Color.interpolate(Color.interpolate(pixel_color, Colors.black, 0.9), pixel_color,  cos_angle*intencity).color
-            color = _interpolate(pixel_color, cos_angle*intencity)
+            color = _interpolate(pixel_color.color, cos_angle*intencity)
             canvas.point((x, y), (*color, 255))
 
 
