@@ -7,7 +7,10 @@ def makeSureFolderExists(name: str, gitignore: bool = False) -> str:
         mkdir(name)
     if not gitignore:
         return name
-    if not exists(".gitignore"):
-        with open(".gitignore", "w+") as f:
-            f.write(name+'/*')
+    with open(".gitignore", "a+") as f:
+        for line in f:
+            print(line, line == name+'/*', name+'/*')
+            # if line == name+'/*':
+            #     print()
+        # f.write(name+'/*')
     return name

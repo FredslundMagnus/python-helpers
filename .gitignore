@@ -1,0 +1,8 @@
+*pyc
+__pycache__
+backgrounds/*
+Videos/*
+Images/*
+Boxes/*
+Colors/*
+*pov
