@@ -175,7 +175,7 @@ def calculate_color(x: float, y: float, z: float) -> tuple[float, float, float]:
 
 @njit
 def _interpolate(pixel_color: tuple[int, int, int], value: float) -> tuple[int, int, int]:
-    return [p*(0.1 + 0.9*value) for p in pixel_color]
+    return [int(p*(0.1 + 0.9*value)) for p in pixel_color]
     # return tuple(int((v2 - v1)*x+v1) for v1, v2 in zip(color1, color2))
 
 
