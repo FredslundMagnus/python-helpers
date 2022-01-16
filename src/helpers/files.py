@@ -16,6 +16,7 @@ class GitIgnore:
 
     @staticmethod
     def add(line: str) -> None:
+        line = line.replace("\n", "").strip()
         print(GitIgnore.exists())
         if not GitIgnore.exists():
             with open(GitIgnore.file, "w") as f:
@@ -23,7 +24,7 @@ class GitIgnore:
         else:
             with open(GitIgnore.file, "r") as f:
                 for _line in f:
-                    print(_line, _line.strip() == line.strip(), line)
+                    print(_line.strip(), _line.replace("\n", "").strip() == line, line)
 
 
 def makeSureFolderExists(name: str, gitignore: bool = False) -> str:
