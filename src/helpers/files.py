@@ -20,14 +20,14 @@ class GitIgnore:
         print(GitIgnore.exists())
         if not GitIgnore.exists():
             with open(GitIgnore.file, "w") as f:
-                f.write(f"{line}\n")
+                f.write(f"{line}")
         else:
             with open(GitIgnore.file, "r") as f:
                 for _line in f:
                     if _line.strip() == line:
                         return
             with open(GitIgnore.file, "a") as f:
-                f.write(f"{line}\n")
+                f.write(f"\n{line}")
 
 
 def makeSureFolderExists(name: str, gitignore: bool = False) -> str:
