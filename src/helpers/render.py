@@ -50,7 +50,7 @@ class Background:
 
     def name(self, size: tuple[int, int] = (1920, 1080)) -> str:
         width, height = size
-        return join(self.folder, f"full-{self.color_name}-{width}-{height}-{self.boxes_name}.png")
+        return join(makeSureFolderExists(self.folder, gitignore=True), f"full-{self.color_name}-{width}-{height}-{self.boxes_name}.png")
 
     def empty_name(self, size: tuple[int, int] = (1920, 1080)) -> str:
         width, height = size
