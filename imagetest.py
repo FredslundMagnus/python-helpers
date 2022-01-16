@@ -5,6 +5,10 @@ from src.helpers.widgets.widgets import *
 from time import time
 
 
+def flip(l: list[Background]) -> list[Background]:
+    return list(reversed(l))
+
+
 children = [
     FileEditor(
         filename="example.py",
@@ -55,7 +59,7 @@ test5 = Background.transition(
     frames=40,
 )
 
-example1 = test1 + test2 + test3 + test4 + test5
+example1 = test1 + test2 + test3 + test4
 
 
 def ani6(animation: float) -> list[Widget]:
@@ -64,31 +68,42 @@ def ani6(animation: float) -> list[Widget]:
     return [Scale(scale=scale, child=child) for child in children]
 
 
-def box(center_x: float = 8.0, center_y: float = 4.5, ratio: float = 16/9, height: float | None = None, width: float | None = None) -> tuple(float, float, float, float):
+def box(center_x: float = 8.0, center_y: float = 4.5, ratio: float = 16/9, height: float | None = None, width: float | None = None, color: Color | None = None) -> tuple[float, float, float, float] | tuple[float, float, float, float, Color]:
     if height is None:
         height = width/ratio
     if width is None:
         width = height*ratio
     h_height, h_width = height/2, width/2
-    return (center_x-h_width, center_y-h_height, center_x+h_width, center_y+h_height)
+    if color is None:
+        return (center_x-h_width, center_y-h_height, center_x+h_width, center_y+h_height)
+    return (center_x-h_width, center_y-h_height, center_x+h_width, center_y+h_height, color)
 
 
-test6 = Background.transition(
-    Background(color=Colors.blue, boxes=[box(height=3.5, center_x=8.0-4.0+16/9/4), box(height=3.5, center_x=8.0+4.0-16/9/4)]),
-    Background(color=Colors.blue, boxes=[box(height=7.0), box(height=7.0, center_x=8.0+16.0)]),
-    frames=40,
-    children=ani6,
-)
+def scaleAni(color: Color) -> list[Background]:
+    tmp1 = Background.transition(
+        Background(color=color, boxes=[box(height=3.5, center_x=8.0-4.0+16/9/4), box(height=3.5, center_x=8.0+4.0-16/9/4, color=Colors.gray.c900)]),
+        Background(color=color, boxes=[box(height=7.0), box(height=7.0, center_x=8.0+16.0, color=Colors.gray.c900)]),
+        frames=40,
+        children=ani6,
+    )
 
-test7 = Background.transition(
-    Background(color=Colors.blue, boxes=[box(height=3.5, center_x=8.0-4.0+16/9/4), box(height=3.5, center_x=8.0+4.0-16/9/4)]),
-    Background(color=Colors.blue, boxes=[box(height=7.0, center_x=8.0-16.0), box(height=7.0)]),
-    frames=40,
-    children=ani6,
-)
+    tmp2 = Background.transition(
+        Background(color=color, boxes=[box(height=3.5, center_x=8.0-4.0+16/9/4), box(height=3.5, center_x=8.0+4.0-16/9/4, color=Colors.gray.c900)]),
+        Background(color=color, boxes=[box(height=7.0, center_x=8.0-16.0), box(height=7.0, color=Colors.gray.c900)]),
+        frames=40,
+        children=ani6,
+    )
 
-test8 = Background(color=Colors.green, boxes=[(1, 1, 10, 8), (11, 1, 15, 8, Colors.gray.c900)], children=children)
-test9 = Background(color=Colors.green, boxes=[(1, 1, 10, 8), (11, 1, 15, 8, Colors.black)], children=children)
+    tmp5 = [Background(
+        color=color,
+        boxes=[box(height=3.5, center_x=8.0-4.0+16/9/4), box(height=3.5, center_x=8.0+4.0-16/9/4, color=Colors.gray.c900)],
+        children=[Scale(scale=0.5, child=child) for child in children]
+    ) for _ in range(40)]
+
+    tmp3 = [Background(color=color, boxes=[box(height=7.0)], children=children[0:1]) for _ in range(40)]
+    tmp4 = [Background(color=color, boxes=[box(height=7.0, color=Colors.gray.c900)], children=children[1:2]) for _ in range(40)]
+
+    return (tmp3 + flip(tmp1) + tmp5 + tmp2 + tmp4 + flip(tmp2) + tmp5 + tmp1) * 2
 
 
 def test10(color): return Background.transition(
@@ -113,17 +128,21 @@ def example(color: Color):
 
 test: bool = False
 size = (3840, 2160)
-idea = list(reversed(test6)) + test7 + list(reversed(test7)) + test6
+colors = [
+    ("green", Colors.green),
+    ("blue", Colors.blue),
+    ("brown", Colors.brown),
+    ("deepOrange", Colors.deepOrange),
+    ("red", Colors.red),
+    ("indigo", Colors.indigo),
+    ("pink", Colors.pink),
+]
 
+# for name, color in colors:
+#     render_image(name, textConsoleSplit(color), size=size, test=test)
 
-render_image("green", textConsoleSplit(Colors.green), size=size, test=test)
-render_image("blue", textConsoleSplit(Colors.blue), size=size, test=test)
-render_image("brown", textConsoleSplit(Colors.brown), size=size, test=test)
-render_image("deepOrange", textConsoleSplit(Colors.deepOrange), size=size, test=test)
-render_image("red", textConsoleSplit(Colors.red), size=size, test=test)
+# for name, color in colors:
+#     render_video(name, example(color), size=size, test=test)
 
-render_video("green", example(Colors.green), size=size, test=test)
-render_video("blue", example(Colors.blue), size=size, test=test)
-render_video("brown", example(Colors.brown), size=size, test=test)
-render_video("deepOrange", example(Colors.deepOrange), size=size, test=test)
-render_video("red", example(Colors.red), size=size, test=test)
+for name, color in colors:
+    render_video(name + "Scale", scaleAni(color), size=size, test=test)
