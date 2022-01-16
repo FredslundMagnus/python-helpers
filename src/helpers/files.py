@@ -11,24 +11,21 @@ class GitIgnore:
 
     @staticmethod
     def generate() -> None:
+        if not GitIgnore.exists():
+            with open(GitIgnore.file, "w"):
+                pass
         GitIgnore.add("*pyc")
         GitIgnore.add("__pycache__")
         GitIgnore.add(".vscode/*")
-        GitIgnore.fix()
 
     @staticmethod
     def add(line: str) -> None:
-        line = line.strip()
-        if not GitIgnore.exists():
-            with open(GitIgnore.file, "w") as f:
-                f.write(f"{line}")
-        else:
-            with open(GitIgnore.file, "r") as f:
-                for _line in f:
-                    if _line.strip() == line:
-                        return
-            with open(GitIgnore.file, "a") as f:
-                f.write(f"\n{line}")
+        GitIgnore.generate()
+
+        with open(GitIgnore.file, "a") as f:
+            f.write(f"\n{line}")
+
+        GitIgnore.fix()
 
     @staticmethod
     def fix() -> None:
@@ -44,8 +41,6 @@ class GitIgnore:
 def makeSureFolderExists(name: str, gitignore: bool = False) -> str:
     if not exists(name):
         mkdir(name)
-    print(gitignore)
     if gitignore:
         GitIgnore.add(name + '/*')
-        GitIgnore.fix()
     return name
