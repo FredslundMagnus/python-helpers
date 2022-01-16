@@ -1,6 +1,6 @@
 from __future__ import annotations
 from PIL import Image, ImageDraw, ImageFilter
-from helpers.colors import Colors, Color, _interpolate
+from helpers.colors import Colors, Color
 from helpers.widgets.widget import Widget
 from helpers.widgets.root import Root
 from helpers.curves import Curve, Curves
@@ -174,9 +174,9 @@ def calculate_color(x: float, y: float, z: float) -> tuple[float, float, float]:
 
 
 @njit
-def getColor(pixel_color: tuple[int, int, int], value: float) -> tuple[int, int, int]:
-    return _interpolate((0, 0, 0), pixel_color, 0.1 + 0.9*value)
-    return _interpolate(_interpolate(pixel_color, (0, 0, 0), 0.9), pixel_color,  value).color
+def _interpolate(pixel_color: tuple[int, int, int], value: float) -> tuple[int, int, int]:
+    return [p*(0.1 + 0.9*value) for p in pixel_color]
+    # return tuple(int((v2 - v1)*x+v1) for v1, v2 in zip(color1, color2))
 
 
 def drawBackground(canvas: ImageDraw.ImageDraw, pixel_color: Color, size: tuple[int, int]):
@@ -189,7 +189,7 @@ def drawBackground(canvas: ImageDraw.ImageDraw, pixel_color: Color, size: tuple[
             # color = Color.interpolate(Color.interpolate(pixel_color, Colors.black, 0.9), pixel_color,  cos_angle*intencity).color
             # color = getColor(pixel_color.color, cos_angle*intencity)
             # color = Color.interpolate(Colors.black, pixel_color,  cos_angle*intencity*0.9+0.1).color
-            color = _interpolate((0, 0, 0), pixel_color, cos_angle*intencity*0.9+0.1)
+            color = _interpolate((0, 0, 0), pixel_color, cos_angle*intencity)
             canvas.point((x, y), (*color, 255))
 
 
