@@ -5,7 +5,6 @@ from os.path import exists
 class GitIgnore:
     file: str = ".gitignore"
 
-    @property
     @staticmethod
     def exists() -> bool:
         return exists(GitIgnore.file)
@@ -16,11 +15,15 @@ class GitIgnore:
         GitIgnore.add("__pycache__\n")
 
     @staticmethod
-    def add(line) -> None:
-        print(GitIgnore.exists)
-        if not GitIgnore.exists:
-            with open(GitIgnore.file, "w+") as f:
+    def add(line: str) -> None:
+        print(GitIgnore.exists())
+        if not GitIgnore.exists():
+            with open(GitIgnore.file, "w") as f:
                 f.write(f"{line}\n")
+        else:
+            with open(GitIgnore.file, "r") as f:
+                for _line in f:
+                    print(_line, _line == line, line)
 
 
 def makeSureFolderExists(name: str, gitignore: bool = False) -> str:
