@@ -17,16 +17,16 @@ class GitIgnore:
 
     @staticmethod
     def add(line) -> None:
+        print(GitIgnore.exists)
         if not GitIgnore.exists:
-            with open(GitIgnore.file, "w") as f:
+            with open(GitIgnore.file, "w+") as f:
                 f.write(f"{line}\n")
-
-
 
 
 def makeSureFolderExists(name: str, gitignore: bool = False) -> str:
     if not exists(name):
         mkdir(name)
+    print(gitignore)
     if gitignore:
         GitIgnore.add(name + '/*')
     return name
