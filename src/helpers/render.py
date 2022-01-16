@@ -13,6 +13,7 @@ from PIL import Image
 import numpy as np
 from enum import Enum
 import cv2
+from os import mkdir
 
 name = "your_file.png"
 intencity = 0.9
@@ -52,12 +53,14 @@ class Background:
 
     def empty_name(self, size: tuple[int, int] = (1920, 1080)) -> str:
         width, height = size
-        print(exists("Empty"))
-        return join("Empty", f"background-{self.color_name}-{width}-{height}.png")
+        if not exists("Colors"):
+            mkdir("Colors")
+        return join("Colors", f"color-{width}-{height}-{self.color_name}.png")
 
     def rendered_boxes_name(self, size: tuple[int, int] = (1920, 1080)) -> str:
         width, height = size
-        print(exists("Boxes"))
+        if not exists("Boxes"):
+            mkdir("Boxes")
         return join("Boxes", f"boxes-{width}-{height}-{self.boxes_name}.png")
 
     def render(self, size: tuple[int, int] = (1920, 1080)) -> None:
