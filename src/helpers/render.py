@@ -187,7 +187,7 @@ def fixScale(v: int, size: tuple[int, int]) -> float:
 
 @njit
 def get_color(pixel: tuple[int, int, int], x: int, size: tuple[int, int], _y: float, z: float) -> tuple[int, int, int, int]:
-    _interpolate(pixel, calculate_highlight(fixScale(x, size), _y, z)*intencity)
+    return _interpolate(pixel, calculate_highlight(fixScale(x, size), _y, z)*intencity)
 
 
 def drawBackground(canvas: ImageDraw.ImageDraw, pixel_color: Color, size: tuple[int, int]):
