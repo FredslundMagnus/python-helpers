@@ -187,31 +187,22 @@ def fixScale(v: int, size: tuple[int, int]) -> float:
 
 def drawBackground(canvas: ImageDraw.ImageDraw, pixel_color: Color, size: tuple[int, int]):
     z = -2.0
+    pixel = pixel_color.color
     for y in range(size[1]):
         _y = fixScale(y, size)
         for x in range(size[0]):
-            _x = fixScale(x, size)
-            cos_angle = calculate_highlight(_x, _y, z)
-            # color = Color.interpolate(Color.interpolate(pixel_color, Colors.black, 0.9), pixel_color,  cos_angle*intencity).color
-            # color = getColor(pixel_color.color, cos_angle*intencity)
-            # color = Color.interpolate(Colors.black, pixel_color,  cos_angle*intencity*0.9+0.1).color
-            color = _interpolate(pixel_color.color, cos_angle*intencity)
-            canvas.point((x, y), color)
+            canvas.point((x, y), _interpolate(pixel, calculate_highlight(fixScale(x, size), _y, z)*intencity))
 
 
 def drawBox(canvas: ImageDraw.ImageDraw, box: tuple[float, float, float, float, Color], size: tuple[int, int]) -> None:
     z = -1.9
-    pixel_color = box[4]
+    pixel = box[4].color
     for y in range(size[1]):
         _y = fixScale(y, size)
         for x in range(size[0]):
             if not (factor * box[0] < x < factor * box[2] and factor * box[1] < y < factor * box[3]):
                 continue
-            _x = fixScale(x, size)
-            cos_angle = calculate_highlight(_x, _y, z)
-            # color = Color.interpolate(Color.interpolate(pixel_color, Colors.black, 0.9), pixel_color,  cos_angle*intencity).color
-            color = _interpolate(pixel_color.color, cos_angle*intencity)
-            canvas.point((x, y), color)
+            canvas.point((x, y), _interpolate(pixel, calculate_highlight(fixScale(x, size), _y, z)*intencity))
 
 
 @njit

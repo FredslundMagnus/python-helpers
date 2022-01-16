@@ -131,7 +131,7 @@ render_image("blueTextConsoleRender", textConsoleSplit(Colors.blue), size=size, 
 start = time()
 render_video("321", example1[:10], size=size, test=test)
 end = time()
-print(end - start)  # 86.44119358062744, 89.99770712852478, 88.75808334350586 , 52.393105030059814
+print(end - start)  # 86.44119358062744, 89.99770712852478, 88.75808334350586 , 52.393105030059814, 48.77566599845886
 
 
 def example(color: Color):
