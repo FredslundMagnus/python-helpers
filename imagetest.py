@@ -144,5 +144,13 @@ colors = [
 # for name, color in colors:
 #     render_video(name, example(color), size=size, test=test)
 
+# for name, color in colors:
+#     render_video(name + "Scale", scaleAni(color), size=size, test=test)
+
+
+def textPresentation(color: Color) -> Background:
+    return Background(color=color, boxes=[(0.5, 0.5, 15.5, 8.5, Colors.gray.c100)])
+
+
 for name, color in colors:
-    render_video(name + "Scale", scaleAni(color), size=size, test=test)
+    render_image("presentaion/" + name, textPresentation(color), size=size, test=test)
