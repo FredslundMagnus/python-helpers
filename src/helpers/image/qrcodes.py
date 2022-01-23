@@ -47,8 +47,6 @@ class QRCode:
         # save the QR code generated
         QRimg.save(self.output_name)
 
-        print('QR code generated!')
-
 
 if __name__ == "__main__":
     code = QRCode("P9jkUcIwlGVEp9nygG64", logo_path="Logo.png")
