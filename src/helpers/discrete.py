@@ -1,10 +1,29 @@
+from __future__ import annotations
 from numpy import array as _array, r_, nonzero, ones
 import numpy as np
 from functools import lru_cache as cache  # Python 3.9
 from helpers.utils import timer
+from numba import njit as jit
+
+REMEMBER_PRIMES_UP_TO = 10000000
 
 
-def gcd(a: int, b: int, do_print: bool = False, return_s_t: bool = False) -> int:
+@jit
+def gcd_fast(a: int, b: int) -> int:
+    matrix = [
+        _array([a, 1, 0]),
+        _array([b, 0, 1]),
+    ]
+    i: int = 0
+    while a % b:
+        matrix.append(matrix[i]-(a//b)*matrix[i+1])
+        i += 1
+        a, b = matrix[i][0], matrix[i+1][0]
+    return b
+
+
+@jit
+def gcd_fast_with_s_t(a: int, b: int) -> int:
     matrix = [
         _array([a, 1, 0]),
         _array([b, 0, 1]),
@@ -15,25 +34,57 @@ def gcd(a: int, b: int, do_print: bool = False, return_s_t: bool = False) -> int
         i += 1
         a, b = matrix[i][0], matrix[i+1][0]
     matrix.append(matrix[i]-(a//b)*matrix[i+1])
-    if do_print:
-        for line in str(_array(matrix)).splitlines()[:-1]:
-            print(line[1:])
+    return b, matrix[i+1][1], matrix[i+1][2]
+
+
+def gcd_with_print(a: int, b: int, return_s_t: bool = False) -> int:
+    matrix = [
+        _array([a, 1, 0]),
+        _array([b, 0, 1]),
+    ]
+    i: int = 0
+    while a % b:
+        matrix.append(matrix[i]-(a//b)*matrix[i+1])
+        i += 1
+        a, b = matrix[i][0], matrix[i+1][0]
+    matrix.append(matrix[i]-(a//b)*matrix[i+1])
+    for line in str(_array(matrix)).splitlines()[:-1]:
+        print(line[1:])
     if return_s_t:
         return b, matrix[i+1][1], matrix[i+1][2]
     return b
 
 
+def gcd(a: int, b: int, return_s_t: bool = False, do_print: bool = False):
+    if do_print:
+        return gcd_with_print(a, b, return_s_t)
+    if return_s_t:
+        return gcd_fast_with_s_t(a, b)
+    return gcd_fast(a, b)
+
+
+@jit
 def lcm(a: int, b: int) -> int:
-    return a//gcd(a, b)*b
+    return a//gcd_fast(a, b)*b
 
 
+@jit
 def totient(n: int) -> int:
-    return sum(gcd(n, i) == 1 for i in range(1, n+1))
+    return sum([gcd_fast(n, i) == 1 for i in range(1, n+1)])
 
 
-# @cache
-def primes_ip_to(n):
-    """ Input n>=6, Returns a array of primes, 2 <= p < n """
+@cache
+def primes_up_to(n):
+    if n < 6:
+        if n < 2:
+            return []
+        elif n == 2:
+            return [2]
+        elif n < 5:
+            return [2, 3]
+        else:
+            return [2, 3, 5]
+    n += 1
     sieve = ones(n//3 + (n % 6 == 2), dtype=np.bool)
     sieve[0] = False
     for i in range(int(n**0.5)//3+1):
@@ -42,6 +93,20 @@ def primes_ip_to(n):
             sieve[((k*k)//3)::2*k] = False
             sieve[(k*k+4*k-2*k*(i & 1))//3::2*k] = False
     return r_[2, 3, ((3*nonzero(sieve)[0]+1) | 1)]
+
+
+@cache
+def primes_up_to_as_set(n: int) -> set[int]:
+    return set(primes_up_to(n))
+
+
+_primes = primes_up_to_as_set(REMEMBER_PRIMES_UP_TO)
+
+
+def is_prime(n: int) -> bool:
+    if n <= REMEMBER_PRIMES_UP_TO:
+        return n in _primes
+    raise NotImplementedError("This have not been implemented yet.")
 
 
 if __name__ == "__main__":
@@ -55,8 +120,23 @@ if __name__ == "__main__":
     assert totient(301) == 252
     assert totient(1) == 1
     assert totient(0) == 0
-    print(primes_ip_to(11))
+    # print(primes_up_to(11))
 
-    with timer():
-        for i in range(100):
-            totient(i)
+    # with timer():
+    #     for i in range(1000, 1500):
+    #         totient(i)
+
+    # with timer():
+    #     for i in range(1000, 1500):
+    #         totient(i)
+
+    # with timer():
+    #     len(primes_up_to(200000000))
+
+    # with timer():
+    #     print(len(primes_up_to(200000000)))
+    # for i in range(14):
+    #     print(i, primes_up_to(i))
+    # with timer():
+    #     for i in range(REMEMBER_PRIMES_UP_TO):
+    #         isPrime(i)
