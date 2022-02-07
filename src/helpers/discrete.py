@@ -5,7 +5,7 @@ from functools import lru_cache as cache  # Python 3.9
 from helpers.utils import timer
 from numba import njit as jit
 
-REMEMBER_PRIMES_UP_TO = 10000000
+REMEMBER_PRIMES_UP_TO = 1000000
 
 
 @jit
