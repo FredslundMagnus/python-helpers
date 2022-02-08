@@ -1,10 +1,11 @@
 from __future__ import annotations
-from math import sqrt
+from math import prod, sqrt
 from numpy import array as _array, r_, nonzero, ones
 import numpy as np
 from functools import lru_cache as cache  # Python 3.9
 from helpers.utils import timer
 from numba import njit as jit
+from collections import Counter
 
 REMEMBER_PRIMES_UP_TO = 1000000
 
@@ -70,7 +71,10 @@ def lcm(a: int, b: int) -> int:
 
 
 def totient(n: int) -> int:
-    return sum([gcd_fast(n, i) == 1 for i in range(1, n+1)])
+    if n < 2:
+        return n
+    return prod([pow(p, e)-pow(p, e-1) for p, e in Counter(prime_factorize(n)).items()])
+    # return sum([gcd_fast(n, i) == 1 for i in range(1, n+1)]) # old
 
 
 @cache
@@ -103,7 +107,6 @@ def primes_up_to_as_set(n: int) -> set[int]:
 _primes = primes_up_to_as_set(REMEMBER_PRIMES_UP_TO)
 
 
-@jit
 def is_prime(n: int) -> bool:
     if n <= REMEMBER_PRIMES_UP_TO:
         return n in _primes
@@ -118,6 +121,8 @@ def inverse(n: int, mod: int) -> int:
 
 
 def prime_factorize(n: int) -> list[int]:
+    if n < REMEMBER_PRIMES_UP_TO and is_prime(n):
+        return [n]
     factors = []
     primes = primes_up_to(min(int(sqrt(n))+3, 1000000))
     i = 0
@@ -126,6 +131,8 @@ def prime_factorize(n: int) -> list[int]:
             n = n // primes[i]
             factors.append(primes[i])
         i += 1
+    if n != 1:
+        factors.append(n)
     return factors
 
 
@@ -155,6 +162,10 @@ if __name__ == "__main__":
     assert prime_factorize(8) == [2, 2, 2]
     assert prime_factorize(9) == [3, 3]
     assert prime_factorize(10) == [2, 5]
+    assert prime_factorize(11) == [11]
+    assert prime_factorize(12) == [2, 2, 3]
+    assert prime_factorize(13) == [13]
+    assert prime_factorize(34) == [2, 17]
     assert crt_n_ai(11, [5, 7]) == [1, 4]
     # print(primes_up_to(11))
 
