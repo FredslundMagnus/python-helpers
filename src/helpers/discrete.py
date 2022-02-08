@@ -124,12 +124,7 @@ def prime_factorize(n: int) -> list[int]:
     while n > 1 and i < len(primes):
         while n % primes[i] == 0:
             n = n // primes[i]
-            if len(factors) == i:
-                factors.append(1)
-            else:
-                factors[i] += 1
-        if len(factors) == i:
-            factors.append(0)
+            factors.append(primes[i])
         i += 1
     return factors
 
@@ -155,9 +150,9 @@ if __name__ == "__main__":
     assert totient(0) == 0
     assert inverse(3, 7) == 5
     assert inverse(4, 9) == 7
-    assert prime_factorize(8) == [3]
-    assert prime_factorize(9) == [0, 2]
-    assert prime_factorize(10) == [1, 0, 1]
+    assert prime_factorize(8) == [2, 2, 2]
+    assert prime_factorize(9) == [3, 3]
+    assert prime_factorize(10) == [2, 5]
     assert crt_n_ai(11, [5, 7]) == [1, 4]
     # print(primes_up_to(11))
 
