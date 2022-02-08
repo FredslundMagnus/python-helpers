@@ -69,7 +69,6 @@ def lcm(a: int, b: int) -> int:
     return a//gcd_fast(a, b)*b
 
 
-@jit
 def totient(n: int) -> int:
     return sum([gcd_fast(n, i) == 1 for i in range(1, n+1)])
 
@@ -104,6 +103,7 @@ def primes_up_to_as_set(n: int) -> set[int]:
 _primes = primes_up_to_as_set(REMEMBER_PRIMES_UP_TO)
 
 
+@jit
 def is_prime(n: int) -> bool:
     if n <= REMEMBER_PRIMES_UP_TO:
         return n in _primes
@@ -150,6 +150,8 @@ if __name__ == "__main__":
     assert totient(0) == 0
     assert inverse(3, 7) == 5
     assert inverse(4, 9) == 7
+    assert is_prime(4) == False
+    assert is_prime(5) == True
     assert prime_factorize(8) == [2, 2, 2]
     assert prime_factorize(9) == [3, 3]
     assert prime_factorize(10) == [2, 5]
