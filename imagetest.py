@@ -153,4 +153,4 @@ def textPresentation(color: Color) -> Background:
 
 
 for name, color in colors:
-    render_image("presentaion/" + name, textPresentation(color), size=size, test=test)
+    render_image(name, textPresentation(color), size=size, test=test)
