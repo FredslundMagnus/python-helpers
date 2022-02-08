@@ -141,7 +141,13 @@ def crt_n_ai(n: int, mods: list[int]) -> list[int]:
 
 
 def crt_ai_n(ai: list[int], mods: list[int]) -> int:
-    pass
+    M = prod(mods)
+    total: int = 0
+    for a_i, m_i in zip(ai, mods):
+        M_i = M//m_i
+        y_i = inverse(M_i, m_i)
+        total += ((a_i*M_i) % M)*y_i % M
+    return total % M
 
 
 def φ(n: int) -> int:
@@ -170,7 +176,14 @@ if __name__ == "__main__":
     assert prime_factorize(12) == [2, 2, 3]
     assert prime_factorize(13) == [13]
     assert prime_factorize(34) == [2, 17]
-    assert crt_n_ai(11, [5, 7]) == [1, 4]
+    assert crt_n_ai(11, [3, 5, 7]) == [2, 1, 4]
+    assert crt_n_ai(13, [3, 5, 7]) == [1, 3, 6]
+    assert crt_ai_n([2, 1, 4], [3, 5, 7]) == 11
+    assert crt_ai_n([1, 3, 6], [3, 5, 7]) == 13
+    for _mods in [[3, 5, 7, 17], [3, 19, 7, 17]]:
+        for _n in [75, 28, 12, 356]:
+            _values = crt_n_ai(_n, _mods)
+            assert crt_ai_n(_values, _mods) == _n
     # print(primes_up_to(11))
 
     # with timer():
