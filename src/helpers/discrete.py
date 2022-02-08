@@ -1,4 +1,5 @@
 from __future__ import annotations
+from math import sqrt
 from numpy import array as _array, r_, nonzero, ones
 import numpy as np
 from functools import lru_cache as cache  # Python 3.9
@@ -116,6 +117,31 @@ def inverse(n: int, mod: int) -> int:
         return s % mod
 
 
+def prime_factorize(n: int) -> list[int]:
+    factors = []
+    primes = primes_up_to(min(int(sqrt(n))+3, 1000000))
+    i = 0
+    while n > 1 and i < len(primes):
+        while n % primes[i] == 0:
+            n = n // primes[i]
+            if len(factors) == i:
+                factors.append(1)
+            else:
+                factors[i] += 1
+        if len(factors) == i:
+            factors.append(0)
+        i += 1
+    return factors
+
+
+def crt_n_ai(n: int, mods: list[int]) -> list[int]:
+    return [n % mod for mod in mods]
+
+
+def crt_ai_n(ai: list[int], mods: list[int]) -> int:
+    pass
+
+
 if __name__ == "__main__":
     assert gcd(10, 12) == 2
     assert gcd(8, 13) == 1
@@ -129,6 +155,10 @@ if __name__ == "__main__":
     assert totient(0) == 0
     assert inverse(3, 7) == 5
     assert inverse(4, 9) == 7
+    assert prime_factorize(8) == [3]
+    assert prime_factorize(9) == [0, 2]
+    assert prime_factorize(10) == [1, 0, 1]
+    assert crt_n_ai(11, [5, 7]) == [1, 4]
     # print(primes_up_to(11))
 
     # with timer():
