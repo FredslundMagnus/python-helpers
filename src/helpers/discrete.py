@@ -144,6 +144,10 @@ def crt_ai_n(ai: list[int], mods: list[int]) -> int:
     pass
 
 
+def φ(n: int) -> int:
+    return totient(n)
+
+
 if __name__ == "__main__":
     assert gcd(10, 12) == 2
     assert gcd(8, 13) == 1
