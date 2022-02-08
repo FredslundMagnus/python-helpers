@@ -109,6 +109,13 @@ def is_prime(n: int) -> bool:
     raise NotImplementedError("This have not been implemented yet.")
 
 
+@jit
+def inverse(n: int, mod: int) -> int:
+    _gdc, s, _ = gcd_fast_with_s_t(n, mod)
+    if _gdc == 1:
+        return s % mod
+
+
 if __name__ == "__main__":
     assert gcd(10, 12) == 2
     assert gcd(8, 13) == 1
@@ -120,6 +127,8 @@ if __name__ == "__main__":
     assert totient(301) == 252
     assert totient(1) == 1
     assert totient(0) == 0
+    assert inverse(3, 7) == 5
+    assert inverse(4, 9) == 7
     # print(primes_up_to(11))
 
     # with timer():
