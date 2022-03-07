@@ -6,8 +6,13 @@ from functools import lru_cache as cache  # Python 3.9
 from helpers.utils import timer
 from numba import njit as jit
 from collections import Counter
+from builtins import pow as _pow
 
 REMEMBER_PRIMES_UP_TO = 1000000
+
+
+def pow(base: int, exp: int, mod: int) -> int:
+    return _pow(base, exp, mod)
 
 
 @jit
