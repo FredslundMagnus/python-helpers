@@ -48,7 +48,7 @@ class Language:
 
     def colorize(self, code: str, functions: set[str], classes: set[str], notModules: set[str]) -> list[list[Color]]:
         tokens: list[list[Token]] = self.tokenize(code, functions, classes, notModules)
-        print(set.union(*[set(token) for token in tokens]))
+        # print(set.union(*[set(token) for token in tokens]))
         return [[self.color(token) for token in line] for line in tokens]
 
     def color(self, token: Token) -> Color:
@@ -76,7 +76,7 @@ class Language:
             return self.color_self                    # self
         if token == Tokens.Name.Decorator:            # Decorator
             return self.color_functions
-        print(token)
+        # print(token, self.strings, token in self.strings)
         return Colors.red
 
 
