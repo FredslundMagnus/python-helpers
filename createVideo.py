@@ -9,6 +9,7 @@ from PIL import Image, ImageDraw
 import numpy as np
 from functools import cache
 from numba import njit
+from src.helpers.printer import printer
 
 import math
 from typing import TypeVar, Generic, Callable
@@ -22,6 +23,52 @@ camera = np.array([0.5, 0.5, 2])
 blur = 8
 factor = 1
 
+def edit_distance(str1: str, str2: str):  
+    m, n = len(str1), len(str2)  
+    dp = [[0] * (n + 1) for _ in range(m + 1)]  
+    for i in range(m + 1):  
+        for j in range(n + 1):  
+            if i == 0:  
+                dp[i][j] = j  
+            elif j == 0:  
+                dp[i][j] = i  
+            elif str1[i - 1] == str2[j - 1]:  
+                dp[i][j] = dp[i - 1][j - 1]  
+            else:  
+                dp[i][j] = 1 + min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1])  
+    return dp[m][n]
+
+def string_transformations_iterator(string1: str, string2: str):
+    d = edit_distance(string1, string2)
+    yield string1
+    if d:
+      for i, (c1, c2) in enumerate(zip(string1, string2)):
+          if string1[i] != string2[i]:
+              change_string = string1[:i] + string2[i] + string1[i + 1:]
+              d1 = edit_distance(change_string, string2)
+              add_string = string1[:i] + string2[i] + string1[i:]
+              d2 = edit_distance(add_string, string2)
+              delete_string = string1[:i] + string1[i + 1:]
+              d3 = edit_distance(delete_string, string2)
+              d_min = min(d1, d2, d3)
+              if d_min == d1:
+                  yield from string_transformations_iterator(change_string, string2)
+                  break
+              elif d_min == d2:
+                  yield from string_transformations_iterator(add_string, string2)
+                  break
+              else:
+                  yield from string_transformations_iterator(delete_string, string2)
+                  break
+      else:
+        if len(string1) < len(string2):
+            yield from string_transformations_iterator(string1 + string2[len(string1)], string2)
+        else:
+            yield from string_transformations_iterator(string1[:len(string2)] + string1[len(string2) + 1:], string2)
+
+@cache
+def string_transformations(str1: str, str2: str) -> list[str]:
+    return list(string_transformations_iterator(str1, str2))
 
 @njit
 def normalize(v):
@@ -269,8 +316,9 @@ class Video:
             for frame in range(frames + 1):
               print(f"Rendering frame {frame}/{frames}", end="\r")
               image = background_image(section.color.at_frame(frame), self.size, section.light.at_frame(frame)).copy()
-              for img in (drawable.draw(frame, screen_size=self.size, light=section.light.at_frame(frame), test=self.test) for drawable in section.drawables):
-                image.paste(img, (0, 0), img)
+              with printer(None):
+                for img in (drawable.draw(frame, screen_size=self.size, light=section.light.at_frame(frame), test=self.test) for drawable in section.drawables):
+                  image.paste(img, (0, 0), img)
               pil_image = np.array(image.convert('RGB'))
               open_cv_image = pil_image[:, :, ::-1].copy()
               video.write(open_cv_image)
@@ -315,9 +363,36 @@ class WindowManager:
 
 video = Video("Videos/test.mov", size=(3840//4, 2160//4), fps=60//2, test=False)
 
+
+# Driver Code
+s1 = "Change into sthot"
+s2 = "Change this into that"
+
+
+
+def stringIntepolater(start: str, end: str, x: float) -> str:
+  transformations = string_transformations(start, end)
+  i = int((len(transformations) - 1) * x)
+  return transformations[i]
+
 intro = video.section("Intro")
 intro.color.set(Colors.blue).wait(0.5) #.fade(Colors.green, 1).wait(0.5).fade(Colors.red, 1).wait(0.5)
-text = intro.addProperty("'Hello World'").wait(1).set("'Hello World'\n'Hello World'")
+text = intro.addProperty("""class Code:
+    @staticmethod
+    def normal(child: Callable[[int], Widget]) -> Callable[[int], Box]:
+        return lambda fps: Box(0.1, 0.1, 0.9, 0.9, fps, child)
+    
+    @staticmethod
+    def right_tall_outside(child: Callable[[int], Widget]) -> Callable[[int], Box]:
+        return lambda fps: Box(1.1, 0.1, 1.35, 0.9, fps, child)
+""", stringIntepolater).wait(1).fade("""class Magnus:
+    
+    def __init__(self, name: str) -> None:
+        self.name = name
+    
+    def greet(self) -> None:
+        print(f"Hello, my name is {self.name}!")
+""", 5)
 
 editor = intro.add(
   Box.normal(
@@ -351,7 +426,7 @@ C:\\Python>""",
 )
 terminal.color.set(Colors.gray.c900)
 
-windowManager = WindowManager(editor, terminal).wait(1).fade(Layouts.share_with_tall_on_right, 1).wait(1).fade(Layouts.normal_with_tall_on_right, 1).wait(1)
+windowManager = WindowManager(editor, terminal).wait(1).fade(Layouts.share_with_tall_on_right, 1).wait(1).fade(Layouts.normal_with_tall_on_right, 1,  Curves.linear).wait(1)
 
 video.render()
 

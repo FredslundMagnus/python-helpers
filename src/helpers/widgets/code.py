@@ -6,7 +6,7 @@ from helpers.widgets.widget import *
 
 
 class Code(Widget):
-    def __init__(self, code: str, language: Language = Languages.python, fontSize: float = 16.0, lineHeight: float = 1.5, functions: set[str] = {}, classes: set[str] = {}, notModules: set[str] = {}, useLineNumbers: bool = True) -> None:
+    def __init__(self, code: str, language: Language = Languages.python, fontSize: float = 16.0, lineHeight: float = 1.5, functions: set[str] = set(), classes: set[str] = set(), notModules: set[str] = set(), useLineNumbers: bool = True) -> None:
         self.code = code
         self.fontSize = fontSize
         self.font: Font = Fonts.CascadiaCode
